@@ -36,6 +36,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <p className="text-sm text-body md:text-base">
           {project.organization} · {project.cardDates ?? project.dates}
         </p>
+        {project.status ? (
+          <p className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-amber-800">
+            {project.status}
+          </p>
+        ) : null}
         <p className="text-sm leading-relaxed text-body md:text-base">{project.description}</p>
       </div>
       <div className="mt-2.5 flex flex-wrap gap-1 md:gap-1.5">

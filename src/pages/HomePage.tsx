@@ -39,6 +39,8 @@ const navSections = [
 
 const skillAccentClasses = ['bg-sky-400', 'bg-sky-500', 'bg-[#3f8edb]', 'bg-[#2f6fb8]']
 const projectTileOrder = [
+  'inverted-payload-system',
+  'cad-handoff',
   'sae-aero-design',
   'robotic-arm-vision-pick',
   '3-axis-camera-tracking-gimbal',
