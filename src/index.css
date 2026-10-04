@@ -14,13 +14,32 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 82.5%;
+  font-size: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 82.5%;
+  }
 }
 
 body {
   margin: 0;
   min-width: 320px;
   background: linear-gradient(180deg, #f3e5cf 0%, #f8f7f3 50%, #e6f1ff 100%);
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Let long contact details and technical names wrap inside narrow cards. */
+#root {
+  overflow-wrap: anywhere;
+}
+
+.grid > *, .flex > * {
+  min-width: 0;
 }
 
 a {
@@ -44,21 +63,28 @@ a {
 /* Reveal animation tweak knobs:
    distance -> 12px (calm), duration -> 460ms, stagger via --delay classes */
 .reveal {
-  opacity: 0;
-  transform: translateY(12px) scale(1.01);
+  opacity: 1;
   transition:
     opacity 460ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 460ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, opacity;
 }
 
-.reveal-visible {
+.reveal-ready:not(.reveal-visible) {
+  opacity: 0;
+  transform: translateY(12px) scale(1.01);
+}
+
+.reveal.reveal-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
 .reveal--distance-sm {
   transform: translateY(8px) scale(1.01);
+}
+
+.reveal:not(.reveal-ready) {
+  transform: none;
 }
 
 .reveal-card {
@@ -76,8 +102,8 @@ a {
 .diag-lines-page {
   position: fixed;
   top: 0;
-  left: -25vw;
-  width: 150vw;
+  left: 0;
+  width: 100%;
   height: 100vh;
   pointer-events: none;
   z-index: 0;
@@ -87,18 +113,33 @@ a {
     rgba(125, 184, 249, 0.22) 0 1px,
     rgba(125, 184, 249, 0) 1px 18px
   );
-  transform: translate3d(var(--diag-shift, 0px), var(--diag-shift, 0px), 0);
+  background-position: var(--diag-shift, 0px) var(--diag-shift, 0px);
   transition: opacity 260ms ease;
-  will-change: transform;
+}
+
+@media (max-width: 1023px), (pointer: coarse) {
+  .diag-lines-page {
+    display: none;
+  }
+}
+
+@media (pointer: coarse) {
+  a.pressable, button.pressable {
+    min-height: 44px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pressable,
-  .reveal {
+  .reveal, .reveal-ready:not(.reveal-visible) {
     transition: none;
   }
 
-  .reveal {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal, .reveal-ready:not(.reveal-visible) {
     opacity: 1;
     transform: none;
     will-change: auto;

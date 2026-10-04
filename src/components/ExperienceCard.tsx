@@ -1,3 +1,4 @@
+import { ResponsiveImage } from './ResponsiveImage'
 import { useEffect, useRef, useState } from 'react'
 import type { ExperienceItem } from '../data/profile'
 import { Card } from './Card'
@@ -28,7 +29,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
         </div>
         <div className="flex items-center md:pt-1">
           {item.image ? (
-            <img
+            <ResponsiveImage
               src={item.image}
               alt={item.imageAlt ?? `${item.company} logo`}
               className="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm"
@@ -77,7 +78,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
                 key={photo.src}
                 className="h-24 overflow-hidden rounded-2xl border border-white/70 bg-slate-100"
               >
-                <img
+                <ResponsiveImage
                   src={photo.src}
                   alt={photo.alt}
                   className="h-full w-full object-cover"

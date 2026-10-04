@@ -20,7 +20,8 @@ export function Chip({ label, active = false, onClick, asButton = false, compact
       <button
         type="button"
         onClick={onClick}
-        className={`${base} ${interactive} ${activeClass} whitespace-nowrap`}
+        aria-pressed={active}
+        className={`${base} ${interactive} ${activeClass} shrink-0 whitespace-nowrap`}
       >
         {label}
       </button>

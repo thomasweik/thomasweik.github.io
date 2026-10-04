@@ -6,6 +6,7 @@ interface UseInViewAnimateOptions {
   threshold?: number
   once?: boolean
   reducedMotion?: boolean
+  refreshKey?: string
 }
 
 export function useInViewAnimate(
@@ -13,9 +14,10 @@ export function useInViewAnimate(
   {
     selector = '[data-animate]',
     rootMargin = '0px 0px -10% 0px',
-    threshold = 0.14,
+    threshold = 0,
     once = true,
-    reducedMotion = false
+    reducedMotion = false,
+    refreshKey
   }: UseInViewAnimateOptions = {}
 ) {
   useEffect(() => {
@@ -25,11 +27,13 @@ export function useInViewAnimate(
     const elements = Array.from(root.querySelectorAll<HTMLElement>(selector))
     if (elements.length === 0) return
 
-    if (reducedMotion) {
+    if (reducedMotion || !('IntersectionObserver' in window)) {
       elements.forEach((element) => element.classList.add('reveal-visible'))
       return
     }
 
+    // Only hide elements after animation support has been confirmed.
+    elements.forEach((element) => element.classList.add('reveal-ready'))
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -45,7 +49,9 @@ export function useInViewAnimate(
     )
 
     elements.forEach((element) => observer.observe(element))
-    return () => observer.disconnect()
-  }, [once, reducedMotion, rootMargin, rootRef, selector, threshold])
+    return () => {
+      observer.disconnect()
+      elements.forEach((element) => element.classList.remove('reveal-ready'))
+    }
+  }, [once, reducedMotion, refreshKey, rootMargin, rootRef, selector, threshold])
 }
-

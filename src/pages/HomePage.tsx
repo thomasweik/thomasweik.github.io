@@ -1,3 +1,4 @@
+import { ResponsiveImage } from '../components/ResponsiveImage'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CertificationsList } from '../components/CertificationsList'
 import { Chip } from '../components/Chip'
@@ -8,8 +9,8 @@ import { Navbar } from '../components/Navbar'
 import { ProjectCard } from '../components/ProjectCard'
 import { Section } from '../components/Section'
 import { useInViewAnimate } from '../hooks/useInViewAnimate'
-import leadershipFundraiserPhoto from '../assets/PrytanisGroupPhotowithSt.JudeCheck.jpeg'
-import awardCeremonyPhoto from '../assets/TomWeikReceivingAwardfromFloridaTechPresident.jpeg'
+import leadershipFundraiserPhoto from '../assets/optimized/PrytanisGroupPhotowithSt.JudeCheck-1600.webp'
+import awardCeremonyPhoto from '../assets/optimized/TomWeikReceivingAwardfromFloridaTechPresident-1600.webp'
 import {
   about,
   awards,
@@ -72,11 +73,17 @@ export function HomePage() {
     const updatePreference = () => setReducedMotion(mediaQuery.matches)
     updatePreference()
 
-    mediaQuery.addEventListener('change', updatePreference)
-    return () => mediaQuery.removeEventListener('change', updatePreference)
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', updatePreference)
+      return () => mediaQuery.removeEventListener('change', updatePreference)
+    }
+    // Older iOS Safari exposes only the legacy media-query listener API.
+    mediaQuery.addListener(updatePreference)
+    return () => mediaQuery.removeListener(updatePreference)
   }, [])
 
   useEffect(() => {
+    if (!('IntersectionObserver' in window)) return
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -88,8 +95,8 @@ export function HomePage() {
         }
       },
       {
-        rootMargin: '-30% 0px -55% 0px',
-        threshold: [0.15, 0.3, 0.6]
+        rootMargin: `-${Math.round(window.innerHeight * 0.2)}px 0px -${Math.round(window.innerHeight * 0.45)}px 0px`,
+        threshold: 0
       }
     )
 
@@ -101,7 +108,8 @@ export function HomePage() {
     return () => observer.disconnect()
   }, [])
 
-  useInViewAnimate(mainRef, { reducedMotion })
+  // Reconnect when filtering mounts new project cards.
+  useInViewAnimate(mainRef, { reducedMotion, refreshKey: filter })
 
   useEffect(() => {
     let rafId = 0
@@ -133,7 +141,7 @@ export function HomePage() {
         setShowScrollTop(shouldShowTopButton)
       }
 
-      if (!reducedMotion) {
+      if (!reducedMotion && window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches) {
         const heroProgress = clamp(scrollTop / Math.max(viewportHeight, 1), 0, 1)
         // Tweak: decorative parallax travel (keep within 10-20px total).
         if (heroShapeLeftRef.current) {
@@ -350,7 +358,7 @@ export function HomePage() {
               </Card>
               <Card className="h-full">
                 <figure className="h-full overflow-hidden rounded-3xl bg-white shadow-soft">
-                  <img
+                  <ResponsiveImage
                     src={awardCeremonyPhoto}
                     alt="Receiving an award from the Florida Tech President"
                     className="h-full w-full object-cover"
@@ -465,7 +473,7 @@ export function HomePage() {
                         </p>
                         {item.role === 'Prytanis (President)' ? (
                           <figure className="mt-4 overflow-hidden rounded-2xl border border-white/70 bg-white shadow-soft">
-                            <img
+                            <ResponsiveImage
                               src={leadershipFundraiserPhoto}
                               alt="Prytanis group photo with St. Jude fundraising check"
                               className="h-40 w-full object-cover"

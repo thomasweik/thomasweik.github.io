@@ -1,3 +1,4 @@
+import { ResponsiveImage } from '../components/ResponsiveImage'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Card } from '../components/Card'
@@ -531,13 +532,15 @@ export function ProjectDetailPage() {
         <Card className="space-y-4 md:space-y-5">
           {project.coverImage ? (
             <div className="h-48 overflow-hidden rounded-3xl border border-white/70 bg-white md:h-64">
-              <img
+              <ResponsiveImage
                 src={project.coverImage}
                 alt={project.coverAlt ?? `${project.title} cover`}
                 className={`h-full w-full ${
                   project.coverFit === 'contain' ? 'object-contain' : 'object-cover'
                 } ${project.coverPosition ?? 'object-center'}`}
-                loading="lazy"
+                sizes="(min-width: 1024px) 960px, 100vw"
+                loading="eager"
+                fetchPriority="high"
               />
             </div>
           ) : (
@@ -615,7 +618,7 @@ export function ProjectDetailPage() {
                       item.layout === 'portrait' ? 'h-64 sm:h-72 md:h-[30rem]' : 'h-36 sm:h-40'
                     }`}
                   >
-                    <img
+                    <ResponsiveImage
                       src={item.src}
                       alt={item.alt}
                       className={`h-full w-full ${
@@ -662,7 +665,7 @@ export function ProjectDetailPage() {
           onClick={() => setActiveMediaIndex(null)}
         >
           <div
-            className="flex max-h-[92vh] w-full max-w-7xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-white shadow-2xl"
+            className="flex max-h-[92dvh] w-full max-w-7xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-white shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-4 py-3 md:gap-4 md:px-5 md:py-4">
@@ -709,10 +712,11 @@ export function ProjectDetailPage() {
                   </button>
                 </>
               ) : null}
-              <img
+              <ResponsiveImage
                 src={projectMedia[activeMediaIndex].src}
                 alt={projectMedia[activeMediaIndex].alt}
-                className="max-h-[72vh] max-w-full rounded-2xl object-contain shadow-xl md:max-h-[78vh]"
+                className="h-auto max-h-[65dvh] w-auto max-w-full rounded-2xl object-contain shadow-xl md:max-h-[78dvh]"
+                sizes="100vw"
                 loading="eager"
               />
             </div>

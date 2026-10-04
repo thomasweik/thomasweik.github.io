@@ -1,3 +1,4 @@
+import { ResponsiveImage } from './ResponsiveImage'
 import type { ProjectItem } from '../data/profile'
 import { Card } from './Card'
 import { Chip } from './Chip'
@@ -14,7 +15,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
     <Card className="flex h-full flex-col space-y-0.5 p-4 md:p-5 hover:-translate-y-1 hover:shadow-lift">
       {project.coverImage ? (
         <div className={`${coverSizeClass} overflow-hidden rounded-3xl border border-white/70 bg-white`}>
-          <img
+          <ResponsiveImage
             src={project.coverImage}
             alt={project.coverAlt ?? `${project.title} cover`}
             className={`h-full w-full ${

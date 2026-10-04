@@ -11,7 +11,7 @@ interface SectionProps {
 
 export function Section({ id, title, description, children, reveal = true, aside }: SectionProps) {
   return (
-    <section id={id} className="scroll-mt-32 py-10 md:py-16">
+    <section id={id} className="scroll-mt-44 py-10 md:py-16 xl:scroll-mt-32">
       <div
         className={
           aside ? 'flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between' : 'space-y-5'

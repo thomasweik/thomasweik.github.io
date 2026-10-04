@@ -71,6 +71,21 @@ Then deploy the `dist/` folder using either:
 
 ## Content Updates
 
+### Responsive images
+
+The site serves generated WebP images at 640px and 1600px widths, with lazy
+loading and browser-selected sizes for phones and desktop displays. Originals
+remain in `src/assets`. After adding or replacing an original image, run:
+
+```bash
+python3 -m pip install Pillow
+python3 scripts/optimize-images.py
+```
+
+Import its `src/assets/optimized/<name>-1600.webp` version in the profile data
+and render it with `ResponsiveImage`. Commit the generated images and
+`src/data/responsiveImages.ts`; deployment does not require Python.
+
 Update only `src/data/profile.ts` to edit:
 
 - personal info

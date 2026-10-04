@@ -1,3 +1,4 @@
+import { ResponsiveImage } from './ResponsiveImage'
 import { useState } from 'react'
 import type { ExperienceItem } from '../data/profile'
 import { Card } from './Card'
@@ -49,7 +50,7 @@ function ExperienceRole({ item, isLast }: { item: ExperienceItem; isLast: boolea
               }`}
             >
               {item.image ? (
-                <img
+                <ResponsiveImage
                   src={item.image}
                   alt={item.imageAlt ?? `${item.company} logo`}
                   className="h-full w-full object-cover"
