@@ -4,6 +4,7 @@ interface StepModelViewerProps {
   modelPath: string
   projectTitle: string
   mode: 'scroll' | 'manual'
+  compact?: boolean
   rotationOffsetDegrees?: number
   rotationXDegrees?: number
   rotationYDegrees?: number
@@ -18,6 +19,7 @@ export function StepModelViewer({
   modelPath,
   projectTitle,
   mode,
+  compact = false,
   rotationOffsetDegrees = 0,
   rotationXDegrees = 0,
   rotationYDegrees = 0,
@@ -240,23 +242,23 @@ export function StepModelViewer({
 
   const manual = mode === 'manual'
   return (
-    <div className="space-y-3">
+    <div className={compact ? '' : 'space-y-3'}>
       <div
-        className={`relative overflow-hidden border border-forest-line bg-forest-surface ${manual ? 'h-80 sm:h-[28rem]' : 'h-48 md:h-52'}`}
+        className={`relative overflow-hidden border border-forest-line bg-forest-surface ${compact ? 'h-28' : manual ? 'h-80 sm:h-[28rem]' : 'h-48 md:h-52'}`}
         role="group"
         aria-label={`${projectTitle} 3D model`}
       >
         <div ref={stageRef} className="absolute inset-0" />
-        <span className="pointer-events-none absolute left-3 top-3 border border-forest-line bg-forest-surface/90 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-forest-accent sm:left-5 sm:top-5">
-          3D model
+        <span className={`pointer-events-none absolute border border-forest-line bg-forest-surface/90 font-bold uppercase text-forest-accent ${compact ? 'left-1.5 top-1.5 px-1 py-0.5 text-[8px] tracking-[0.1em]' : 'left-3 top-3 px-2 py-1 text-[10px] tracking-[0.15em] sm:left-5 sm:top-5'}`}>
+          {compact ? '3D' : '3D model'}
         </span>
         {state !== 'ready' ? (
-          <p className="pointer-events-none absolute inset-0 grid place-items-center px-5 text-center text-sm font-semibold text-body">
-            {state === 'error' ? '3D preview unavailable; the project image is shown below.' : 'Preparing 3D model…'}
+          <p className={`pointer-events-none absolute inset-0 grid place-items-center px-2 text-center font-semibold text-body ${compact ? 'text-[10px]' : 'px-5 text-sm'}`}>
+            {state === 'error' ? '3D preview unavailable' : 'Preparing 3D model…'}
           </p>
         ) : null}
-        <span className="pointer-events-none absolute bottom-3 left-3 right-3 text-center text-[10px] font-bold uppercase tracking-[0.13em] text-forest-accent sm:bottom-5">
-          {manual ? 'Drag to rotate · Pinch or scroll to zoom' : 'Scroll to rotate · Open project to explore'}
+        <span className={`pointer-events-none absolute bottom-1.5 left-1 right-1 text-center font-bold uppercase text-forest-accent ${compact ? 'text-[7px] tracking-[0.08em]' : 'bottom-3 left-3 right-3 text-[10px] tracking-[0.13em] sm:bottom-5'}`}>
+          {compact ? 'Scroll to rotate' : manual ? 'Drag to rotate · Pinch or scroll to zoom' : 'Scroll to rotate · Open project to explore'}
         </span>
       </div>
     </div>

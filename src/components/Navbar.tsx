@@ -1,4 +1,4 @@
-import { useState, type MouseEvent } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
 
 interface NavbarProps {
   sections: { id: string; label: string }[]
@@ -10,6 +10,11 @@ interface NavbarProps {
 
 export function Navbar({ sections, activeSection, compact = false, linkedinHref, emailHref }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const mobileMenuRef = useRef<HTMLElement | null>(null)
+
+  useEffect(() => {
+    mobileMenuRef.current?.toggleAttribute('inert', !menuOpen)
+  }, [menuOpen])
 
   const handleNav = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
     event.preventDefault()
@@ -59,8 +64,13 @@ export function Navbar({ sections, activeSection, compact = false, linkedinHref,
         </button>
       </nav>
 
-      {menuOpen && (
-        <nav id="mobile-site-menu" aria-label="Mobile navigation" className="grid border-t border-forest-line pb-3 lg:hidden">
+      <nav
+        id="mobile-site-menu"
+        ref={mobileMenuRef}
+        aria-label="Mobile navigation"
+        aria-hidden={!menuOpen}
+        className={`grid overflow-hidden transition-[max-height,opacity,transform] duration-300 ease-out motion-reduce:transition-none lg:hidden ${menuOpen ? 'max-h-96 translate-y-0 border-t border-forest-line pb-3 opacity-100' : 'pointer-events-none max-h-0 -translate-y-2 border-t border-transparent pb-0 opacity-0'}`}
+      >
           {sections.map((section) => (
             <a
               key={section.id}
@@ -76,8 +86,7 @@ export function Navbar({ sections, activeSection, compact = false, linkedinHref,
             {linkedinHref && <a href={linkedinHref} target="_blank" rel="noreferrer">LinkedIn</a>}
             {emailHref && <a href={emailHref}>Email</a>}
           </div>
-        </nav>
-      )}
+      </nav>
     </header>
   )
 }

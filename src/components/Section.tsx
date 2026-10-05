@@ -11,7 +11,7 @@ interface SectionProps {
 
 export function Section({ id, title, description, children, reveal = true, aside }: SectionProps) {
   return (
-    <section id={id} className="scroll-mt-24 border-t border-forest-line/70 py-12 md:py-20">
+    <section id={id} className="scroll-mt-24 border-t border-forest-line/70 py-9 md:py-20">
       <div
         className={
           aside ? 'flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between' : 'space-y-5'
@@ -19,14 +19,14 @@ export function Section({ id, title, description, children, reveal = true, aside
       >
         <div className="space-y-5">
           <h2
-            className={`${reveal ? 'reveal reveal--distance-sm' : ''} text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl`}
+            className={`${reveal ? 'reveal reveal--distance-sm' : ''} text-2xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl`}
             data-animate={reveal ? true : undefined}
           >
             {title}
           </h2>
           {description ? (
             <p
-              className={`${reveal ? 'reveal reveal--delay1 reveal--distance-sm' : ''} max-w-4xl text-base leading-relaxed text-body sm:text-lg md:text-[1.8rem]/[1.35]`}
+              className={`${reveal ? 'reveal reveal--delay1 reveal--distance-sm' : ''} max-w-4xl text-sm leading-relaxed text-body sm:text-lg md:text-[1.8rem]/[1.35]`}
               data-animate={reveal ? true : undefined}
             >
               {description}
@@ -36,7 +36,7 @@ export function Section({ id, title, description, children, reveal = true, aside
         {aside ? <div className="w-full lg:w-[420px]">{aside}</div> : null}
       </div>
       <div
-        className={`${reveal ? 'reveal reveal--delay2' : ''} mt-7 md:mt-11`}
+        className={`${reveal ? 'reveal reveal--delay2' : ''} mt-6 md:mt-11`}
         data-animate={reveal ? true : undefined}
       >
         {children}

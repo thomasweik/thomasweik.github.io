@@ -6,7 +6,7 @@ import { ContactRow } from '../components/ContactRow'
 import { EducationCard } from '../components/EducationCard'
 import { ExperienceStack } from '../components/ExperienceStack'
 import { Navbar } from '../components/Navbar'
-import { ProjectCard } from '../components/ProjectCard'
+import { CompactProjectCard, ProjectCard } from '../components/ProjectCard'
 import { Section } from '../components/Section'
 import { useInViewAnimate } from '../hooks/useInViewAnimate'
 import leadershipFundraiserPhoto from '../assets/optimized/PrytanisGroupPhotowithSt.JudeCheck-1600.webp'
@@ -25,6 +25,8 @@ import {
   projects,
   siteContent,
   skills,
+  type ExperienceItem,
+  type SkillGroup,
   type ProjectCategory
 } from '../data/profile'
 import { Card } from '../components/Card'
@@ -54,15 +56,104 @@ const projectTileOrder = [
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
+function SkillGroupRow({ group, index }: { group: SkillGroup; index: number }) {
+  const [open, setOpen] = useState(false)
+  const extraSkillsId = `skills-${group.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+
+  return (
+    <div
+      className="reveal reveal-card"
+      data-animate
+      style={{ transitionDelay: `${Math.min(index * 70, 280)}ms` }}
+    >
+      <div className="h-full border-t border-forest-line/70 py-3 md:py-5">
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="text-lg font-bold leading-tight text-ink md:text-2xl">{group.title}</h3>
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls={extraSkillsId}
+            onClick={() => setOpen((value) => !value)}
+            className="min-h-10 shrink-0 text-xs font-bold text-forest-accent focus-visible:outline-2 focus-visible:outline-forest-accent md:hidden"
+          >
+            {open ? 'Show less' : `See all ${group.items.length}`}
+          </button>
+        </div>
+        <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1.5 md:mt-4 md:hidden">
+          {group.items.slice(0, 2).map((item) => <Chip key={item} label={item} compact />)}
+        </div>
+        {group.items.length > 2 ? (
+          <div
+            id={extraSkillsId}
+            aria-hidden={!open}
+            className={`relative mt-1 overflow-hidden transition-[max-height] duration-500 ease-in-out md:hidden ${open ? 'max-h-[40rem]' : 'h-12 max-h-12'}`}
+          >
+            <div className="flex flex-wrap gap-x-2 gap-y-1.5 py-1">
+              {group.items.slice(2).map((item) => <Chip key={item} label={item} compact />)}
+            </div>
+            <div
+              aria-hidden="true"
+              className={`pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-gradient-to-b from-transparent via-forest-base/70 to-forest-base transition-opacity duration-300 ${open ? 'opacity-0' : 'opacity-100'}`}
+            />
+          </div>
+        ) : null}
+        <div className="hidden flex-wrap gap-x-2 gap-y-2 md:flex">
+          {group.items.map((item) => <Chip key={item} label={item} compact />)}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const leadershipSummaries: Record<string, string> = {
+  'Prytanis (President)': 'Led a 44+ member chapter, managed a $30K budget, raised $11K for St. Jude, and earned the chapter’s first Top TKE award.',
+  'Public Relations Chairman': 'Led digital branding that earned Florida Tech Greek Life’s Best Online Presence award.',
+  'Pylortes (Sergeant at Arms / Risk Manager)': 'Led chapter risk planning, wrote a 30-page emergency response plan, and expanded safety resources.'
+}
+
+function MobileLeadershipSummary({ item }: { item: ExperienceItem }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <article className="border-t border-forest-line/60 py-3 md:hidden">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h4 className="text-base font-bold leading-snug text-ink">{item.role}</h4>
+          <p className="mt-1 text-xs font-semibold text-body">{item.company} · {item.dates}</p>
+        </div>
+        <button
+          type="button"
+          aria-expanded={open}
+          onClick={() => setOpen((value) => !value)}
+          className="min-h-10 shrink-0 text-xs font-bold text-forest-accent focus-visible:outline-2 focus-visible:outline-forest-accent"
+        >
+          {open ? 'Less' : 'Details'}
+        </button>
+      </div>
+      <p className="mt-2 text-sm leading-relaxed text-body">
+        {leadershipSummaries[item.role] ?? item.bullets[0]}
+      </p>
+      {open ? (
+        <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-body">
+          {item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+        </ul>
+      ) : null}
+    </article>
+  )
+}
+
 export function HomePage() {
   const [activeSection, setActiveSection] = useState('about')
   const [filter, setFilter] = useState<'All' | ProjectCategory>('All')
   const [reducedMotion, setReducedMotion] = useState(false)
   const [navCompact, setNavCompact] = useState(false)
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const [showAllMobileProjects, setShowAllMobileProjects] = useState(false)
+  const [isMobileViewport, setIsMobileViewport] = useState(() => window.matchMedia('(max-width: 767px)').matches)
 
   const mainRef = useRef<HTMLDivElement | null>(null)
   const progressBarRef = useRef<HTMLDivElement | null>(null)
+  const additionalProjectsRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -77,6 +168,21 @@ export function HomePage() {
     mediaQuery.addListener(updatePreference)
     return () => mediaQuery.removeListener(updatePreference)
   }, [])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)')
+    const updateViewport = () => setIsMobileViewport(mediaQuery.matches)
+    updateViewport()
+    mediaQuery.addEventListener('change', updateViewport)
+    return () => mediaQuery.removeEventListener('change', updateViewport)
+  }, [])
+
+  useEffect(() => {
+    additionalProjectsRef.current?.toggleAttribute(
+      'inert',
+      isMobileViewport && !showAllMobileProjects
+    )
+  }, [isMobileViewport, showAllMobileProjects])
 
   useEffect(() => {
     if (!('IntersectionObserver' in window)) return
@@ -217,7 +323,7 @@ export function HomePage() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 pb-16 md:px-12 lg:px-16">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-5 pb-16 md:px-12 lg:px-16">
         <Navbar
           sections={navSections}
           activeSection={activeSection}
@@ -228,11 +334,11 @@ export function HomePage() {
 
         <main>
           <div>
-            <section className="relative scroll-mt-24 py-20 md:py-28" id="hero">
-              <p className="mb-8 text-xs font-bold uppercase tracking-[0.3em] text-forest-accent">Portfolio / Engineering & design</p>
+            <section className="relative scroll-mt-24 py-14 md:py-28" id="hero">
+              <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.24em] text-forest-accent md:mb-8 md:text-xs md:tracking-[0.3em]">Portfolio / Engineering & design</p>
               <div className="flex max-w-5xl flex-col items-start">
                 <h1
-                  className="reveal reveal--distance-sm text-5xl font-bold tracking-tight text-ink sm:text-6xl md:text-8xl"
+                  className="reveal reveal--distance-sm text-4xl font-bold tracking-tight text-ink sm:text-6xl md:text-8xl"
                   data-animate
                 >
                   {person.name}
@@ -292,18 +398,18 @@ export function HomePage() {
           <Section id="about" title="About" description={about.short}>
             <div className="grid grid-cols-1 gap-0 lg:grid-cols-3">
               <Card className="h-full space-y-4">
-                <p className="text-xl leading-relaxed text-body">{about.long[0]}</p>
-                <p className="text-xl leading-relaxed text-body">{about.long[1]}</p>
-                <p className="text-xl leading-relaxed text-body">{about.long[2]}</p>
+                <p className="text-base leading-relaxed text-body md:text-xl">{about.long[0]}</p>
+                <p className="text-base leading-relaxed text-body md:text-xl">{about.long[1]}</p>
+                <p className="text-base leading-relaxed text-body md:text-xl">{about.long[2]}</p>
               </Card>
               <Card className="h-full space-y-5">
                 <div>
                   <p className="text-sm font-bold uppercase tracking-[0.24em] text-body/70">Citizenship</p>
-                  <p className="mt-1 text-2xl font-bold text-ink">{person.citizenship}</p>
+                  <p className="mt-1 text-xl font-bold text-ink md:text-2xl">{person.citizenship}</p>
                 </div>
                 <div>
                   <p className="text-sm font-bold uppercase tracking-[0.24em] text-body/70">Location</p>
-                  <p className="mt-1 text-2xl font-semibold text-body">{person.location}</p>
+                  <p className="mt-1 text-xl font-semibold text-body md:text-2xl">{person.location}</p>
                 </div>
                 <div>
                   <p className="text-sm font-bold uppercase tracking-[0.24em] text-body/70">Focus Areas</p>
@@ -315,7 +421,7 @@ export function HomePage() {
                 </div>
               </Card>
               <Card className="h-full">
-                <figure className="h-full overflow-hidden bg-forest-surface">
+                <figure className="mx-auto h-36 w-36 overflow-hidden bg-forest-surface md:h-full md:w-full">
                   <ResponsiveImage
                     src={awardCeremonyPhoto}
                     alt="Receiving an award from the Florida Tech President"
@@ -335,24 +441,64 @@ export function HomePage() {
                   label={category}
                   active={filter === category}
                   asButton
-                  onClick={() => setFilter(category)}
+                  onClick={() => {
+                    setFilter(category)
+                    setShowAllMobileProjects(false)
+                  }}
                 />
               ))}
             </div>
 
             {filteredProjects.length > 0 ? (
-              <div className="border-t border-forest-line">
-                {filteredProjects.map((project, index) => (
-                  <div
-                    key={project.slug}
-                    className="reveal reveal-card"
-                    data-animate
-                    style={{ transitionDelay: `${Math.min(index * 70, 280)}ms` }}
-                  >
-                    <ProjectCard project={project} />
+              <>
+                <div className="hidden border-t border-forest-line md:block">
+                  {filteredProjects.map((project, index) => (
+                    <div
+                      key={project.slug}
+                      className="reveal reveal-card"
+                      data-animate
+                      style={{ transitionDelay: `${Math.min(index * 70, 280)}ms` }}
+                    >
+                      <ProjectCard project={project} />
+                    </div>
+                  ))}
+                </div>
+                <div className="border-t border-forest-line md:hidden">
+                  <div className="grid grid-cols-2 gap-x-3">
+                    {filteredProjects.slice(0, 6).map((project) => (
+                      <CompactProjectCard key={project.slug} project={project} />
+                    ))}
                   </div>
-                ))}
-              </div>
+                  {filteredProjects.length > 6 ? (
+                    <>
+                      <div
+                        id="additional-projects"
+                        ref={additionalProjectsRef}
+                        aria-hidden={!showAllMobileProjects}
+                        style={{ maxHeight: showAllMobileProjects ? `${additionalProjectsRef.current?.scrollHeight ?? 0}px` : '3rem' }}
+                        className="relative grid grid-cols-2 gap-x-3 overflow-hidden transition-[max-height] duration-700 ease-in-out"
+                      >
+                        {filteredProjects.slice(6).map((project) => (
+                          <CompactProjectCard key={project.slug} project={project} />
+                        ))}
+                        <div
+                          aria-hidden="true"
+                          className={`pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-b from-transparent via-forest-base/80 to-forest-base transition-opacity duration-500 ${showAllMobileProjects ? 'opacity-0' : 'opacity-100'}`}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        aria-expanded={showAllMobileProjects}
+                        aria-controls="additional-projects"
+                        onClick={() => setShowAllMobileProjects((value) => !value)}
+                        className="mt-2 min-h-11 w-full border border-forest-line px-4 py-2.5 text-sm font-bold text-ink transition-colors hover:border-forest-accent hover:text-forest-accent focus-visible:outline-2 focus-visible:outline-forest-accent"
+                      >
+                        {showAllMobileProjects ? 'Show fewer projects' : `See all ${filteredProjects.length} projects`}
+                      </button>
+                    </>
+                  ) : null}
+                </div>
+              </>
             ) : (
               <Card>
                 <p className="text-xl text-body">No projects in this category yet.</p>
@@ -363,23 +509,7 @@ export function HomePage() {
           <div>
             <Section id="skills" title="Skills" description={siteContent.skillsDescription}>
               <div className="grid grid-cols-1 gap-x-10 gap-y-5 md:grid-cols-2 xl:grid-cols-3">
-                {skills.map((group, index) => (
-                  <div
-                    key={group.title}
-                    className="reveal reveal-card"
-                    data-animate
-                    style={{ transitionDelay: `${Math.min(index * 70, 280)}ms` }}
-                  >
-                    <div className="h-full border-t border-forest-line/70 py-5">
-                      <h3 className="text-2xl font-bold leading-tight text-ink">{group.title}</h3>
-                      <div className="mt-4 flex flex-wrap gap-x-2 gap-y-2">
-                        {group.items.map((item) => (
-                          <Chip key={item} label={item} />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                {skills.map((group, index) => <SkillGroupRow key={group.title} group={group} index={index} />)}
               </div>
             </Section>
           </div>
@@ -396,14 +526,15 @@ export function HomePage() {
 
             <div className="mt-8 grid grid-cols-1 gap-8">
               <Card className="space-y-5">
-                <h3 className="text-3xl font-bold text-ink">Leadership</h3>
+                <h3 className="text-xl font-bold text-ink md:text-3xl">Leadership</h3>
                 <div className="space-y-4">
                   {leadershipRoles.map((item) => (
                     <article
                       key={`${item.company}-${item.role}-${item.dates}`}
-                      className="border-t border-forest-line/60 py-5 md:flex md:gap-6"
+                      className="md:flex md:gap-6 md:border-t md:border-forest-line/60 md:py-5"
                     >
-                      <div className="md:w-[320px] md:flex-none">
+                      <MobileLeadershipSummary item={item} />
+                      <div className="hidden md:block md:w-[320px] md:flex-none">
                         <div className="flex flex-col gap-2">
                           <p className="text-2xl font-bold text-ink">{item.role}</p>
                           <p className="text-lg font-semibold text-body">{item.dates}</p>
@@ -437,7 +568,7 @@ export function HomePage() {
                           </figure>
                         ) : null}
                       </div>
-                      <ul className="mt-3 list-disc space-y-1 pl-5 text-base text-body md:mt-0">
+                      <ul className="mt-3 hidden list-disc space-y-1 pl-5 text-base text-body md:mt-0 md:block">
                         {item.bullets.map((bullet) => (
                           <li key={bullet}>{bullet}</li>
                         ))}
@@ -448,7 +579,7 @@ export function HomePage() {
               </Card>
 
               <Card className="space-y-5">
-                <h3 className="text-3xl font-bold text-ink">Organizations</h3>
+                <h3 className="text-xl font-bold text-ink md:text-3xl">Organizations</h3>
                 <div className="space-y-3">
                   {organizations.map((org) => (
                     <article key={org.name} className="border-t border-forest-line/60 py-4">
@@ -459,7 +590,6 @@ export function HomePage() {
                           rel="noreferrer"
                           className="inline-flex text-lg font-semibold text-sky-700 transition-colors hover:text-forest-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
                         >
-                          {org.name}
                           {org.name}
                         </a>
                       ) : (

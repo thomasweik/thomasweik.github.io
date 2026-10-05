@@ -28,9 +28,9 @@ function ExperienceRole({ item, isLast }: { item: ExperienceItem; isLast: boolea
         className="absolute left-0 top-2 hidden h-5 w-5 rounded-full border-4 border-forest-line bg-sky-500 shadow-sm md:inline-flex"
       />
       <div className="overflow-hidden border-b border-forest-line/70 bg-transparent">
-        <div className="flex flex-col gap-3 p-4 md:gap-4 md:p-5">
-          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-4">
-            <div className="space-y-1">
+        <div className="flex flex-col gap-2.5 px-0 py-3 md:gap-4 md:p-5">
+          <div className="flex flex-row items-start gap-3 md:justify-between md:gap-4">
+            <div className="min-w-0 flex-1 space-y-1">
               <button
                 type="button"
                 onClick={() => setExpanded((value) => !value)}
@@ -44,12 +44,12 @@ function ExperienceRole({ item, isLast }: { item: ExperienceItem; isLast: boolea
                   href={item.companyUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex text-lg font-semibold text-sky-700 transition-colors hover:text-forest-accent hover:underline focus-visible:outline-2 focus-visible:outline-forest-accent md:text-xl"
+                  className="hidden text-lg font-semibold text-sky-700 transition-colors hover:text-forest-accent hover:underline focus-visible:outline-2 focus-visible:outline-forest-accent md:inline-flex md:text-xl"
                 >
                   {item.company}
                 </a>
               ) : (
-                <p className="text-lg font-semibold text-sky-700 md:text-xl">{item.company}</p>
+                <p className="hidden text-lg font-semibold text-sky-700 md:block md:text-xl">{item.company}</p>
               )}
               <p className="text-sm text-body md:text-base">
                 {item.location} · {item.type}
@@ -60,8 +60,8 @@ function ExperienceRole({ item, isLast }: { item: ExperienceItem; isLast: boolea
             <div
               className={`overflow-hidden border border-forest-line bg-forest-raised transition-all duration-300 md:shrink-0 ${
                 expanded
-                  ? 'h-56 w-full md:h-52 md:w-72 lg:h-60 lg:w-80'
-                  : 'h-40 w-full md:h-40 md:w-60 lg:h-44 lg:w-72'
+                  ? 'h-14 w-14 shrink-0 md:h-52 md:w-72 lg:h-60 lg:w-80'
+                  : 'h-14 w-14 shrink-0 md:h-40 md:w-60 lg:h-44 lg:w-72'
               }`}
             >
               {item.image ? (
@@ -85,8 +85,9 @@ function ExperienceRole({ item, isLast }: { item: ExperienceItem; isLast: boolea
             aria-expanded={expanded}
             className="pressable flex w-full items-center justify-between border-t border-forest-line pt-3 text-left transition-colors hover:text-forest-accent focus-visible:outline-2 focus-visible:outline-forest-accent"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-body/70 md:text-sm">
-              {expanded ? 'Click to collapse' : 'Click to expand'}
+            <span className="text-xs font-bold text-body/70 md:text-sm">
+              <span className="md:hidden">{expanded ? 'Hide details' : 'Click to expand'}</span>
+              <span className="hidden uppercase tracking-[0.22em] md:inline">{expanded ? 'Click to collapse' : 'Click to expand'}</span>
             </span>
             <span
               aria-hidden="true"

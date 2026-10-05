@@ -17,6 +17,12 @@ html {
   font-size: 100%;
 }
 
+@media (max-width: 767px) {
+  html {
+    font-size: 95%;
+  }
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 82.5%;
