@@ -4,8 +4,8 @@
 
 :root {
   font-family: 'Manrope', sans-serif;
-  color: #1f2937;
-  background-color: #f8f7f3;
+  color: #20382a;
+  background-color: #e8dbc2;
 }
 
 * {
@@ -26,7 +26,17 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: linear-gradient(180deg, #f3e5cf 0%, #f8f7f3 50%, #e6f1ff 100%);
+  background: #e8dbc2;
+}
+
+.site-theme *, .site-theme *::before, .site-theme *::after {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-theme :focus-visible {
+  outline: 2px solid #24563b;
+  outline-offset: 3px;
 }
 
 img {
@@ -57,7 +67,7 @@ a {
 }
 
 .pressable:active {
-  transform: translateY(1px) scale(0.985);
+  opacity: 0.82;
 }
 
 /* Reveal animation tweak knobs:
@@ -88,7 +98,7 @@ a {
 }
 
 .reveal-card {
-  transform: translateY(16px) scale(1.03);
+  transform: translateY(12px);
 }
 
 .reveal--delay1 {
@@ -97,30 +107,6 @@ a {
 
 .reveal--delay2 {
   transition-delay: 150ms;
-}
-
-.diag-lines-page {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 0;
-  opacity: calc(var(--diag-opacity, 0) * 0.72);
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(125, 184, 249, 0.22) 0 1px,
-    rgba(125, 184, 249, 0) 1px 18px
-  );
-  background-position: var(--diag-shift, 0px) var(--diag-shift, 0px);
-  transition: opacity 260ms ease;
-}
-
-@media (max-width: 1023px), (pointer: coarse) {
-  .diag-lines-page {
-    display: none;
-  }
 }
 
 @media (pointer: coarse) {
@@ -145,8 +131,4 @@ a {
     will-change: auto;
   }
 
-  .diag-lines-page {
-    transform: none;
-    opacity: 0;
-  }
 }

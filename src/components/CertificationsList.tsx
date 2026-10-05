@@ -20,7 +20,7 @@ export function CertificationsList({ certifications, awards }: CertificationsLis
             {certifications.map((cert) => (
               <article
                 key={cert.title}
-                className="rounded-3xl border border-white/60 bg-white p-2.5 transition-all hover:-translate-y-0.5 hover:bg-white"
+                className="border-b border-forest-line/60 py-3"
               >
                 <p className="text-lg font-bold text-ink">{cert.title}</p>
                 <p className="text-base text-body">
@@ -33,13 +33,13 @@ export function CertificationsList({ certifications, awards }: CertificationsLis
           </div>
         </div>
 
-        <div className="space-y-1.5 lg:border-l lg:border-slate-200 lg:pl-4">
+        <div className="space-y-1.5 lg:border-l lg:border-forest-line lg:pl-4">
           <h4 className="text-sm font-bold uppercase tracking-[0.18em] text-body/75">Awards</h4>
           <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
             {awards.map((award) => (
               <article
                 key={award.title}
-                className="rounded-3xl border border-white/60 bg-white p-2.5 transition-all hover:-translate-y-0.5 hover:bg-white"
+                className="border-b border-forest-line/60 py-3"
               >
                 <p className="text-xl font-bold text-ink">{award.title}</p>
                 <p className="text-lg text-body">

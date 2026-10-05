@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Card } from '../components/Card'
 import { Chip } from '../components/Chip'
+import { StepModelPlaceholder } from '../components/StepModelPlaceholder'
+import { StepModelViewer } from '../components/StepModelViewer'
 import { projects, type ProjectItem } from '../data/profile'
 
 type ProjectStory = NonNullable<ProjectItem['story']>
@@ -10,9 +12,9 @@ type EngineeringCaseStudy = NonNullable<ProjectItem['engineeringCaseStudy']>
 type TechnicalCaseStudy = NonNullable<ProjectItem['technicalCaseStudy']>
 
 const workflowToneClasses: Record<ProjectStory['workflow'][number]['tone'], string> = {
-  primary: 'border-blue-200 bg-blue-50 text-blue-900',
-  active: 'border-amber-200 bg-amber-50 text-amber-950',
-  merged: 'border-emerald-200 bg-emerald-50 text-emerald-950'
+  primary: 'border-forest-line bg-forest-raised text-ink',
+  active: 'border-forest-line bg-forest-raised text-ink',
+  merged: 'border-forest-line bg-forest-raised text-ink'
 }
 
 function DetailList({ items }: { items: string[] }) {
@@ -33,7 +35,7 @@ function ProjectStorySections({ story }: { story: ProjectStory }) {
     <>
       <div className="grid gap-5 md:grid-cols-2 md:gap-6">
         <Card className="space-y-3 border-t-4 border-t-amber-400">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-700">Engineering problem</p>
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Engineering problem</p>
           <h2 className="text-2xl font-bold text-ink md:text-3xl">CAD history becomes ambiguous</h2>
           <p className="text-base leading-relaxed text-body md:text-lg">{story.problem}</p>
         </Card>
@@ -60,7 +62,7 @@ function ProjectStorySections({ story }: { story: ProjectStory }) {
               {index < story.workflow.length - 1 ? (
                 <span
                   aria-hidden="true"
-                  className="absolute -bottom-3 left-1/2 z-10 -translate-x-1/2 text-xl font-bold text-slate-400 md:-right-3 md:bottom-auto md:left-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2"
+                  className="absolute -bottom-3 left-1/2 z-10 -translate-x-1/2 text-xl font-bold text-body md:-right-3 md:bottom-auto md:left-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2"
                 >
                   →
                 </span>
@@ -69,9 +71,9 @@ function ProjectStorySections({ story }: { story: ProjectStory }) {
           ))}
         </div>
         <div className="flex flex-wrap gap-4 text-xs font-bold uppercase tracking-[0.16em] text-body">
-          <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-blue-500" />Primary path</span>
+          <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-forest-accent" />Primary path</span>
           <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-amber-400" />Active branch</span>
-          <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />Merged branch</span>
+          <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-forest-accent" />Merged branch</span>
         </div>
       </Card>
 
@@ -82,7 +84,7 @@ function ProjectStorySections({ story }: { story: ProjectStory }) {
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {story.featureGroups.map((group) => (
-            <div key={group.title} className="rounded-3xl border border-slate-200 bg-white/80 p-5">
+            <div key={group.title} className="rounded-3xl border border-forest-line bg-forest-surface/80 p-5">
               <h3 className="mb-3 text-lg font-bold text-ink md:text-xl">{group.title}</h3>
               <DetailList items={group.items} />
             </div>
@@ -98,7 +100,7 @@ function ProjectStorySections({ story }: { story: ProjectStory }) {
         <div className="mx-auto max-w-3xl space-y-2">
           {story.architecture.map((node, index) => (
             <div key={node.title}>
-              <div className="rounded-3xl border border-sky-200 bg-gradient-to-r from-white to-sky-50 p-4 text-center shadow-soft md:p-5">
+              <div className="rounded-3xl border border-sky-200 bg-gradient-to-r from-forest-surface to-sky-50 p-4 text-center shadow-soft md:p-5">
                 <h3 className="text-base font-bold text-ink md:text-lg">{node.title}</h3>
                 <p className="mt-1 text-sm leading-relaxed text-body md:text-base">{node.description}</p>
               </div>
@@ -128,7 +130,7 @@ function ProjectStorySections({ story }: { story: ProjectStory }) {
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           {story.challenges.map((item) => (
-            <div key={item.challenge} className="rounded-3xl border border-slate-200 bg-white/80 p-5">
+            <div key={item.challenge} className="rounded-3xl border border-forest-line bg-forest-surface/80 p-5">
               <h3 className="text-base font-bold text-ink md:text-lg">{item.challenge}</h3>
               <p className="mt-2 text-sm leading-relaxed text-body md:text-base">{item.solution}</p>
             </div>
@@ -167,7 +169,7 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {projectFacts.map((fact) => (
-            <div key={fact.label} className="rounded-3xl border border-slate-200 bg-white/80 p-4">
+            <div key={fact.label} className="rounded-3xl border border-forest-line bg-forest-surface/80 p-4">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-body/70">{fact.label}</p>
               <p className="mt-2 text-base font-bold leading-snug text-ink">{fact.value}</p>
             </div>
@@ -176,7 +178,7 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
       </Card>
 
       <Card className="space-y-3 border-t-4 border-t-amber-400">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-700">Engineering challenge</p>
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Engineering challenge</p>
         <h2 className="text-2xl font-bold text-ink md:text-3xl">Control a heavy payload in a constrained envelope</h2>
         <p className="text-base leading-relaxed text-body md:text-lg">{caseStudy.challenge}</p>
       </Card>
@@ -188,20 +190,12 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
         </div>
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {caseStudy.requirements.map((requirement) => (
-            <div key={requirement.title} className="rounded-3xl border border-slate-200 bg-white/80 p-5">
+            <div key={requirement.title} className="rounded-3xl border border-forest-line bg-forest-surface/80 p-5">
               <h3 className="text-base font-bold text-ink md:text-lg">{requirement.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-body md:text-base">{requirement.description}</p>
             </div>
           ))}
         </div>
-      </Card>
-
-      <Card className="space-y-4">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">My contributions</p>
-          <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">Concept research, requirements, and CAD support</h2>
-        </div>
-        <DetailList items={caseStudy.contributions} />
       </Card>
 
       <Card className="space-y-5">
@@ -211,7 +205,7 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
         </div>
         <ol className="space-y-3">
           {caseStudy.process.map((step, index) => (
-            <li key={step.title} className="grid gap-3 rounded-3xl border border-slate-200 bg-white/80 p-4 sm:grid-cols-[3rem_1fr] md:p-5">
+            <li key={step.title} className="grid gap-3 rounded-3xl border border-forest-line bg-forest-surface/80 p-4 sm:grid-cols-[3rem_1fr] md:p-5">
               <span className="grid h-10 w-10 place-items-center rounded-full bg-sky-500 text-sm font-bold text-white">
                 {index + 1}
               </span>
@@ -226,7 +220,7 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
 
       <Card className="space-y-5 border-t-4 border-t-amber-400">
         <div>
-          <div className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-amber-800">
+          <div className="inline-flex rounded-full border border-forest-line bg-forest-raised px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-forest-accent">
             Preliminary concept under evaluation
           </div>
           <h2 className="mt-3 text-2xl font-bold text-ink md:text-3xl">Current mechanism direction</h2>
@@ -236,7 +230,7 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
         <div className="grid gap-3 md:grid-cols-5">
           {caseStudy.concept.elements.map((element, index) => (
             <div key={element.title} className="relative flex">
-              <div className="w-full rounded-3xl border border-sky-200 bg-gradient-to-b from-white to-sky-50 p-4">
+              <div className="w-full rounded-3xl border border-sky-200 bg-gradient-to-b from-forest-surface to-sky-50 p-4">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Element {index + 1}</p>
                 <h3 className="mt-2 text-base font-bold text-ink">{element.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-body">{element.description}</p>
@@ -253,12 +247,6 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
           ))}
         </div>
 
-        <div className="rounded-3xl border border-amber-200 bg-amber-50/80 p-5">
-          <h3 className="text-lg font-bold text-amber-950">Open engineering questions</h3>
-          <div className="mt-3 columns-1 gap-8 md:columns-2">
-            <DetailList items={caseStudy.concept.unresolved} />
-          </div>
-        </div>
       </Card>
 
       <Card className="space-y-4">
@@ -272,7 +260,7 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
 
       <div className="grid gap-5 md:grid-cols-2 md:gap-6">
         <Card className="space-y-4">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-700">Current status</p>
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Current status</p>
           <h2 className="text-2xl font-bold text-ink md:text-3xl">Conceptual design</h2>
           <p className="text-base leading-relaxed text-body md:text-lg">{caseStudy.currentStatus}</p>
         </Card>
@@ -287,7 +275,7 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
         <DetailList items={caseStudy.finalDeliverables} />
       </Card>
 
-      <div className="rounded-3xl border border-slate-300 bg-slate-100/80 px-5 py-4 text-sm leading-relaxed text-body md:px-6 md:text-base">
+      <div className="rounded-3xl border border-forest-line bg-forest-raised/80 px-5 py-4 text-sm leading-relaxed text-body md:px-6 md:text-base">
         <span className="font-bold text-ink">Project information notice: </span>
         {caseStudy.disclaimer}
       </div>
@@ -313,7 +301,7 @@ function StandardProjectSections({ project }: { project: ProjectItem }) {
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {projectFacts.map((fact) => (
-            <div key={fact.label} className="rounded-3xl border border-slate-200 bg-white/80 p-4">
+            <div key={fact.label} className="rounded-3xl border border-forest-line bg-forest-surface/80 p-4">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-body/70">{fact.label}</p>
               <p className="mt-2 text-sm font-bold leading-snug text-ink md:text-base">{fact.value}</p>
             </div>
@@ -332,7 +320,7 @@ function StandardProjectSections({ project }: { project: ProjectItem }) {
 
         <Card className="space-y-4 border-t-4 border-t-amber-400">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-700">Engineering approach</p>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Engineering approach</p>
             <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">Design and implementation</h2>
           </div>
           <DetailList items={project.fullDetails} />
@@ -362,9 +350,9 @@ function TechnicalCaseStudySections({ caseStudy }: { caseStudy: TechnicalCaseStu
         <h2 className="text-2xl font-bold text-ink md:text-3xl">Engineering goal</h2>
         <p className="text-base leading-relaxed text-body md:text-lg">{caseStudy.objective}</p>
         {caseStudy.currentStatus ? (
-          <div className="rounded-3xl border border-amber-200 bg-amber-50/80 p-4 md:p-5">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-800">Current status</p>
-            <p className="mt-2 text-sm leading-relaxed text-amber-950 md:text-base">{caseStudy.currentStatus}</p>
+          <div className="rounded-3xl border border-forest-line bg-forest-raised/80 p-4 md:p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-forest-accent">Current status</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink md:text-base">{caseStudy.currentStatus}</p>
           </div>
         ) : null}
       </Card>
@@ -376,7 +364,7 @@ function TechnicalCaseStudySections({ caseStudy }: { caseStudy: TechnicalCaseStu
         </div>
         <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {caseStudy.specifications.map((specification) => (
-            <div key={specification.label} className="rounded-3xl border border-slate-200 bg-white/80 p-4">
+            <div key={specification.label} className="rounded-3xl border border-forest-line bg-forest-surface/80 p-4">
               <dt className="text-xs font-bold uppercase tracking-[0.16em] text-body/70">{specification.label}</dt>
               <dd className="mt-2 text-sm font-bold leading-relaxed text-ink md:text-base">{specification.value}</dd>
             </div>
@@ -392,7 +380,7 @@ function TechnicalCaseStudySections({ caseStudy }: { caseStudy: TechnicalCaseStu
         <div className="grid gap-3 md:grid-cols-4">
           {caseStudy.architecture.map((subsystem, index) => (
             <div key={subsystem.title} className="relative flex">
-              <div className="w-full rounded-3xl border border-sky-200 bg-gradient-to-b from-white to-sky-50 p-4 md:p-5">
+              <div className="w-full rounded-3xl border border-sky-200 bg-gradient-to-b from-forest-surface to-sky-50 p-4 md:p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-sky-700">Subsystem {index + 1}</p>
                 <h3 className="mt-2 text-lg font-bold text-ink">{subsystem.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-body">{subsystem.description}</p>
@@ -429,7 +417,7 @@ function TechnicalCaseStudySections({ caseStudy }: { caseStudy: TechnicalCaseStu
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           {caseStudy.challenges.map((item) => (
-            <div key={item.challenge} className="rounded-3xl border border-slate-200 bg-white/80 p-5">
+            <div key={item.challenge} className="rounded-3xl border border-forest-line bg-forest-surface/80 p-5">
               <h3 className="text-base font-bold text-ink md:text-lg">{item.challenge}</h3>
               <p className="mt-2 text-sm leading-relaxed text-body md:text-base">{item.response}</p>
             </div>
@@ -440,7 +428,7 @@ function TechnicalCaseStudySections({ caseStudy }: { caseStudy: TechnicalCaseStu
       <div className="grid gap-5 md:grid-cols-[1.35fr_0.65fr] md:gap-6">
         <Card className="space-y-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-700">Testing & results</p>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Testing & results</p>
             <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">Demonstrated outcomes</h2>
           </div>
           <DetailList items={caseStudy.results} />
@@ -498,7 +486,7 @@ export function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f3e5cf] via-[#f8f7f3] to-[#e6f1ff] px-6 py-10 md:px-12 lg:px-16">
+      <div className="site-theme min-h-screen bg-forest-base px-4 py-8 text-ink md:px-12 md:py-12 lg:px-16">
         <div className="mx-auto max-w-5xl">
           <Card className="space-y-4 text-center">
             <h1 className="text-4xl font-bold text-ink">Project Not Found</h1>
@@ -518,20 +506,35 @@ export function ProjectDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f3e5cf] via-[#f8f7f3] to-[#e6f1ff] px-6 py-10 md:px-12 lg:px-16">
+    <div className="site-theme min-h-screen bg-forest-base px-4 text-ink md:px-12 lg:px-16">
       <div className="mx-auto max-w-5xl space-y-5 md:space-y-6">
-        <div className="flex items-center justify-between gap-4">
+        <header className="sticky top-0 z-50 flex items-center justify-between gap-4 border-b border-forest-line bg-forest-base/95 py-4 backdrop-blur-sm">
+          <Link to="/" className="text-sm font-extrabold uppercase tracking-[0.16em] text-ink md:text-lg">Thomas Weik</Link>
           <Link
             to="/"
-            className="pressable inline-flex rounded-full border border-white/80 bg-white/75 px-4 py-2 text-sm font-bold text-ink transition-all hover:border-sky-200 hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 md:px-5 md:text-base"
+            className="pressable inline-flex border border-forest-line px-3 py-2 text-xs font-bold text-ink transition-colors hover:border-forest-accent hover:text-forest-accent focus-visible:outline-2 focus-visible:outline-forest-accent md:px-5 md:text-sm"
           >
-            Back to Portfolio
+            Back to Portfolio ↗
           </Link>
-        </div>
+        </header>
 
         <Card className="space-y-4 md:space-y-5">
+          {project.modelPath ? (
+            <StepModelViewer
+              modelPath={project.modelPath}
+              projectTitle={project.title}
+              mode="manual"
+              rotationOffsetDegrees={project.modelRotationDegrees}
+              rotationXDegrees={project.modelRotationXDegrees}
+              viewAxisRotationDegrees={project.modelViewAxisRotationDegrees}
+              cameraPosition={project.modelCameraPosition}
+              upAxis={project.modelUpAxis}
+            />
+          ) : project.stepPreviewPlaceholder ? (
+            <StepModelPlaceholder projectTitle={project.title} variant="detail" />
+          ) : null}
           {project.coverImage ? (
-            <div className="h-48 overflow-hidden rounded-3xl border border-white/70 bg-white md:h-64">
+            <div className="h-48 overflow-hidden rounded-3xl border border-forest-line/70 bg-forest-surface md:h-64">
               <ResponsiveImage
                 src={project.coverImage}
                 alt={project.coverAlt ?? `${project.title} cover`}
@@ -544,7 +547,7 @@ export function ProjectDetailPage() {
               />
             </div>
           ) : (
-            <div className={`h-48 rounded-3xl border border-white/70 bg-gradient-to-br md:h-64 ${project.visual}`} />
+            <div className={`h-48 rounded-3xl border border-forest-line/70 bg-gradient-to-br md:h-64 ${project.visual}`} />
           )}
           <div className="space-y-2.5 md:space-y-3">
             <p className="text-sm font-semibold text-body md:text-lg">{project.categories.join(' · ')}</p>
@@ -557,7 +560,8 @@ export function ProjectDetailPage() {
               {project.organization} · {project.dates}
             </p>
             {project.status ? (
-              <p className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-amber-800">
+              <p className="inline-flex w-fit items-center gap-2 border border-amber-700 bg-amber-200 px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.12em] text-amber-950">
+                <span className="h-2 w-2 bg-amber-800" aria-hidden="true" />
                 {project.status}
               </p>
             ) : null}
@@ -577,10 +581,10 @@ export function ProjectDetailPage() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className={`pressable inline-flex rounded-full border px-5 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 md:text-base ${
+                  className={`pressable inline-flex rounded-full border px-5 py-2.5 text-sm font-bold transition-all  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 md:text-base ${
                     link.variant === 'secondary'
-                      ? 'border-slate-300 bg-white text-ink hover:border-sky-300 hover:text-sky-700'
-                      : 'border-sky-500 bg-sky-500 text-white hover:bg-sky-700'
+                      ? 'border-forest-line bg-forest-surface text-ink hover:border-sky-300 hover:text-sky-700'
+                      : 'border-forest-accent bg-forest-accent text-forest-base hover:bg-ink'
                   }`}
                 >
                   {link.label}
@@ -611,10 +615,10 @@ export function ProjectDetailPage() {
                   key={item.src}
                   type="button"
                   onClick={() => setActiveMediaIndex(index)}
-                  className="pressable group flex h-full w-full flex-col rounded-3xl border border-white/70 bg-white p-3 text-left shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:p-4"
+                  className="pressable group flex h-full w-full flex-col rounded-3xl border border-forest-line/70 bg-forest-surface p-3 text-left shadow-soft transition-all duration-300  hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:p-4"
                 >
                   <div
-                    className={`overflow-hidden rounded-2xl bg-slate-100 transition-transform duration-300 group-hover:scale-[1.01] ${
+                    className={`overflow-hidden rounded-2xl bg-forest-raised transition-transform duration-300  ${
                       item.layout === 'portrait' ? 'h-64 sm:h-72 md:h-[30rem]' : 'h-36 sm:h-40'
                     }`}
                   >
@@ -644,9 +648,9 @@ export function ProjectDetailPage() {
                 {project.mediaPlaceholders?.map((placeholder) => (
                   <div
                     key={placeholder}
-                    className="rounded-3xl border border-white/70 bg-white p-3 shadow-soft md:p-4"
+                    className="rounded-3xl border border-forest-line/70 bg-forest-surface p-3 shadow-soft md:p-4"
                   >
-                    <div className="h-32 rounded-2xl bg-gradient-to-br from-sky-100 to-[#dbeafe] md:h-40" />
+                    <div className="h-32 rounded-2xl bg-gradient-to-br from-sky-100 to-forest-raised md:h-40" />
                     <p className="mt-3 text-sm font-semibold text-body md:text-base">{placeholder}</p>
                   </div>
                 ))}
@@ -658,17 +662,17 @@ export function ProjectDetailPage() {
 
       {projectMedia.length > 0 && activeMediaIndex !== null ? (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/85 px-3 py-4 backdrop-blur-sm md:px-4 md:py-6"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-forest-base/85 px-3 py-4 backdrop-blur-sm md:px-4 md:py-6"
           role="dialog"
           aria-modal="true"
           aria-label={`${projectMedia[activeMediaIndex].caption} full screen view`}
           onClick={() => setActiveMediaIndex(null)}
         >
           <div
-            className="flex max-h-[92dvh] w-full max-w-7xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-white shadow-2xl"
+            className="flex max-h-[92dvh] w-full max-w-7xl flex-col overflow-hidden rounded-3xl border border-forest-line/15 bg-forest-surface shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-4 py-3 md:gap-4 md:px-5 md:py-4">
+            <div className="flex items-center justify-between gap-3 border-b border-forest-line px-4 py-3 md:gap-4 md:px-5 md:py-4">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-body/60 md:text-sm">
                   Full Screen View
@@ -680,12 +684,12 @@ export function ProjectDetailPage() {
               <button
                 type="button"
                 onClick={() => setActiveMediaIndex(null)}
-                className="pressable inline-flex rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-ink transition-all hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:px-4 md:text-sm"
+                className="pressable inline-flex rounded-full border border-forest-line bg-forest-surface px-3 py-2 text-xs font-bold text-ink transition-all hover:bg-forest-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:px-4 md:text-sm"
               >
                 Close
               </button>
             </div>
-            <div className="relative grid min-h-0 flex-1 place-items-center bg-slate-100 p-3 md:p-6">
+            <div className="relative grid min-h-0 flex-1 place-items-center bg-forest-raised p-3 md:p-6">
               {projectMedia.length > 1 ? (
                 <>
                   <button
@@ -696,7 +700,7 @@ export function ProjectDetailPage() {
                       )
                     }
                     aria-label="Previous image"
-                    className="pressable absolute left-2 top-1/2 -translate-y-1/2 rounded-full border border-white/70 bg-white/90 p-2.5 text-xl font-bold text-ink shadow-lg transition-all hover:-translate-x-0.5 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:left-3 md:p-3 md:text-2xl"
+                    className="pressable absolute left-2 top-1/2 -translate-y-1/2 rounded-full border border-forest-line/70 bg-forest-surface/90 p-2.5 text-xl font-bold text-ink shadow-lg transition-all hover:-translate-x-0.5 hover:bg-forest-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:left-3 md:p-3 md:text-2xl"
                   >
                     ‹
                   </button>
@@ -706,7 +710,7 @@ export function ProjectDetailPage() {
                       setActiveMediaIndex((value) => (value === null ? 0 : (value + 1) % projectMedia.length))
                     }
                     aria-label="Next image"
-                    className="pressable absolute right-2 top-1/2 -translate-y-1/2 rounded-full border border-white/70 bg-white/90 p-2.5 text-xl font-bold text-ink shadow-lg transition-all hover:translate-x-0.5 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:right-3 md:p-3 md:text-2xl"
+                    className="pressable absolute right-2 top-1/2 -translate-y-1/2 rounded-full border border-forest-line/70 bg-forest-surface/90 p-2.5 text-xl font-bold text-ink shadow-lg transition-all hover:translate-x-0.5 hover:bg-forest-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:right-3 md:p-3 md:text-2xl"
                   >
                     ›
                   </button>

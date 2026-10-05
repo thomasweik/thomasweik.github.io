@@ -33,6 +33,9 @@ import cadHandoffHomepagePhoto from '../assets/optimized/CAD-Handoff_Homepage-16
 import cadHandoffTreePhoto from '../assets/optimized/Example_Tree-1600.webp'
 import ipsTunnelModelPhoto from '../assets/optimized/Tunnel_Model-1600.webp'
 import ipsTunnelAnalysisPhoto from '../assets/optimized/Tunnel_Analysis-1600.webp'
+import ipsConceptAssemblyPhoto from '../assets/optimized/IPSConceptAssembly-1600.webp'
+import ipsTunnelFloorFEAPhoto from '../assets/optimized/IPSTunnelFloorFEA-1600.webp'
+import ipsInitialConceptSketchPhoto from '../assets/optimized/IPSInitialConceptSketch-1600.webp'
 
 export type ProjectCategory =
   | 'Defense'
@@ -92,6 +95,13 @@ export interface ProjectItem {
   categories: ProjectCategory[]
   tags: string[]
   visual: string
+  stepPreviewPlaceholder?: boolean
+  modelPath?: string
+  modelRotationDegrees?: number
+  modelRotationXDegrees?: number
+  modelViewAxisRotationDegrees?: number
+  modelCameraPosition?: [number, number, number]
+  modelUpAxis?: 'y' | 'z'
   coverImage?: string
   coverAlt?: string
   coverPosition?: string
@@ -108,12 +118,10 @@ export interface ProjectItem {
     phase: string
     challenge: string
     requirements: Array<{ title: string; description: string }>
-    contributions: string[]
     process: Array<{ title: string; description: string }>
     concept: {
       summary: string
       elements: Array<{ title: string; description: string }>
-      unresolved: string[]
     }
     tools: string[]
     currentStatus: string
@@ -230,7 +238,14 @@ export const skills: SkillGroup[] = [
   {
     title: 'Microscopy & Characterization',
     icon: 'mc',
-    items: ['STM', 'AFM', 'SEM', 'TEM', 'EDAX', 'Confocal Microscopy']
+    items: [
+      'Scanning Tunneling Microscopy',
+      'Atomic Force Microscopy',
+      'Scanning Electron Microscopy',
+      'Transmission Electron Microscopy',
+      'Energy-Dispersive X-ray Spectroscopy (EDAX)',
+      'Confocal Microscopy'
+    ]
   },
   {
     title: 'Programming & Controls',
@@ -321,7 +336,7 @@ export const experience: ExperienceItem[] = [
     imageAlt: 'Captain in training role photo',
     location: 'Sayville, NY',
     type: 'On-site, Seasonal',
-    dates: 'May 2025 - Aug 2025',
+    dates: 'May 2025 - Aug 2026',
     gallery: [
       {
         src: coastlineFreightSeahorsePhoto,
@@ -444,9 +459,9 @@ export const leadership: ExperienceItem[] = [
 export const projects: ProjectItem[] = [
   {
     slug: 'inverted-payload-system',
-    title: 'Inverted Payload System',
+    title: 'Lockheed Martin Inverted Payload System',
     subtitle: 'Mechanical payload installation system for a confined tunnel environment',
-    role: 'Concept Design Subteam Member',
+    role: 'Team Member',
     organization: 'Florida Institute of Technology',
     dates: '2026–2027',
     cardDates: '2026–2027 · In Development',
@@ -454,7 +469,7 @@ export const projects: ProjectItem[] = [
     description:
       'Developing a fully mechanical system to lift, orient, and position 20-pound payloads for overhead installation inside a confined, low-visibility tunnel.',
     overview:
-      'The Inverted Payload System is a Mechanical Engineering Senior Design project sponsored by Lockheed Martin Space and the United States Navy. Our 11-student team is developing a mechanically operated device to install and remove three cube-shaped payloads, one at a time, at overhead interfaces within a confined tunnel.',
+      'The Inverted Payload System is a Mechanical Engineering Senior Design project sponsored by Lockheed Martin and the United States Navy. Our 11-student team is developing a mechanically operated device to install and remove three cube-shaped payloads, one at a time, at overhead interfaces within a confined tunnel.',
     bullets: [
       'Researching mechanical lifting, positioning, alignment, rotation, and locking mechanisms for confined-space operation.',
       'Contributing to requirements development, verification planning, literature review, risk analysis, and the Systems Requirements Review.',
@@ -468,11 +483,34 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['Defense', 'Mechanical Design', 'Manufacturing'],
     tags: ['Mechanical Design', 'Creo', 'Systems Engineering', 'Concept Development', 'DFM/DFA'],
-    visual: 'from-[#172033] via-[#324760] to-[#d8e3ec]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
+    stepPreviewPlaceholder: true,
+    modelPath: 'models/inverted-payload-system.glb',
+    modelRotationXDegrees: 180,
+    modelRotationDegrees: 90,
+    modelViewAxisRotationDegrees: 90,
     coverImage: ipsTunnelModelPhoto,
     coverAlt: 'Simplified tunnel-envelope model showing payload approach and overhead installation directions',
     coverFit: 'contain',
     media: [
+      {
+        src: ipsConceptAssemblyPhoto,
+        alt: 'Render of the concept design team assembly created for IPS, with its curated bill of materials',
+        caption: 'Concept design team assembly and curated bill of materials',
+        layout: 'landscape'
+      },
+      {
+        src: ipsTunnelFloorFEAPhoto,
+        alt: 'ANSYS static structural total-deformation plot of the tunnel floor',
+        caption: 'ANSYS floor-deformation analysis for the tunnel',
+        layout: 'landscape'
+      },
+      {
+        src: ipsInitialConceptSketchPhoto,
+        alt: 'Initial hand-drawn concept sketch of the payload support arm and lead-screw lift',
+        caption: 'Initial concept sketch exploring the first stages of the device',
+        layout: 'landscape'
+      },
       {
         src: ipsTunnelModelPhoto,
         alt: 'Simplified tunnel-envelope model showing payload approach and overhead installation directions',
@@ -487,7 +525,7 @@ export const projects: ProjectItem[] = [
       }
     ],
     engineeringCaseStudy: {
-      sponsor: 'Lockheed Martin Space + United States Navy',
+      sponsor: 'Lockheed Martin + United States Navy',
       teamSize: '11 engineering students',
       budget: '$10,000',
       phase: 'Conceptual design',
@@ -518,14 +556,6 @@ export const projects: ProjectItem[] = [
           title: 'Design basis',
           description: 'Target a 25-year service life, consider MIL-STD-1472H and MIL-STD-3034A, and use 1.5 yield and 2.0 ultimate factors of safety with nonnegative margins.'
         }
-      ],
-      contributions: [
-        'I serve on the concept design subteam and research mechanisms for lifting, positioning, alignment, rotation, and positive locking.',
-        'I investigated worm gears, Geneva mechanisms, ratchet-and-pawl systems, index plungers, rotary indexing tables, kinematic couplings, rotary actuators, lead screws, and linear guides.',
-        'I contribute to system-requirements development, verification planning, the literature review, risk analysis, and Systems Requirements Review material.',
-        'I develop and evaluate mechanical concepts through sketches while considering manufacturability, assembly, operator access, stability, and customer requirements.',
-        'I created a Creo model and technical drawing of the tunnel envelope to support packaging and clearance studies.',
-        'I prepare technical presentation content and document concept-team meetings so design decisions and open questions remain traceable.'
       ],
       process: [
         {
@@ -577,16 +607,6 @@ export const projects: ProjectItem[] = [
             title: 'Mechanical position holding',
             description: 'Candidate friction locks, toothed joints, index plungers, ratchets, or mechanically braked joints to prevent arm drift.'
           }
-        ],
-        unresolved: [
-          'Reliable anchoring on a low-friction sloped floor',
-          'Stability throughout the articulating arm’s working range',
-          'Joint drift prevention under a 20-pound payload',
-          'Controlled in-plane cube rotation',
-          'Tooling clearance around the multi-bolt interface',
-          'Reach around changes in tunnel geometry',
-          'Dropped-part and inadvertent-disconnection prevention',
-          'Elimination or mitigation of single-point failures'
         ]
       },
       tools: [
@@ -649,7 +669,7 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['Software', 'Mechanical Design'],
     tags: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Row Level Security', 'GitHub Actions'],
-    visual: 'from-[#0f2747] via-[#164a7b] to-[#e5eef8]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: cadHandoffHomepagePhoto,
     coverAlt: 'CAD Handoff project selection screen with storage status and project tiles',
     media: [
@@ -662,18 +682,6 @@ export const projects: ProjectItem[] = [
         src: cadHandoffTreePhoto,
         alt: 'CAD Handoff visual version tree showing primary, active, and merged branches',
         caption: 'Version tree showing branch origins, iterations, archived packages, and promotions'
-      }
-    ],
-    links: [
-      {
-        label: 'View Live Project',
-        href: 'https://thomasweik.github.io/cad-handoff/',
-        variant: 'primary'
-      },
-      {
-        label: 'View Source Code',
-        href: 'https://github.com/thomasweik/cad-handoff',
-        variant: 'secondary'
       }
     ],
     story: {
@@ -838,9 +846,12 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['UAS', 'Mechanical Design', 'Manufacturing'],
     tags: ['Laser Cutting', 'Mechanical Assembly', 'Teamwork', 'CAD', 'Wiring Harnesses', 'Servo Testing'],
-    visual: 'from-[#edf3ff] to-[#dfeaff]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
+    modelPath: 'models/sae-aero-design.glb',
+    modelRotationDegrees: 90,
     coverImage: saeFullGroupPhoto,
     coverAlt: 'Full SAE Aero Design group photo after flight',
+    coverFit: 'contain',
     media: [
       {
         src: saeMovingPlanePhoto,
@@ -880,7 +891,7 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['UAS', 'Mechatronics'],
     tags: ['Avionics Integration', 'RC Systems', 'Servos', 'Flight Controller'],
-    visual: 'from-[#eef2ff] to-[#dde9ff]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: aresExplodedViewPhoto,
     coverAlt: 'ARES MUAV exploded view of structure',
     coverPosition: 'object-[center_40%]',
@@ -923,7 +934,7 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['UAS', 'Mechatronics'],
     tags: ['FPV', 'Betaflight', 'ExpressLRS', 'Analog Video', 'Flight Testing', 'Soldering', 'Power Systems', 'LiPo Safety'],
-    visual: 'from-[#e8f2ff] to-[#d8e9ff]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: fpvAssemblingPhoto,
     coverAlt: 'Assembling FPV drone electronics onto the frame',
     coverPosition: 'object-[center_80%]',
@@ -1065,7 +1076,7 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['Software', 'Mechatronics', 'Defense'],
     tags: ['Embedded Linux', 'PCB Assembly', 'Reflow Soldering', 'AM335x', 'GitHub'],
-    visual: 'from-[#f4f7ff] to-sky-100',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: cubesatReflowPhoto,
     coverAlt: 'Reflow-soldered CubeSat flight computer PCB',
     media: [
@@ -1115,7 +1126,7 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['Mechanical Design', 'Manufacturing'],
     tags: ['Model Rocketry', 'Fiberglassing', 'Assembly', 'Certification'],
-    visual: 'from-[#fff2e6] to-[#ffe0c6]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: locIrisFinFiberglassingPhoto,
     coverAlt: 'Fiberglassing the fins on the Loc Iris model rocket',
     media: [
@@ -1146,6 +1157,7 @@ export const projects: ProjectItem[] = [
     organization: 'Personal Project',
     dates: 'Mar 2026 - Present',
     cardDates: 'In Progress',
+    status: 'In Progress',
     description:
       'Designed and built a 3D-printed robotic arm with vision guidance for object pickup and placement.',
     overview:
@@ -1158,12 +1170,12 @@ export const projects: ProjectItem[] = [
     fullDetails: [
       'Co-designed the full arm in Onshape, validating joint ranges and motion sequencing through assembly animations.',
       'Built and assembled 3D-printed components, mounting a wrist camera for close-range target detection.',
-      'Implemented AprilTag-based detection on a Raspberry Pi and linked it with Duet3D motion control to drive pick-and-place moves.',
-      'Project remains in progress as of March 2026 while I continue refining integration and automation behavior.'
+      'Implemented AprilTag-based detection on a Raspberry Pi and linked it with Duet3D motion control to drive pick-and-place moves.'
     ],
     categories: ['Mechatronics', 'Computer Vision', 'Mechanical Design', 'Software'],
     tags: ['Onshape', '3D Printing', 'Raspberry Pi', 'AprilTag', 'Duet3D', 'Motion Control'],
-    visual: 'from-[#eef7ff] to-[#d9ecff]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
+    modelPath: 'models/robotic-arm-vision-pick.glb',
     coverImage: robotArmCADPhoto,
     coverAlt: 'Robot arm CAD model',
     coverFit: 'contain',
@@ -1197,11 +1209,12 @@ export const projects: ProjectItem[] = [
     cardDates: '2026 - Present',
     status: 'In Development · Design Revisions',
     description:
-      'Designed and built a low-cost camera gimbal combining inertial stabilization with computer-vision target tracking using custom printed structures, an Arduino, an Orange Pi, and a BNO055 IMU.',
+      'Designed, printed, and troubleshot five camera-gimbal prototypes in two weeks, rapidly refining the mechanics before integrating stabilization and computer-vision tracking.',
     overview:
       'This personal project integrates mechanical design, embedded controls, and computer vision into a compact pan, tilt, and roll camera platform. Pan-and-tilt stabilization has been built and demonstrated; roll integration and final control tuning remain in progress.',
     bullets: [
       'Designed a custom 3-axis pan, tilt, and roll mechanism around compact servo actuators and bearing-supported rotating joints.',
+      'Completed five design, print, and troubleshooting iterations in two weeks, using hands-on build and motion-test findings to guide each revision.',
       'Integrated BNO055 orientation feedback for real-time yaw, pitch, and roll stabilization.',
       'Developed OpenCV-based vision tracking to detect a target and generate pan/tilt corrections from camera position error.',
       'Implemented serial communication between an Orange Pi vision computer and Arduino-based servo controller.',
@@ -1217,7 +1230,8 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['Mechatronics', 'Computer Vision', 'Mechanical Design', 'Software'],
     tags: ['Onshape', 'OpenCV', 'Arduino', 'Orange Pi', 'BNO055', 'Controls', 'FDM Printing', 'Prototyping'],
-    visual: 'bg-[linear-gradient(135deg,#111827_0%,#1e3a5f_50%,#0f766e_100%)]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
+    modelPath: 'models/three-axis-gimbal.glb',
     coverImage: gimbalFrontIsoPhoto,
     coverAlt: 'Custom three-axis camera gimbal with pan, tilt, and roll stabilization hardware',
     coverFit: 'contain',
@@ -1232,7 +1246,7 @@ export const projects: ProjectItem[] = [
         { label: 'Vision computer', value: 'Orange Pi 4 Pro, 6 GB' },
         { label: 'Orientation sensor', value: 'BNO055 9-DOF absolute orientation IMU' },
         { label: 'Actuation', value: 'Three low-cost MS18-class micro servos' },
-        { label: 'Camera', value: 'Arducam Camera Module 3 · 12 MP Sony IMX708 · autofocus' },
+        { label: 'Camera', value: 'Logitech C270 USB webcam' },
         { label: 'Servo power', value: 'XL4015 buck converter' },
         { label: 'Communication', value: 'USB serial between Orange Pi and Arduino' }
       ],
@@ -1259,6 +1273,7 @@ export const projects: ProjectItem[] = [
           title: 'Mechanical design & prototyping',
           items: [
             'Modeled the gimbal, servo mounts, camera supports, rotating frames, shafts, and bearing interfaces in Onshape.',
+            'Designed, printed, assembled, and troubleshot five iterations in two weeks, translating fit, stiffness, and motion issues into rapid CAD revisions.',
             'Manufactured iterative FDM prototypes and redesigned interfaces that were difficult to assemble or required excessive plastic welding.',
             'Used bearing-supported joints so servo shafts do not directly carry the full structural load.',
             'Removed unnecessary printed material and moved servo interfaces closer to applied loads to reduce mass and moment arms.',
@@ -1268,10 +1283,10 @@ export const projects: ProjectItem[] = [
         {
           title: 'Electrical & computing integration',
           items: [
-            'Integrated an Arduino Uno, Orange Pi 4 Pro, BNO055 IMU, MS18-class servos, Arducam IMX708 camera, and XL4015 power regulator.',
+            'Integrated an Arduino Uno, Orange Pi 4 Pro, BNO055 IMU, MS18-class servos, Logitech C270 webcam, and XL4015 power regulator.',
             'Separated high-current servo power from the breadboard after testing showed lower jitter when the buck converter powered the servos directly.',
             'Established USB serial communication between the Linux vision computer and the Arduino controller.',
-            'Earlier development evaluated a Raspberry Pi Zero W and Logitech C270 before moving to the newer Orange Pi and Arducam architecture.'
+            'Earlier development evaluated a Raspberry Pi Zero W and Arducam IMX708 before moving to the Orange Pi 4 Pro and Logitech C270 architecture.'
           ]
         },
         {
@@ -1377,7 +1392,7 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['Software'],
     tags: ['React', 'Vite', 'Tailwind CSS', 'Visual Studio Code', 'Codex', 'GitHub'],
-    visual: 'from-[#eaf4ff] to-[#dcecff]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: portfolioCoverPhoto,
     coverAlt: 'Portfolio website cover page',
     media: [
@@ -1415,7 +1430,7 @@ export const projects: ProjectItem[] = [
     ],
     categories: ['Mechanical Design', 'Manufacturing'],
     tags: ['Reverse Engineering', 'CAD', 'Assembly Drawings', 'Mechanical Interfaces', 'Motion Constraints'],
-    visual: 'from-[#edf5ff] to-[#dbe9ff]',
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: menziMuckOverviewDrawingPhoto,
     coverAlt: 'Menzi Muck overview drawing',
     coverFit: 'contain',

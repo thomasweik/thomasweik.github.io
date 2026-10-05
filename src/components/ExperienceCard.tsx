@@ -22,7 +22,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
   }, [])
 
   return (
-    <Card className="reveal reveal-card space-y-4 hover:-translate-y-1 hover:shadow-lift" data-animate>
+    <Card className="reveal reveal-card space-y-4  hover:shadow-lift" data-animate>
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div>
           <h3 className="text-2xl font-bold leading-tight text-ink">{item.role}</h3>
@@ -32,11 +32,11 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
             <ResponsiveImage
               src={item.image}
               alt={item.imageAlt ?? `${item.company} logo`}
-              className="h-16 w-16 rounded-2xl border border-slate-200 object-cover shadow-sm"
+              className="h-16 w-16 rounded-2xl border border-forest-line object-cover shadow-sm"
               loading="lazy"
             />
           ) : (
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-dashed border-forest-line bg-forest-surface text-[11px] font-semibold uppercase tracking-wide text-body">
               Image
             </div>
           )}
@@ -54,7 +54,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
               href={item.companyUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-1 inline-flex text-xl font-semibold text-sky-700 transition-colors hover:text-sky-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
+              className="mt-1 inline-flex text-xl font-semibold text-sky-700 transition-colors hover:text-forest-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
             >
               {item.company}
             </a>
@@ -76,7 +76,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
             {item.gallery.map((photo) => (
               <div
                 key={photo.src}
-                className="h-24 overflow-hidden rounded-2xl border border-white/70 bg-slate-100"
+                className="h-24 overflow-hidden rounded-2xl border border-forest-line/70 bg-forest-raised"
               >
                 <ResponsiveImage
                   src={photo.src}
@@ -91,7 +91,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
         {!expanded && canExpand ? (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white to-transparent"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-forest-surface to-transparent"
           />
         ) : null}
       </div>
@@ -99,7 +99,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
         <button
           type="button"
           onClick={() => setExpanded((value) => !value)}
-          className="pressable inline-flex rounded-full border border-sky-200 bg-white px-4 py-2 text-sm font-bold text-sky-700 transition-all hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+          className="pressable inline-flex rounded-full border border-sky-200 bg-forest-surface px-4 py-2 text-sm font-bold text-sky-700 transition-all hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
           aria-expanded={expanded}
         >
           {expanded ? 'View Less' : 'View More'}

@@ -8,7 +8,7 @@ interface CardProps extends HTMLAttributes<HTMLElement> {
 export function Card({ children, className = '', ...rest }: CardProps) {
   return (
     <article
-      className={`rounded-4xl border border-line bg-white p-5 shadow-soft transition-all duration-300 md:p-6 ${className}`}
+      className={`border-t border-line/70 bg-transparent px-0 py-5 md:py-6 ${className}`}
       {...rest}
     >
       {children}

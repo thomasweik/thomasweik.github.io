@@ -71,6 +71,29 @@ Then deploy the `dist/` folder using either:
 
 ## Content Updates
 
+The home page's **3D Models** section is currently a scroll-driven CSS preview.
+When publishable CAD files are ready, replace the visual in
+`src/components/ModelPreviewPlaceholder.tsx` with a model viewer while keeping
+the section id (`models`) so navigation continues to work.
+
+The Inverted Payload System, SAE Aero Design, three-axis gimbal, and robotic arm
+use lazy-loaded GLB models. Scrolling rotates them on the home page; dragging
+rotates them on their project pages. Their original cover images remain directly
+below the detail-page viewers. The ARES MUAV project still uses
+`StepModelPlaceholder` until its STEP file is available.
+
+To prepare another STEP file locally, run:
+
+```bash
+node scripts/convert-step-to-glb.cjs path/to/model.step public/models/model.glb
+```
+
+The converter imports colors from the STEP file by default. Add `--dark-gray`
+to make every part dark gray, or `--dark-gray-all-except="PART_NAME"` to retain
+one named part's STEP color. Then set the model's `modelPath` in
+`src/data/profile.ts` to `models/model.glb`. The source STEP file stays outside
+the website and is not needed at runtime.
+
 ### Responsive images
 
 The site serves generated WebP images at 640px and 1600px widths, with lazy

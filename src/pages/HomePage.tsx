@@ -6,6 +6,7 @@ import { ContactRow } from '../components/ContactRow'
 import { EducationCard } from '../components/EducationCard'
 import { ExperienceStack } from '../components/ExperienceStack'
 import { Navbar } from '../components/Navbar'
+import { ProjectModelsShowcase } from '../components/ProjectModelsShowcase'
 import { ProjectCard } from '../components/ProjectCard'
 import { Section } from '../components/Section'
 import { useInViewAnimate } from '../hooks/useInViewAnimate'
@@ -32,13 +33,13 @@ import { Card } from '../components/Card'
 const navSections = [
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
+  { id: 'models', label: '3D Models' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
   { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' }
 ]
 
-const skillAccentClasses = ['bg-sky-400', 'bg-sky-500', 'bg-[#3f8edb]', 'bg-[#2f6fb8]']
 const projectTileOrder = [
   'inverted-payload-system',
   'cad-handoff',
@@ -63,10 +64,7 @@ export function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false)
 
   const mainRef = useRef<HTMLDivElement | null>(null)
-  const skillsTriggerRef = useRef<HTMLDivElement | null>(null)
   const progressBarRef = useRef<HTMLDivElement | null>(null)
-  const heroShapeLeftRef = useRef<HTMLDivElement | null>(null)
-  const heroShapeRightRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -141,34 +139,6 @@ export function HomePage() {
         setShowScrollTop(shouldShowTopButton)
       }
 
-      if (!reducedMotion && window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches) {
-        const heroProgress = clamp(scrollTop / Math.max(viewportHeight, 1), 0, 1)
-        // Tweak: decorative parallax travel (keep within 10-20px total).
-        if (heroShapeLeftRef.current) {
-          heroShapeLeftRef.current.style.transform = `translate3d(0, ${(heroProgress * 14).toFixed(2)}px, 0)`
-        }
-        if (heroShapeRightRef.current) {
-          heroShapeRightRef.current.style.transform = `translate3d(0, ${(-heroProgress * 12).toFixed(2)}px, 0)`
-        }
-        // Tweak: diagonal-line drift speed (px per viewport scroll).
-        if (mainRef.current && skillsTriggerRef.current) {
-          const skillsTop = skillsTriggerRef.current.getBoundingClientRect().top + scrollTop
-          const fadeStart = skillsTop - viewportHeight * 0.55
-          const fadeEnd = skillsTop + viewportHeight * 0.15
-          const fadeProgress = clamp((scrollTop - fadeStart) / Math.max(fadeEnd - fadeStart, 1), 0, 1)
-          const lineShift = (scrollTop / Math.max(viewportHeight, 1)) * 14
-          mainRef.current.style.setProperty('--diag-opacity', fadeProgress.toFixed(3))
-          mainRef.current.style.setProperty('--diag-shift', `${lineShift.toFixed(2)}px`)
-        }
-      } else {
-        if (heroShapeLeftRef.current) heroShapeLeftRef.current.style.transform = 'translate3d(0, 0, 0)'
-        if (heroShapeRightRef.current) heroShapeRightRef.current.style.transform = 'translate3d(0, 0, 0)'
-        if (mainRef.current) {
-          mainRef.current.style.setProperty('--diag-shift', '0px')
-          mainRef.current.style.setProperty('--diag-opacity', '0')
-        }
-      }
-
       ticking = false
     }
 
@@ -188,7 +158,7 @@ export function HomePage() {
       window.removeEventListener('scroll', requestTick)
       window.removeEventListener('resize', requestTick)
     }
-  }, [reducedMotion])
+  }, [])
 
   const filteredProjects = useMemo(() => {
     const orderedProjects = [...projects].sort(
@@ -240,17 +210,16 @@ export function HomePage() {
   ]
 
   return (
-    <div ref={mainRef} className="relative min-h-screen bg-gradient-to-b from-[#f3e5cf] via-[#f8f7f3] to-[#e6f1ff] text-ink">
-      <div aria-hidden="true" className="diag-lines-page" />
-      <div className="pointer-events-none fixed left-0 top-0 z-[70] h-1 w-full bg-white/30">
+    <div ref={mainRef} className="site-theme min-h-screen bg-forest-base text-ink">
+      <div className="pointer-events-none fixed left-0 top-0 z-[70] h-0.5 w-full bg-forest-line/30">
         <div
           ref={progressBarRef}
-          className="h-full origin-left bg-gradient-to-r from-sky-300 to-sky-500"
+          className="h-full origin-left bg-forest-accent"
           style={{ transform: 'scaleX(0)' }}
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1400px] px-4 pb-16 pt-4 md:px-12 lg:px-16">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-4 pb-16 md:px-12 lg:px-16">
         <Navbar
           sections={navSections}
           activeSection={activeSection}
@@ -261,34 +230,25 @@ export function HomePage() {
 
         <main>
           <div>
-            <section className="relative scroll-mt-32 overflow-hidden py-12 text-center md:py-24" id="hero">
-              <div
-                ref={heroShapeLeftRef}
-                aria-hidden="true"
-                className="pointer-events-none absolute -left-16 top-2 hidden h-56 w-56 rounded-full bg-sky-200/45 blur-3xl md:block"
-              />
-              <div
-                ref={heroShapeRightRef}
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-12 top-24 hidden h-72 w-72 rounded-full bg-[#d7e8ff]/55 blur-3xl md:block"
-              />
-              <div className="mx-auto flex max-w-5xl flex-col items-center">
+            <section className="relative scroll-mt-24 py-20 md:py-28" id="hero">
+              <p className="mb-8 text-xs font-bold uppercase tracking-[0.3em] text-forest-accent">Portfolio / Engineering & design</p>
+              <div className="flex max-w-5xl flex-col items-start">
                 <h1
-                  className="reveal reveal--distance-sm text-4xl font-bold tracking-tight text-ink sm:text-5xl md:text-8xl"
+                  className="reveal reveal--distance-sm text-5xl font-bold tracking-tight text-ink sm:text-6xl md:text-8xl"
                   data-animate
                 >
                   {person.name}
                 </h1>
-                <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5 md:mt-8 md:gap-3.5">
+                <div className="mt-6 flex flex-wrap items-center gap-2.5 md:mt-8 md:gap-3.5">
                   <p
-                    className="reveal reveal--delay1 reveal--distance-sm inline-flex rounded-full border border-white/70 bg-white/60 px-4 py-2 text-sm font-semibold text-sky-700 shadow-soft backdrop-blur-sm sm:px-5 sm:text-lg md:px-6 md:text-2xl"
+                    className="reveal reveal--delay1 reveal--distance-sm inline-flex border-l-2 border-forest-accent pl-4 text-sm font-semibold uppercase tracking-[0.14em] text-forest-accent sm:text-base md:text-lg"
                     data-animate
                   >
                     {person.badge}
                   </p>
                   {person.secondaryBadge ? (
                     <p
-                      className="reveal reveal--delay1 reveal--distance-sm inline-flex rounded-full border border-white/70 bg-white/60 px-4 py-2 text-sm font-semibold text-sky-700 shadow-soft backdrop-blur-sm sm:px-5 sm:text-lg md:px-6 md:text-2xl"
+                      className="reveal reveal--delay1 reveal--distance-sm inline-flex border-l-2 border-forest-accent pl-4 text-sm font-semibold uppercase tracking-[0.14em] text-forest-accent sm:text-base md:text-lg"
                       data-animate
                     >
                       {person.secondaryBadge}
@@ -296,25 +256,25 @@ export function HomePage() {
                   ) : null}
                 </div>
               </div>
-              <div className="mx-auto mt-10 max-w-4xl md:mt-16">
+              <div className="mt-10 max-w-4xl md:mt-14">
                 <p
                   className="reveal reveal--delay2 text-lg leading-relaxed text-body sm:text-xl md:text-[2.15rem]/[1.4]"
                   data-animate
                 >
                   {person.summary}
                 </p>
-                <div className="mt-6 flex flex-wrap items-center justify-center gap-3 md:mt-8 md:gap-4">
+                <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10 md:gap-4">
                   <a
                     href="#contact"
                     onClick={(event) => {
                       event.preventDefault()
                       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                     }}
-                    className="pressable reveal reveal--delay2 rounded-full border border-sky-200 bg-sky-500 px-6 py-3 text-base font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 md:px-10 md:py-4 md:text-2xl"
+                    className="pressable reveal reveal--delay2 border border-forest-accent bg-forest-accent px-6 py-3 text-base font-bold text-forest-base transition-colors hover:bg-ink focus-visible:outline-2 focus-visible:outline-forest-accent md:px-10 md:py-4 md:text-xl"
                     data-animate
                     aria-label="Go to contact section"
                   >
-                    Get in Touch
+                    Get in Touch <span aria-hidden="true" className="ml-1 text-[0.75em] opacity-75">↗</span>
                   </a>
                   <a
                     href="#projects"
@@ -322,18 +282,18 @@ export function HomePage() {
                       event.preventDefault()
                       document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
                     }}
-                    className="pressable reveal reveal--delay2 rounded-full border border-white/80 bg-white/75 px-6 py-3 text-base font-bold text-ink transition-all hover:-translate-y-0.5 hover:border-sky-200 hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 md:px-10 md:py-4 md:text-2xl"
+                    className="pressable reveal reveal--delay2 border border-forest-line bg-transparent px-6 py-3 text-base font-bold text-ink transition-colors hover:border-forest-accent hover:text-forest-accent focus-visible:outline-2 focus-visible:outline-forest-accent md:px-10 md:py-4 md:text-xl"
                     data-animate
                     aria-label="Go to projects section"
                   >
-                    View Projects
+                    View Projects <span aria-hidden="true" className="ml-1 text-[0.75em] opacity-75">↗</span>
                   </a>
                 </div>
               </div>
             </section>
           <Section id="about" title="About" description={about.short}>
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-              <Card className="space-y-4 h-full">
+            <div className="grid grid-cols-1 gap-0 lg:grid-cols-3">
+              <Card className="h-full space-y-4">
                 <p className="text-xl leading-relaxed text-body">{about.long[0]}</p>
                 <p className="text-xl leading-relaxed text-body">{about.long[1]}</p>
                 <p className="text-xl leading-relaxed text-body">{about.long[2]}</p>
@@ -357,7 +317,7 @@ export function HomePage() {
                 </div>
               </Card>
               <Card className="h-full">
-                <figure className="h-full overflow-hidden rounded-3xl bg-white shadow-soft">
+                <figure className="h-full overflow-hidden bg-forest-surface">
                   <ResponsiveImage
                     src={awardCeremonyPhoto}
                     alt="Receiving an award from the Florida Tech President"
@@ -383,7 +343,7 @@ export function HomePage() {
             </div>
 
             {filteredProjects.length > 0 ? (
-              <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-4">
+              <div className="border-t border-forest-line">
                 {filteredProjects.map((project, index) => (
                   <div
                     key={project.slug}
@@ -402,9 +362,11 @@ export function HomePage() {
             )}
           </Section>
 
-          <div ref={skillsTriggerRef}>
+          <ProjectModelsShowcase />
+
+          <div>
             <Section id="skills" title="Skills" description={siteContent.skillsDescription}>
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 gap-x-10 gap-y-5 md:grid-cols-2 xl:grid-cols-3">
                 {skills.map((group, index) => (
                   <div
                     key={group.title}
@@ -412,20 +374,14 @@ export function HomePage() {
                     data-animate
                     style={{ transitionDelay: `${Math.min(index * 70, 280)}ms` }}
                   >
-                    <Card className="h-full space-y-3 p-3 hover:-translate-y-1 hover:shadow-lift">
-                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/85 shadow-inner">
-                        <span
-                          className={`h-6 w-6 rounded-xl ${skillAccentClasses[index % skillAccentClasses.length]}`}
-                          aria-hidden="true"
-                        />
-                      </span>
+                    <div className="h-full border-t border-forest-line/70 py-5">
                       <h3 className="text-2xl font-bold leading-tight text-ink">{group.title}</h3>
-                      <div className="flex flex-wrap gap-1">
+                      <div className="mt-4 flex flex-wrap gap-x-2 gap-y-2">
                         {group.items.map((item) => (
                           <Chip key={item} label={item} />
                         ))}
                       </div>
-                    </Card>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -449,7 +405,7 @@ export function HomePage() {
                   {leadershipRoles.map((item) => (
                     <article
                       key={`${item.company}-${item.role}-${item.dates}`}
-                      className="rounded-3xl border border-white/60 bg-white p-5 md:flex md:gap-6"
+                      className="border-t border-forest-line/60 py-5 md:flex md:gap-6"
                     >
                       <div className="md:w-[320px] md:flex-none">
                         <div className="flex flex-col gap-2">
@@ -461,7 +417,7 @@ export function HomePage() {
                             href={item.companyUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex text-lg font-semibold text-sky-700 transition-colors hover:text-sky-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
+                            className="inline-flex text-lg font-semibold text-sky-700 transition-colors hover:text-forest-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
                           >
                             {item.company}
                           </a>
@@ -472,11 +428,11 @@ export function HomePage() {
                           {item.location} · {item.type}
                         </p>
                         {item.role === 'Prytanis (President)' ? (
-                          <figure className="mt-4 overflow-hidden rounded-2xl border border-white/70 bg-white shadow-soft">
+                          <figure className="group relative z-0 mt-4 border border-forest-line/70 bg-forest-surface transition-[z-index] hover:z-20">
                             <ResponsiveImage
                               src={leadershipFundraiserPhoto}
                               alt="Prytanis group photo with St. Jude fundraising check"
-                              className="h-40 w-full object-cover"
+                              className="h-40 w-full origin-top-left object-cover transition-transform duration-300 ease-out motion-reduce:transition-none md:group-hover:scale-[2.5]"
                               loading="lazy"
                             />
                             <figcaption className="px-3 py-2 text-sm font-semibold text-body">
@@ -499,15 +455,18 @@ export function HomePage() {
                 <h3 className="text-3xl font-bold text-ink">Organizations</h3>
                 <div className="space-y-3">
                   {organizations.map((org) => (
-                    <article key={org.name} className="rounded-3xl border border-white/60 bg-white p-5">
+                    <article key={org.name} className="border-t border-forest-line/60 py-4">
                       {org.href ? (
                         <a
                           href={org.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex text-lg font-semibold text-sky-700 transition-colors hover:text-sky-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
+                          className="inline-flex text-lg font-semibold text-sky-700 transition-colors hover:text-forest-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
                         >
                           {org.name}
+                          {!leadershipRoles.some((item) => item.companyUrl === org.href) ? (
+                            <span aria-hidden="true" className="ml-1 text-sm">↗</span>
+                          ) : null}
                         </a>
                       ) : (
                         <p className="text-lg font-semibold text-sky-700">{org.name}</p>
@@ -534,7 +493,7 @@ export function HomePage() {
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className={`pressable fixed bottom-6 right-6 z-50 rounded-full border border-white/80 bg-white/85 px-4 py-3 text-sm font-bold text-ink shadow-soft backdrop-blur-md transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${
+          className={`pressable fixed bottom-6 right-6 z-50 border border-forest-line bg-forest-surface px-4 py-3 text-sm font-bold text-ink transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 ${
             showScrollTop ? 'pointer-events-auto opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-2'
           }`}
           aria-label="Scroll to top"
