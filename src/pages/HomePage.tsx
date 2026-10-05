@@ -6,7 +6,6 @@ import { ContactRow } from '../components/ContactRow'
 import { EducationCard } from '../components/EducationCard'
 import { ExperienceStack } from '../components/ExperienceStack'
 import { Navbar } from '../components/Navbar'
-import { ProjectModelsShowcase } from '../components/ProjectModelsShowcase'
 import { ProjectCard } from '../components/ProjectCard'
 import { Section } from '../components/Section'
 import { useInViewAnimate } from '../hooks/useInViewAnimate'
@@ -33,7 +32,6 @@ import { Card } from '../components/Card'
 const navSections = [
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
-  { id: 'models', label: '3D Models' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
   { id: 'experience', label: 'Experience' },
@@ -361,8 +359,6 @@ export function HomePage() {
               </Card>
             )}
           </Section>
-
-          <ProjectModelsShowcase />
 
           <div>
             <Section id="skills" title="Skills" description={siteContent.skillsDescription}>
