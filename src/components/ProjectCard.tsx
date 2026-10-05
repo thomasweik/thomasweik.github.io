@@ -67,7 +67,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         className="pressable inline-flex w-fit items-center border border-forest-accent px-4 py-3 text-sm font-bold text-forest-accent transition-colors hover:bg-forest-accent hover:text-forest-base focus-visible:outline-2 focus-visible:outline-forest-accent"
         aria-label={`View full project details for ${project.title}`}
       >
-        View project ↗
+        View project
       </Link>
     </article>
   )

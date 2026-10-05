@@ -41,8 +41,8 @@ export function Navbar({ sections, activeSection, compact = false, linkedinHref,
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          {linkedinHref && <a href={linkedinHref} target="_blank" rel="noreferrer" className="text-sm font-semibold text-body underline-offset-4 hover:text-ink hover:underline">LinkedIn ↗</a>}
-          {emailHref && <a href={emailHref} className="border border-forest-line px-3 py-2 text-sm font-semibold text-ink hover:border-forest-accent">Email ↗</a>}
+          {linkedinHref && <a href={linkedinHref} target="_blank" rel="noreferrer" className="text-sm font-semibold text-body underline-offset-4 hover:text-ink hover:underline">LinkedIn</a>}
+          {emailHref && <a href={emailHref} className="border border-forest-line px-3 py-2 text-sm font-semibold text-ink hover:border-forest-accent">Email</a>}
         </div>
 
         <button
@@ -73,8 +73,8 @@ export function Navbar({ sections, activeSection, compact = false, linkedinHref,
             </a>
           ))}
           <div className="flex gap-4 px-3 pt-4 text-sm font-semibold text-ink">
-            {linkedinHref && <a href={linkedinHref} target="_blank" rel="noreferrer">LinkedIn ↗</a>}
-            {emailHref && <a href={emailHref}>Email ↗</a>}
+            {linkedinHref && <a href={linkedinHref} target="_blank" rel="noreferrer">LinkedIn</a>}
+            {emailHref && <a href={emailHref}>Email</a>}
           </div>
         </nav>
       )}

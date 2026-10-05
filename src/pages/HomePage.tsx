@@ -272,7 +272,7 @@ export function HomePage() {
                     data-animate
                     aria-label="Go to contact section"
                   >
-                    Get in Touch <span aria-hidden="true" className="ml-1 text-[0.75em] opacity-75">↗</span>
+                    Get in Touch
                   </a>
                   <a
                     href="#projects"
@@ -284,7 +284,7 @@ export function HomePage() {
                     data-animate
                     aria-label="Go to projects section"
                   >
-                    View Projects <span aria-hidden="true" className="ml-1 text-[0.75em] opacity-75">↗</span>
+                    View Projects
                   </a>
                 </div>
               </div>
@@ -460,9 +460,7 @@ export function HomePage() {
                           className="inline-flex text-lg font-semibold text-sky-700 transition-colors hover:text-forest-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
                         >
                           {org.name}
-                          {!leadershipRoles.some((item) => item.companyUrl === org.href) ? (
-                            <span aria-hidden="true" className="ml-1 text-sm">↗</span>
-                          ) : null}
+                          {org.name}
                         </a>
                       ) : (
                         <p className="text-lg font-semibold text-sky-700">{org.name}</p>

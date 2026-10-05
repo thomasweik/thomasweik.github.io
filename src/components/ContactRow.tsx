@@ -41,7 +41,7 @@ export function ContactRow({ label, value, href }: ContactRowProps) {
     >
       <span className="inline-flex w-auto min-w-24 shrink-0 items-center gap-2 whitespace-nowrap text-xs font-bold uppercase tracking-[0.16em] text-forest-accent">
         <ContactIcon label={label} />
-        {label}{label === 'Phone' ? <span aria-hidden="true" className="text-[0.9em] opacity-70">↗</span> : null}
+        {label}
       </span>
       <span className="min-w-0 break-words text-base font-bold text-ink group-hover:text-forest-accent md:text-2xl">{value}</span>
     </a>

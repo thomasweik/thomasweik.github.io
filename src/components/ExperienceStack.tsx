@@ -154,7 +154,7 @@ export function ExperienceStack({ groups }: ExperienceStackProps) {
                     rel="noreferrer"
                     className="inline-flex text-sm font-semibold text-sky-700 transition-colors hover:text-forest-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 md:text-base"
                   >
-                    View company website <span aria-hidden="true" className="ml-1">↗</span>
+                    View company website
                   </a>
                 ) : null}
               </div>

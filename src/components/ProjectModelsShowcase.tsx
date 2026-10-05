@@ -43,7 +43,7 @@ export function ProjectModelsShowcase() {
             to={`/projects/${selectedProject.slug}`}
             className="pressable inline-flex items-center border border-[#4A3326] bg-[#4A3326] px-4 py-3 text-sm font-bold text-[#F4E7D0] shadow-sm transition-colors hover:border-[#37251C] hover:bg-[#37251C] focus-visible:outline-2 focus-visible:outline-forest-accent"
           >
-            View {selectedProject.title} ↗
+            View {selectedProject.title}
           </Link>
         </div>
 

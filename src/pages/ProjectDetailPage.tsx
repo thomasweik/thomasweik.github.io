@@ -514,7 +514,7 @@ export function ProjectDetailPage() {
             to="/"
             className="pressable inline-flex border border-forest-line px-3 py-2 text-xs font-bold text-ink transition-colors hover:border-forest-accent hover:text-forest-accent focus-visible:outline-2 focus-visible:outline-forest-accent md:px-5 md:text-sm"
           >
-            Back to Portfolio ↗
+            Back to Portfolio
           </Link>
         </header>
 
@@ -588,7 +588,6 @@ export function ProjectDetailPage() {
                   }`}
                 >
                   {link.label}
-                  <span aria-hidden="true" className="ml-2">↗</span>
                 </a>
               ))}
             </div>
