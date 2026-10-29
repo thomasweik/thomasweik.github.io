@@ -701,6 +701,7 @@ export const projects: ProjectItem[] = [
     visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: cadHandoffHomepagePhoto,
     coverAlt: 'CAD Handoff project selection screen with storage status and project tiles',
+    coverPosition: 'object-top',
     media: [
       {
         src: cadHandoffHomepagePhoto,
