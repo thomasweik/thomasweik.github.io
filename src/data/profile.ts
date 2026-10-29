@@ -26,6 +26,8 @@ import robotArmCADPhoto from '../assets/optimized/RobotArmCADModel-1600.webp'
 import robotArmBuildPhoto from '../assets/optimized/RobotArm-1600.webp'
 import robotArmControlPhoto from '../assets/optimized/RobotArmDuetBoardwithRaspberryPi-1600.webp'
 import portfolioCoverPhoto from '../assets/optimized/PortfolioWebsiteCoverpage-1600.webp'
+import portfolioProjectsPhoto from '../assets/optimized/PortfolioWebsiteProjects-1600.webp'
+import portfolioMobilePhoto from '../assets/optimized/PortfolioWebsiteMobile-1600.webp'
 import portfolioBackendPhoto from '../assets/optimized/PortfolioWebsiteSampleBackendscreenshotwithcodex-1600.webp'
 import menziMuckOverviewDrawingPhoto from '../assets/optimized/MenziMuckoverviewDrawing-1600.webp'
 import menziMuckClawDrawingPhoto from '../assets/optimized/MenziMuckClawDrawing-1600.webp'
@@ -123,7 +125,7 @@ export interface ProjectItem {
   coverPosition?: string
   coverFit?: 'cover' | 'contain'
   coverScale?: number
-  media?: Array<{ src: string; alt: string; caption: string; layout?: 'portrait' | 'landscape'; thumbnailScale?: number }>
+  media?: Array<{ src: string; alt: string; caption: string; layout?: 'portrait' | 'landscape'; thumbnailFit?: 'cover' | 'contain'; thumbnailScale?: number }>
   mediaPlaceholders?: string[]
   subtitle?: string
   links?: Array<{ label: string; href: string; variant?: 'primary' | 'secondary' }>
@@ -1544,11 +1546,13 @@ export const projects: ProjectItem[] = [
     organization: 'Personal Project',
     dates: '2026',
     description:
-      'Built and deployed a personal engineering portfolio website with reusable React components and structured content.',
+      'Built and deployed a responsive engineering portfolio with interactive 3D CAD viewers and structured React content.',
     overview:
-      'I designed and implemented this portfolio as a single-page React app focused on clear technical communication.',
+      'I designed and implemented this portfolio as a single-page React app focused on clear technical communication across desktop and mobile.',
     bullets: [
       'Developed the site using React, Vite, and Tailwind CSS with reusable components for easy updates.',
+      'Added interactive 3D model viewers so visitors can inspect CAD projects directly in the browser.',
+      'Optimized navigation, layouts, images, and viewer interactions for mobile screens.',
       'Used Codex to iterate quickly and deployed the site through GitHub.'
     ],
     fullDetails: [
@@ -1557,20 +1561,34 @@ export const projects: ProjectItem[] = [
       'Deployed the production build with GitHub-based hosting for a shareable, version-controlled portfolio.'
     ],
     categories: ['Software'],
-    tags: ['React', 'Vite', 'Tailwind CSS', 'Visual Studio Code', 'Codex', 'GitHub'],
+    tags: ['React', 'Vite', 'Tailwind CSS', '3D CAD Viewer', 'Responsive Design', 'Visual Studio Code', 'Codex', 'GitHub'],
     visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: portfolioCoverPhoto,
-    coverAlt: 'Portfolio website cover page',
+    coverAlt: 'Current desktop homepage of the portfolio website',
+    coverPosition: 'object-top',
     media: [
       {
         src: portfolioCoverPhoto,
-        alt: 'Portfolio website cover page',
-        caption: 'Portfolio homepage cover'
+        alt: 'Current desktop homepage of the portfolio website',
+        caption: 'Desktop portfolio homepage',
+        thumbnailFit: 'contain'
+      },
+      {
+        src: portfolioProjectsPhoto,
+        alt: 'Portfolio projects page showing an interactive 3D CAD model preview',
+        caption: 'Projects page with an interactive 3D CAD viewer',
+        thumbnailFit: 'contain'
       },
       {
         src: portfolioBackendPhoto,
         alt: 'Portfolio website backend screenshot with Codex',
         caption: 'Building the portfolio with Codex support'
+      },
+      {
+        src: portfolioMobilePhoto,
+        alt: 'Mobile portfolio homepage with the responsive navigation menu expanded',
+        caption: 'Mobile navigation and responsive homepage',
+        layout: 'portrait'
       }
     ]
   },

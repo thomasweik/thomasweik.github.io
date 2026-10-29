@@ -632,7 +632,7 @@ export function ProjectDetailPage() {
                       src={item.src}
                       alt={item.alt}
                       className={`h-full w-full ${
-                        item.layout === 'portrait' || project.story ? 'object-contain' : 'object-cover'
+                        item.thumbnailFit === 'contain' || item.layout === 'portrait' || project.story ? 'object-contain' : 'object-cover'
                       }`}
                       style={item.thumbnailScale ? { transform: `scale(${item.thumbnailScale})` } : undefined}
                       loading="lazy"
