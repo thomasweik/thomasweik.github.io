@@ -100,6 +100,19 @@ export interface ProjectItem {
   visual: string
   stepPreviewPlaceholder?: boolean
   modelPath?: string
+  modelCaption?: string
+  previousModel?: {
+    path: string
+    caption: string
+    rotationDegrees?: number
+    rotationXDegrees?: number
+    viewAxisRotationDegrees?: number
+  }
+  bomPdf?: {
+    path: string
+    title: string
+    description: string
+  }
   modelRotationDegrees?: number
   modelRotationXDegrees?: number
   modelViewAxisRotationDegrees?: number
@@ -465,34 +478,46 @@ export const projects: ProjectItem[] = [
     slug: 'inverted-payload-system',
     title: 'Lockheed Martin Inverted Payload System',
     subtitle: 'Mechanical payload installation system for a confined tunnel environment',
-    role: 'Team Member',
+    role: 'Concept System Designer & CAD/BOM Author',
     organization: 'Florida Institute of Technology',
     dates: '2026–2027',
     cardDates: '2026–2027 · In Development',
     status: 'In Development · Preliminary Design Report',
     description:
-      'Developing a fully mechanical system to lift, orient, and position 20-pound payloads for overhead installation inside a confined, low-visibility tunnel.',
+      'Designed Concept Design Team #3’s complete mechanical concept, CAD assembly, and working bill of materials for overhead installation of 20-pound payloads.',
     overview:
-      'The Inverted Payload System is a Mechanical Engineering Senior Design project sponsored by Lockheed Martin and the United States Navy. Our 11-student team is developing a mechanically operated device to install and remove three cube-shaped payloads, one at a time, at overhead interfaces within a confined tunnel.',
+      'The Inverted Payload System is a Mechanical Engineering Senior Design project sponsored by Lockheed Martin and the United States Navy. Our 11-student team is developing a mechanically operated device to install and remove three cube-shaped payloads at overhead interfaces within a confined tunnel. For Concept Design Team #3, I designed the complete Version 2 system concept, created its full CAD assembly, and authored its entire working bill of materials. This is our subteam concept, not the final design for the full project team.',
     bullets: [
-      'Researching mechanical lifting, positioning, alignment, rotation, and locking mechanisms for confined-space operation.',
-      'Contributing to requirements development, verification planning, literature review, risk analysis, and the Systems Requirements Review.',
-      'Developing and evaluating concepts with attention to manufacturability, assembly, access, stability, and customer requirements.',
+      'Designed the full Concept Design Team #3 Version 2 system, from the aluminum extrusion base to the telescoping arm and final positioning stage.',
+      'Created the entire Version 2 CAD assembly and authored the full working bill of materials for the subteam concept.',
+      'Contributed to requirements development, verification planning, literature review, risk analysis, and the Systems Requirements Review.',
       'Created a Creo model and drawing of the tunnel envelope and prepared concept sketches and technical presentation material.'
     ],
     fullDetails: [
       'The system must maintain positive control of one 6-inch, 20-pound cube while technicians complete a multi-bolt ceiling interface.',
-      'The current concept combines a stabilized floor carriage, manual lead-screw lift, spring-counterbalanced articulating arm, and cube-support fixture.',
-      'All concept features remain under evaluation and have not yet been experimentally validated.'
+      'The Version 2 concept uses an aluminum extrusion base and a screw jack to raise an aluminum-tube telescoping arm. Torsion spring loaded rollers support the telescoping motion, which the operator controls with a face worm winch.',
+      'An X-Y linear rail stage, turntable bearing, and scissor lift provide fine positioning at the payload installation point.',
+      'This is Concept Design Team #3’s proposal, not the full team’s final design; its mechanisms remain under evaluation and have not been experimentally validated.'
     ],
     categories: ['Defense', 'Mechanical Design', 'Manufacturing'],
-    tags: ['Mechanical Design', 'Creo', 'Systems Engineering', 'Concept Development', 'DFM/DFA'],
+    tags: ['Mechanical Design', 'Creo', 'Systems Engineering', 'Concept Development', 'Bill of Materials', 'DFM/DFA'],
     visual: 'from-forest-surface via-forest-raised to-forest-base',
     stepPreviewPlaceholder: true,
-    modelPath: 'models/inverted-payload-system.glb',
-    modelRotationXDegrees: 180,
-    modelRotationDegrees: 90,
-    modelViewAxisRotationDegrees: 90,
+    modelPath: 'models/inverted-payload-system-v2.glb',
+    modelCaption: 'Concept Design Team #3 Version 2',
+    previousModel: {
+      path: 'models/inverted-payload-system.glb',
+      caption: 'Concept Design Team #3 Version 1',
+      rotationDegrees: 90,
+      rotationXDegrees: 180,
+      viewAxisRotationDegrees: 90
+    },
+    bomPdf: {
+      path: 'docs/lmco-navy-team-3-concept-bom.pdf',
+      title: 'Concept Design Team #3 Bill of Materials',
+      description: 'I authored the complete working bill of materials for the Concept Design Team #3 system concept. It documents the proposed components and purchasing details for this subteam design, which is still under evaluation.'
+    },
+    modelCameraPosition: [1.15, -0.8, 0.6],
     coverImage: ipsTunnelModelPhoto,
     coverAlt: 'Simplified tunnel-envelope model showing payload approach and overhead installation directions',
     coverFit: 'contain',
@@ -589,27 +614,27 @@ export const projects: ProjectItem[] = [
       ],
       concept: {
         summary:
-          'The concept design team is evaluating a compact carriage that supports a manual lift and counterbalanced reach mechanism. The arrangement below is a preliminary concept under evaluation—not a selected, fabricated, or validated final design.',
+          'Concept Design Team #3 Version 2 starts with an aluminum extrusion base. A screw jack raises a telescoping arm made from aluminum tubing; torsion spring loaded rollers support its extension, while the operator controls that extension with a face worm winch. An X-Y linear rail stage, turntable bearing, and scissor lift provide final alignment for overhead installation. I designed this full subteam concept and its CAD assembly and authored its working bill of materials. It is not the final design for the entire senior design team.',
         elements: [
           {
-            title: 'Temporary anchoring',
-            description: 'A removable mechanical anchoring approach, potentially a vacuum-based SeaSucker-style mount if surface testing confirms compatibility.'
+            title: 'Aluminum extrusion base',
+            description: 'A modular frame supports the lift and arm within the constrained tunnel envelope.'
           },
           {
-            title: 'Manual vertical lift',
-            description: 'A manually driven lead screw intended to provide controlled, self-contained vertical positioning.'
+            title: 'Screw jack lift',
+            description: 'A screw jack raises the telescoping arm to the required working height.'
           },
           {
-            title: 'Counterbalanced reach',
-            description: 'A spring-counterbalanced articulating arm, similar in motion to a balanced task light, intended to extend through the tunnel.'
+            title: 'Telescoping arm',
+            description: 'Aluminum tubing and torsion spring loaded rollers guide the arm as it extends.'
           },
           {
-            title: 'Payload interface',
-            description: 'An end fixture intended to support, orient, and position the cube while retaining installation-tool access.'
+            title: 'Operator winch',
+            description: 'The operator uses a face worm winch to control telescoping reach.'
           },
           {
-            title: 'Mechanical position holding',
-            description: 'Candidate friction locks, toothed joints, index plungers, ratchets, or mechanically braked joints to prevent arm drift.'
+            title: 'Final positioning',
+            description: 'X-Y linear rails, a turntable bearing, and a scissor lift allow fine alignment for installation.'
           }
         ]
       },
@@ -628,7 +653,7 @@ export const projects: ProjectItem[] = [
         'Team collaboration'
       ],
       currentStatus:
-        'The project is in development at the Preliminary Design Report stage. The team is comparing mechanisms and system architectures, refining requirements, documenting risks, and preparing for concept selection. The displayed tunnel analysis is preliminary reference work; no final IPS configuration, completed structural validation, fabricated hardware, or validated performance claim is presented here.',
+        'The project is in development at the Preliminary Design Report stage. Concept Design Team #3 has produced the Version 2 CAD assembly and working bill of materials, but the full team has not selected this as its final design. The concept is still being evaluated; no completed structural validation, fabricated hardware, or validated performance claim is presented here.',
       nextSteps: [
         'Complete concept evaluation and select a system architecture',
         'Develop the selected concept in detailed Creo assemblies and drawings',
@@ -645,7 +670,7 @@ export const projects: ProjectItem[] = [
         'A final engineering report describing the design process and results'
       ],
       disclaimer:
-        'Project information is limited to approved academic and publicly shareable details. Design concepts and requirements may change as development continues.'
+        'Concept Design Team #3 Versions 1 and 2 are subteam proposals, not final designs selected by the full senior design team. Design details and requirements may change as development continues.'
     }
   },
   {

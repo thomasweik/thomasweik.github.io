@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Card } from '../components/Card'
 import { Chip } from '../components/Chip'
+import { PdfDocumentViewer } from '../components/PdfDocumentViewer'
 import { StepModelPlaceholder } from '../components/StepModelPlaceholder'
 import { StepModelViewer } from '../components/StepModelViewer'
 import { projects, type ProjectItem } from '../data/profile'
@@ -533,6 +534,11 @@ export function ProjectDetailPage() {
           ) : project.stepPreviewPlaceholder ? (
             <StepModelPlaceholder projectTitle={project.title} variant="detail" />
           ) : null}
+          {project.modelCaption ? (
+            <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-forest-accent md:text-sm">
+              {project.modelCaption}
+            </p>
+          ) : null}
           {project.coverImage ? (
             <div className="h-48 overflow-hidden rounded-3xl border border-forest-line/70 bg-forest-surface md:h-64">
               <ResponsiveImage
@@ -659,6 +665,42 @@ export function ProjectDetailPage() {
             </>
           ) : null}
         </Card> : null}
+
+        {project.previousModel ? (
+          <Card className="space-y-4 md:space-y-5">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Earlier concept model</p>
+              <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">{project.previousModel.caption}</h2>
+            </div>
+            <StepModelViewer
+              modelPath={project.previousModel.path}
+              projectTitle={`${project.title} ${project.previousModel.caption}`}
+              mode="manual"
+              rotationOffsetDegrees={project.previousModel.rotationDegrees}
+              rotationXDegrees={project.previousModel.rotationXDegrees}
+              viewAxisRotationDegrees={project.previousModel.viewAxisRotationDegrees}
+            />
+          </Card>
+        ) : null}
+
+        {project.bomPdf ? (
+          <Card className="space-y-4 md:space-y-5">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Working concept document</p>
+              <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">{project.bomPdf.title}</h2>
+              <p className="mt-3 text-base leading-relaxed text-body md:text-lg">{project.bomPdf.description}</p>
+            </div>
+            <PdfDocumentViewer path={project.bomPdf.path} title={project.bomPdf.title} />
+            <a
+              href={`${import.meta.env.BASE_URL}${project.bomPdf.path}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex w-fit border border-forest-line px-4 py-2 text-sm font-bold text-forest-accent transition-colors hover:border-forest-accent focus-visible:outline-2 focus-visible:outline-forest-accent"
+            >
+              Open the PDF in a new tab
+            </a>
+          </Card>
+        ) : null}
       </div>
 
       {projectMedia.length > 0 && activeMediaIndex !== null ? (
