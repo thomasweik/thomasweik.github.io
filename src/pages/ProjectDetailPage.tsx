@@ -261,7 +261,7 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
       <div className="grid gap-5 md:grid-cols-2 md:gap-6">
         <Card className="space-y-4">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Current status</p>
-          <h2 className="text-2xl font-bold text-ink md:text-3xl">Conceptual design</h2>
+          <h2 className="text-2xl font-bold text-ink md:text-3xl">{caseStudy.phase}</h2>
           <p className="text-base leading-relaxed text-body md:text-lg">{caseStudy.currentStatus}</p>
         </Card>
         <Card className="space-y-4">

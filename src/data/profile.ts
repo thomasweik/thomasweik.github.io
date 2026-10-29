@@ -469,7 +469,7 @@ export const projects: ProjectItem[] = [
     organization: 'Florida Institute of Technology',
     dates: '2026–2027',
     cardDates: '2026–2027 · In Development',
-    status: 'In Development · Conceptual Design',
+    status: 'In Development · Preliminary Design Report',
     description:
       'Developing a fully mechanical system to lift, orient, and position 20-pound payloads for overhead installation inside a confined, low-visibility tunnel.',
     overview:
@@ -532,7 +532,7 @@ export const projects: ProjectItem[] = [
       sponsor: 'Lockheed Martin + United States Navy',
       teamSize: '11 engineering students',
       budget: '$10,000',
-      phase: 'Conceptual design',
+      phase: 'Preliminary Design Report',
       challenge:
         'The team must enable controlled overhead installation and removal without allowing a payload to contact the floor. The system must fit entirely inside a low-visibility tunnel with a sloped, low-friction floor, keep-out zones, limited tooling clearance, and no allowance for electrical or magnetic components or permanent tunnel modifications.',
       requirements: [
@@ -628,7 +628,7 @@ export const projects: ProjectItem[] = [
         'Team collaboration'
       ],
       currentStatus:
-        'The project is in the conceptual design phase. The team is comparing mechanisms and system architectures, refining requirements, documenting risks, and preparing for concept selection. The displayed tunnel analysis is preliminary reference work; no final IPS configuration, completed structural validation, fabricated hardware, or validated performance claim is presented here.',
+        'The project is in development at the Preliminary Design Report stage. The team is comparing mechanisms and system architectures, refining requirements, documenting risks, and preparing for concept selection. The displayed tunnel analysis is preliminary reference work; no final IPS configuration, completed structural validation, fabricated hardware, or validated performance claim is presented here.',
       nextSteps: [
         'Complete concept evaluation and select a system architecture',
         'Develop the selected concept in detailed Creo assemblies and drawings',
