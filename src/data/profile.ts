@@ -1069,17 +1069,17 @@ export const projects: ProjectItem[] = [
     cardDates: '2026 - Present',
     status: 'In Development · Fusion Concept',
     description:
-      'Designing a single-axis ground station that sweeps a directional 5.8 GHz antenna, measures receiver signal strength, and points toward the strongest reception.',
+      'Designing a single-axis ground station with full 360° azimuth travel that sweeps a directional 5.8 GHz antenna, measures receiver signal strength, and points toward the strongest reception.',
     overview:
       'This project extends my analog FPV drone system with a motorized ground antenna. The baseline design uses an Arduino Uno, an RX5808 receiver, a directional RHCP patch antenna, and a bearing-supported belt drive. A Fusion assembly and renders show the current concept; the antenna geometry is a placeholder and tracking performance has not been measured.',
     bullets: [
       'Developing the azimuth mechanism in Autodesk Fusion around a NEMA 17 motor, 20-tooth and 60-tooth GT2 pulleys, and a separately supported 8 mm output shaft.',
       'Defining a home-and-scan control sequence that records relative RSSI against commanded angle, refines around the best signal, and returns to that direction.',
-      'Planning limit switches, software travel limits, hard stops, and flexible cable routing for approximately ±90° of rotation.'
+      'Planning full 360° azimuth travel with a home reference; motion control and cable routing remain to be finalized.'
     ],
     fullDetails: [
       'The proposed 3:1 timing-belt reduction isolates antenna weight and overturning moment from the motor shaft through two spaced output bearings.',
-      'The receiver is planned near the rotating patch antenna to keep the RF coax short; power, control, RSSI, and composite video will cross the limited-motion joint.',
+      'The receiver is planned near the rotating patch antenna to keep the RF coax short; routing power, control, RSSI, and composite video through the full-rotation joint remains under design.',
       'Validation will begin with a stationary transmitter and bench power, then compare pointing repeatability, backlash, scan time, reacquisition, and reception versus angle. No physical test results are claimed yet.'
     ],
     categories: ['RF Design', 'Mechatronics', 'UAS', 'Mechanical Design'],
@@ -1093,13 +1093,13 @@ export const projects: ProjectItem[] = [
     coverScale: 1.6,
     technicalCaseStudy: {
       objective:
-        'Develop a one-axis ground station that points a directional antenna toward the strongest received analog FPV signal without relying on GPS or drone position telemetry.',
+        'Develop a one-axis ground station with full 360° azimuth travel that points a directional antenna toward the strongest received analog FPV signal without relying on GPS or drone position telemetry.',
       currentStatus:
         'The system architecture and Fusion concept assembly are in development. Belt geometry, purchased-part interfaces, wiring, firmware, and physical test results remain to be finalized.',
       specifications: [
         { label: 'Tracking method', value: 'RSSI-based azimuth sweep and refinement; no GPS' },
         { label: 'Video link', value: 'Analog 5.8 GHz FPV with RHCP directional patch' },
-        { label: 'Planned motion', value: 'Approximately ±90° azimuth with home and limit switches' },
+        { label: 'Planned motion', value: 'Full 360° azimuth travel; homing and cable routing under review' },
         { label: 'Drive concept', value: 'NEMA 17 stepper with 20T:60T GT2 belt reduction' },
         { label: 'Output support', value: 'Separate 8 mm shaft with two spaced 608ZZ bearings' },
         { label: 'Controller', value: 'Arduino Uno with relative RSSI logging' },
@@ -1130,7 +1130,7 @@ export const projects: ProjectItem[] = [
           items: [
             'Modeling the stationary base, motor mount, output shaft, rotating antenna bracket, and bearing-supported load path in Fusion.',
             'Using a 20T motor pulley and 60T output pulley as the 3:1 belt-drive concept; final belt length, center distance, and tension adjustment are still open.',
-            'Planning a limited-travel cable service loop rather than a slip ring or RF rotary joint.'
+            'Designing cable routing to support full 360° azimuth travel; the rotating-joint approach remains under review.'
           ]
         },
         {
@@ -1157,7 +1157,7 @@ export const projects: ProjectItem[] = [
         },
         {
           challenge: 'RF signal versus mechanical motion',
-          response: 'The receiver is planned on the rotating side to shorten RF coax, with a flexible service loop for the other connections.'
+          response: 'The receiver is planned on the rotating side to shorten RF coax; routing the other connections through full 360° azimuth travel remains to be finalized.'
         },
         {
           challenge: 'Uncertain signal bearing',
