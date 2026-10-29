@@ -1277,20 +1277,20 @@ export const projects: ProjectItem[] = [
     organization: 'Personal Project',
     dates: 'Mar 2026 - Present',
     cardDates: 'Mar 2026 - Present',
-    status: 'In Development · Final Assembly',
+    status: 'Assembly Complete · Launch Preparation',
     description:
       'Built a Loc Iris model rocket to pursue NAR Level 1 high powered rocketry certification.',
     overview:
-      'I assembled the rocket and reinforced the fins with fiberglass in preparation for upcoming certification launches.',
+      'The rocket assembly is complete, including fiberglass reinforcement on the fins. I am now painting the rocket and sourcing a motor for an anticipated mid-November 2026 launch.',
     bullets: [
       'Assembled the Loc Iris model rocket for NAR Level 1 certification preparation.',
       'Fiberglassed the fins to improve reinforcement and durability.',
-      'Prepared the rocket for launch operations planned over the coming months.'
+      'Completed the assembly and moved into painting and motor sourcing for an anticipated mid-November 2026 launch.'
     ],
     fullDetails: [
       'Built the rocket as a certification-focused project for NAR Level 1 high powered rocketry.',
       'Applied fiberglass reinforcement to the fins to improve strength and flight durability.',
-      'Project remains in progress as of March 2026, with launch and certification attempts planned in the coming months.'
+      'Assembly is complete. Painting and motor sourcing remain before the anticipated mid-November 2026 certification launch.'
     ],
     categories: ['Mechanical Design', 'Manufacturing'],
     tags: ['Model Rocketry', 'Fiberglassing', 'Assembly', 'Certification'],
