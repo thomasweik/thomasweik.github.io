@@ -203,7 +203,7 @@ export const person: Person = {
   summary:
     'Mechanical engineering student focused on UAV systems, mechatronics, embedded hardware integration, and prototype development.',
   citizenship: 'US Citizen',
-  location: 'Melbourne, Florida / Sayville, New York'
+  location: 'Space Coast, Florida & Long Island, New York'
 }
 
 export const links: LinkItem[] = [
@@ -1375,7 +1375,7 @@ export const projects: ProjectItem[] = [
     organization: 'Independent Personal Project',
     dates: 'May 2026 - Present',
     cardDates: '2026 - Present',
-    status: 'In Development · Design Revisions',
+    status: 'In Development · Controls Programming & Tuning',
     description:
       'Designed, printed, and troubleshot five camera-gimbal prototypes in two weeks, rapidly refining the mechanics before integrating stabilization and computer-vision tracking.',
     overview:
@@ -1407,7 +1407,7 @@ export const projects: ProjectItem[] = [
       objective:
         'The objective is to develop a compact three-axis camera platform that can stabilize a camera and track a visible target while demonstrating mechanical design, controls, embedded-system integration, computer vision, and iterative prototyping within the torque and precision limits of inexpensive hobby servos.',
       currentStatus:
-        'Pan and tilt have been physically built and tested in a stabilization proof test. The vision and serial-control architecture is established. Final smoothing, full tracking integration, tuning, and the roll axis remain in progress; the design is not production-ready or fully optimized.',
+        'Pan and tilt have been physically built and tested in a stabilization proof test. The vision and serial-control architecture is established. Current work focuses on programming and tuning the stabilization and tracking controls; final smoothing, full tracking integration, and the roll axis remain in progress.',
       specifications: [
         { label: 'Motion architecture', value: 'Pan, tilt, and roll; pan and tilt currently built' },
         { label: 'Real-time controller', value: 'Arduino Uno for BNO055 processing and servo commands' },
@@ -1523,19 +1523,22 @@ export const projects: ProjectItem[] = [
         src: gimbalFrontIsoPhoto,
         alt: 'Front isometric view of the custom three-axis camera gimbal',
         caption: 'Front isometric view of the gimbal',
-        layout: 'landscape'
+        layout: 'landscape',
+        thumbnailFit: 'contain'
       },
       {
         src: gimbalBackIsoPhoto,
         alt: 'Back isometric view of the custom three-axis camera gimbal',
         caption: 'Back isometric view of the gimbal',
-        layout: 'landscape'
+        layout: 'landscape',
+        thumbnailFit: 'contain'
       },
       {
         src: gimbalFrontSquarePhoto,
         alt: 'Front square view of the custom three-axis camera gimbal',
         caption: 'Front square view of the gimbal',
-        layout: 'landscape'
+        layout: 'landscape',
+        thumbnailFit: 'contain'
       }
     ]
   },
