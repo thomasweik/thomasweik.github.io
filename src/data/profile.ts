@@ -10,6 +10,9 @@ import cubesatGroupPhoto from '../assets/optimized/CubesatGroupphotoatShowcase-1
 import cubesatFramePhoto from '../assets/optimized/Cubesat3DprintedFrame-1600.webp'
 import fpvAssemblingPhoto from '../assets/optimized/FPVDroneassemblingelectronicstoframe-1600.webp'
 import fpvBetaflightPhoto from '../assets/optimized/FPVDroneInstallingbetaflightfirmware-1600.webp'
+import fpvAntennaTrackerFrontPhoto from '../assets/optimized/FPVAntennaTrackerFrontIso-1600.webp'
+import fpvAntennaTrackerBackPhoto from '../assets/optimized/FPVAntennaTrackerBackIso-1600.webp'
+import fpvAntennaTrackerSidePhoto from '../assets/optimized/FPVAntennaTrackerSideView-1600.webp'
 import aresCfdPhoto from '../assets/optimized/ARESUAVCFDModel-1600.webp'
 import aresStructurePhoto from '../assets/optimized/ARESUAVBuiltStructure-1600.webp'
 import aresExplodedViewPhoto from '../assets/optimized/ARESUAVexplodedviewofStructure-1600.webp'
@@ -106,7 +109,8 @@ export interface ProjectItem {
   coverAlt?: string
   coverPosition?: string
   coverFit?: 'cover' | 'contain'
-  media?: Array<{ src: string; alt: string; caption: string; layout?: 'portrait' | 'landscape' }>
+  coverScale?: number
+  media?: Array<{ src: string; alt: string; caption: string; layout?: 'portrait' | 'landscape'; thumbnailScale?: number }>
   mediaPlaceholders?: string[]
   subtitle?: string
   links?: Array<{ label: string; href: string; variant?: 'primary' | 'secondary' }>
@@ -1052,6 +1056,142 @@ export const projects: ProjectItem[] = [
         src: fpvBetaflightPhoto,
         alt: 'Installing Betaflight firmware on the FPV drone',
         caption: 'Installing Betaflight firmware and configuring the build'
+      }
+    ]
+  },
+  {
+    slug: 'fpv-antenna-tracker',
+    title: 'FPV Antenna Tracking Ground Station',
+    subtitle: 'Single-axis RSSI-based pointing for an analog 5.8 GHz FPV link',
+    role: 'Mechanical & Controls Designer',
+    organization: 'Independent Personal Project',
+    dates: 'October 2026 - Present',
+    cardDates: '2026 - Present',
+    status: 'In Development · Fusion Concept',
+    description:
+      'Designing a single-axis ground station that sweeps a directional 5.8 GHz antenna, measures receiver signal strength, and points toward the strongest reception.',
+    overview:
+      'This project extends my analog FPV drone system with a motorized ground antenna. The baseline design uses an Arduino Uno, an RX5808 receiver, a directional RHCP patch antenna, and a bearing-supported belt drive. A Fusion assembly and renders show the current concept; the antenna geometry is a placeholder and tracking performance has not been measured.',
+    bullets: [
+      'Developing the azimuth mechanism in Autodesk Fusion around a NEMA 17 motor, 20-tooth and 60-tooth GT2 pulleys, and a separately supported 8 mm output shaft.',
+      'Defining a home-and-scan control sequence that records relative RSSI against commanded angle, refines around the best signal, and returns to that direction.',
+      'Planning limit switches, software travel limits, hard stops, and flexible cable routing for approximately ±90° of rotation.'
+    ],
+    fullDetails: [
+      'The proposed 3:1 timing-belt reduction isolates antenna weight and overturning moment from the motor shaft through two spaced output bearings.',
+      'The receiver is planned near the rotating patch antenna to keep the RF coax short; power, control, RSSI, and composite video will cross the limited-motion joint.',
+      'Validation will begin with a stationary transmitter and bench power, then compare pointing repeatability, backlash, scan time, reacquisition, and reception versus angle. No physical test results are claimed yet.'
+    ],
+    categories: ['RF Design', 'Mechatronics', 'UAS', 'Mechanical Design'],
+    tags: ['Autodesk Fusion', 'Antenna Tracking', 'RSSI', '5.8 GHz FPV', 'Arduino', 'GT2 Belt Drive', 'Mechanical Design', 'Controls'],
+    visual: 'from-forest-surface via-forest-raised to-forest-base',
+    modelPath: 'models/fpv-antenna-tracker.glb',
+    modelCameraPosition: [1.6, -1.2, 0.85],
+    coverImage: fpvAntennaTrackerFrontPhoto,
+    coverAlt: 'Fusion render of the FPV antenna tracker concept from the front isometric view',
+    coverFit: 'cover',
+    coverScale: 1.6,
+    technicalCaseStudy: {
+      objective:
+        'Develop a one-axis ground station that points a directional antenna toward the strongest received analog FPV signal without relying on GPS or drone position telemetry.',
+      currentStatus:
+        'The system architecture and Fusion concept assembly are in development. Belt geometry, purchased-part interfaces, wiring, firmware, and physical test results remain to be finalized.',
+      specifications: [
+        { label: 'Tracking method', value: 'RSSI-based azimuth sweep and refinement; no GPS' },
+        { label: 'Video link', value: 'Analog 5.8 GHz FPV with RHCP directional patch' },
+        { label: 'Planned motion', value: 'Approximately ±90° azimuth with home and limit switches' },
+        { label: 'Drive concept', value: 'NEMA 17 stepper with 20T:60T GT2 belt reduction' },
+        { label: 'Output support', value: 'Separate 8 mm shaft with two spaced 608ZZ bearings' },
+        { label: 'Controller', value: 'Arduino Uno with relative RSSI logging' },
+        { label: 'Receiver', value: 'RX5808-family module; exact interface under review' },
+        { label: 'CAD', value: 'Autodesk Fusion concept assembly and STEP export' }
+      ],
+      architecture: [
+        {
+          title: 'Directional antenna',
+          description: 'A rotating RHCP patch receives the drone’s analog 5.8 GHz video signal.'
+        },
+        {
+          title: 'Receiver + RSSI',
+          description: 'An RX5808-family receiver provides relative signal strength to the controller and composite video to the goggles.'
+        },
+        {
+          title: 'Arduino control',
+          description: 'The planned algorithm homes, sweeps, refines near the strongest reading, and commands the best pointing angle.'
+        },
+        {
+          title: 'Belt-driven azimuth',
+          description: 'A stepper turns the bearing-supported output through a proposed 3:1 GT2 belt reduction.'
+        }
+      ],
+      designSections: [
+        {
+          title: 'Mechanical layout',
+          items: [
+            'Modeling the stationary base, motor mount, output shaft, rotating antenna bracket, and bearing-supported load path in Fusion.',
+            'Using a 20T motor pulley and 60T output pulley as the 3:1 belt-drive concept; final belt length, center distance, and tension adjustment are still open.',
+            'Planning a limited-travel cable service loop rather than a slip ring or RF rotary joint.'
+          ]
+        },
+        {
+          title: 'Signal and control plan',
+          items: [
+            'Keeping the receiver close to the antenna to reduce RF cable length while routing lower-frequency signals across the moving joint.',
+            'Planning a home, coarse sweep, RSSI logging, local refinement, and return-to-best-angle sequence.',
+            'Separating analog video delivery to the goggles from the Arduino’s signal-strength and motion-control tasks.'
+          ]
+        },
+        {
+          title: 'Verification plan',
+          items: [
+            'Starting with a stationary transmitter and bench power before attempting moving-target tracking.',
+            'Measuring homing repeatability, backlash, scan duration, reacquisition time, and reception versus antenna angle.',
+            'Comparing commanded step angle with measured physical angle because the baseline design has no encoder.'
+          ]
+        }
+      ],
+      challenges: [
+        {
+          challenge: 'Antenna load on the motor',
+          response: 'The proposed separate shaft and two spaced bearings carry the rotating assembly instead of placing its full moment on the stepper shaft.'
+        },
+        {
+          challenge: 'RF signal versus mechanical motion',
+          response: 'The receiver is planned on the rotating side to shorten RF coax, with a flexible service loop for the other connections.'
+        },
+        {
+          challenge: 'Uncertain signal bearing',
+          response: 'Bench tests will check whether the strongest RSSI reading corresponds to useful pointing, including possible reflections and close-range saturation.'
+        }
+      ],
+      results: [
+        'Established the baseline single-axis RSSI tracking architecture and developed a Fusion concept assembly.',
+        'Selected a 3:1 GT2 belt-drive concept with a separately supported output shaft for further mechanical design.',
+        'Defined a staged validation plan; firmware, assembled hardware, and measured pointing results are still pending.'
+      ],
+      tools: ['Autodesk Fusion', 'Mechanical Design', 'GT2 Belt Drive', 'Arduino Uno', 'Analog FPV', 'RSSI', 'RF Integration', 'Controls Planning']
+    },
+    media: [
+      {
+        src: fpvAntennaTrackerFrontPhoto,
+        alt: 'Front isometric Fusion render of the FPV antenna tracker concept',
+        caption: 'Front isometric Fusion concept; the antenna model is a placeholder for the selected RHCP patch',
+        layout: 'landscape',
+        thumbnailScale: 1.6
+      },
+      {
+        src: fpvAntennaTrackerBackPhoto,
+        alt: 'Back isometric Fusion render of the FPV antenna tracker concept',
+        caption: 'Back isometric view of the rotating platform and electronics layout; antenna geometry is provisional',
+        layout: 'landscape',
+        thumbnailScale: 1.6
+      },
+      {
+        src: fpvAntennaTrackerSidePhoto,
+        alt: 'Side Fusion render of the FPV antenna tracker concept',
+        caption: 'Side view of the belt-drive and antenna mount concept',
+        layout: 'landscape',
+        thumbnailScale: 1.6
       }
     ]
   },

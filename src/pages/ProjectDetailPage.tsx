@@ -541,6 +541,7 @@ export function ProjectDetailPage() {
                 className={`h-full w-full ${
                   project.coverFit === 'contain' ? 'object-contain' : 'object-cover'
                 } ${project.coverPosition ?? 'object-center'}`}
+                style={project.coverScale ? { transform: `scale(${project.coverScale})` } : undefined}
                 sizes="(min-width: 1024px) 960px, 100vw"
                 loading="eager"
                 fetchPriority="high"
@@ -627,6 +628,7 @@ export function ProjectDetailPage() {
                       className={`h-full w-full ${
                         item.layout === 'portrait' || project.story ? 'object-contain' : 'object-cover'
                       }`}
+                      style={item.thumbnailScale ? { transform: `scale(${item.thumbnailScale})` } : undefined}
                       loading="lazy"
                     />
                   </div>

@@ -45,6 +45,7 @@ const projectTileOrder = [
   'cad-handoff',
   'sae-aero-design',
   'robotic-arm-vision-pick',
+  'fpv-antenna-tracker',
   '3-axis-camera-tracking-gimbal',
   'fpv-drone-build',
   'ares-muav-endurance-uav',
