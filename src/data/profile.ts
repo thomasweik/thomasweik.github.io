@@ -1555,9 +1555,9 @@ export const projects: ProjectItem[] = [
     organization: 'Academic Project',
     dates: 'Course Project',
     description:
-      'Reverse-engineered a scale CAD model of the Menzi Muck M220x using technical documentation and subsystem references.',
+      'Reverse-engineered a scale CAD model of the Menzi Muck M220x in Creo Parametric using technical documentation and subsystem references.',
     overview:
-      'Focused on deriving accurate geometry, motion behavior, and subsystem relationships to build a complete scaled CAD model.',
+      'Used Creo Parametric to derive geometry, motion behavior, and subsystem relationships for a complete scaled CAD model.',
     bullets: [
       'Generated subsystem models and assembly drawings directly from technical documentation.',
       'Documented mechanical interfaces and motion constraints to preserve realistic articulation and fit-up behavior.',
@@ -1569,7 +1569,7 @@ export const projects: ProjectItem[] = [
       'Mapped key interfaces and kinematic constraints so model movement aligned with documented behavior.'
     ],
     categories: ['Mechanical Design', 'Manufacturing'],
-    tags: ['Reverse Engineering', 'CAD', 'Assembly Drawings', 'Mechanical Interfaces', 'Motion Constraints'],
+    tags: ['Reverse Engineering', 'Creo Parametric', 'Assembly Drawings', 'Mechanical Interfaces', 'Motion Constraints'],
     visual: 'from-forest-surface via-forest-raised to-forest-base',
     coverImage: menziMuckOverviewDrawingPhoto,
     coverAlt: 'Menzi Muck overview drawing',
