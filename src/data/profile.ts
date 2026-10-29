@@ -1114,13 +1114,13 @@ export const projects: ProjectItem[] = [
     modelCameraPosition: [1.6, -1.2, 0.85],
     coverImage: fpvAntennaTrackerFrontPhoto,
     coverAlt: 'Fusion render of the FPV antenna tracker concept from the front isometric view',
-    coverFit: 'cover',
-    coverScale: 1.6,
+    coverFit: 'contain',
+    coverScale: 1.4,
     technicalCaseStudy: {
       objective:
         'Develop a one-axis ground station with full 360° azimuth travel that points a directional antenna toward the strongest received analog FPV signal without relying on GPS or drone position telemetry.',
       currentStatus:
-        'The system architecture and Fusion concept assembly are in development. Belt geometry, purchased-part interfaces, wiring, firmware, and physical test results remain to be finalized.',
+        'The system architecture and Fusion concept assembly are in development. Components have been purchased, and Version 1 of the structure is ready for 3D printing. Belt geometry, purchased-part interfaces, wiring, firmware, and physical test results remain to be finalized.',
       specifications: [
         { label: 'Tracking method', value: 'RSSI-based azimuth sweep and refinement; no GPS' },
         { label: 'Video link', value: 'Analog 5.8 GHz FPV with RHCP directional patch' },
