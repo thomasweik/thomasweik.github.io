@@ -1085,7 +1085,7 @@ export const projects: ProjectItem[] = [
     categories: ['RF Design', 'Mechatronics', 'UAS', 'Mechanical Design'],
     tags: ['Autodesk Fusion', 'Antenna Tracking', 'RSSI', '5.8 GHz FPV', 'Arduino', 'GT2 Belt Drive', 'Mechanical Design', 'Controls'],
     visual: 'from-forest-surface via-forest-raised to-forest-base',
-    modelPath: 'models/fpv-antenna-tracker.glb',
+    modelPath: 'models/fpv-antenna-tracker.glb?v=20261029-appearances',
     modelCameraPosition: [1.6, -1.2, 0.85],
     coverImage: fpvAntennaTrackerFrontPhoto,
     coverAlt: 'Fusion render of the FPV antenna tracker concept from the front isometric view',
