@@ -42,10 +42,10 @@ const navSections = [
 
 const projectTileOrder = [
   'inverted-payload-system',
-  'cad-handoff',
+  'fpv-antenna-tracker',
   'sae-aero-design',
   'robotic-arm-vision-pick',
-  'fpv-antenna-tracker',
+  'cad-handoff',
   '3-axis-camera-tracking-gimbal',
   'fpv-drone-build',
   'ares-muav-endurance-uav',
