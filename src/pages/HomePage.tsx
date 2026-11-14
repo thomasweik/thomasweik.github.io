@@ -45,12 +45,12 @@ const projectTileOrder = [
   'fpv-antenna-tracker',
   'sae-aero-design',
   'robotic-arm-vision-pick',
-  'cad-handoff',
   '3-axis-camera-tracking-gimbal',
   'fpv-drone-build',
+  'loc-iris-model-rocket',
   'ares-muav-endurance-uav',
   'cubesat-development',
-  'loc-iris-model-rocket',
+  'cad-handoff',
   'portfolio-website',
   'menzi-muck-m220x-reverse-engineering'
 ]

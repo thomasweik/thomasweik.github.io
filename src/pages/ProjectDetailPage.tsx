@@ -153,7 +153,7 @@ function ProjectStorySections({ story }: { story: ProjectStory }) {
   )
 }
 
-function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCaseStudy }) {
+function EngineeringCaseStudySections({ caseStudy, contributions }: { caseStudy: EngineeringCaseStudy; contributions: string[] }) {
   const projectFacts = [
     { label: 'Sponsor', value: caseStudy.sponsor },
     { label: 'Team', value: caseStudy.teamSize },
@@ -222,9 +222,9 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
       <Card className="space-y-5 border-t-4 border-t-amber-400">
         <div>
           <div className="inline-flex rounded-full border border-forest-line bg-forest-raised px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] text-forest-accent">
-            Preliminary concept under evaluation
+            Concept Design Team #3 proposal
           </div>
-          <h2 className="mt-3 text-2xl font-bold text-ink md:text-3xl">Current mechanism direction</h2>
+          <h2 className="mt-3 text-2xl font-bold text-ink md:text-3xl">Version 2 mechanism concept</h2>
           <p className="mt-3 text-base leading-relaxed text-body md:text-lg">{caseStudy.concept.summary}</p>
         </div>
 
@@ -249,6 +249,16 @@ function EngineeringCaseStudySections({ caseStudy }: { caseStudy: EngineeringCas
         </div>
 
       </Card>
+
+      {contributions.length > 0 ? (
+        <Card className="space-y-4 border-t-4 border-t-sky-500">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">My work</p>
+            <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">My contributions</h2>
+          </div>
+          <DetailList items={contributions} />
+        </Card>
+      ) : null}
 
       <Card className="space-y-4">
         <h2 className="text-2xl font-bold text-ink md:text-3xl">Engineering tools & methods</h2>
@@ -310,14 +320,16 @@ function StandardProjectSections({ project }: { project: ProjectItem }) {
         </div>
       </Card>
 
-      <div className="grid gap-5 md:grid-cols-2 md:gap-6">
-        <Card className="space-y-4 border-t-4 border-t-sky-500">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">My work</p>
-            <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">Key contributions</h2>
-          </div>
-          <DetailList items={project.bullets} />
-        </Card>
+      <div className={`grid gap-5 md:gap-6 ${project.bullets.length > 0 ? 'md:grid-cols-2' : ''}`}>
+        {project.bullets.length > 0 ? (
+          <Card className="space-y-4 border-t-4 border-t-sky-500">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky-700">My work</p>
+              <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">Key contributions</h2>
+            </div>
+            <DetailList items={project.bullets} />
+          </Card>
+        ) : null}
 
         <Card className="space-y-4 border-t-4 border-t-amber-400">
           <div>
@@ -567,8 +579,8 @@ export function ProjectDetailPage() {
               {project.organization} · {project.dates}
             </p>
             {project.status ? (
-              <p className="inline-flex w-fit items-center gap-2 border border-amber-700 bg-amber-200 px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.12em] text-amber-950">
-                <span className="h-2 w-2 bg-amber-800" aria-hidden="true" />
+              <p className={`inline-flex w-fit items-center gap-2 border px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.12em] ${project.statusTone === 'complete' ? 'border-emerald-700 bg-emerald-200 text-emerald-950' : 'border-amber-700 bg-amber-200 text-amber-950'}`}>
+                <span className={`h-2 w-2 ${project.statusTone === 'complete' ? 'bg-emerald-800' : 'bg-amber-800'}`} aria-hidden="true" />
                 {project.status}
               </p>
             ) : null}
@@ -603,7 +615,7 @@ export function ProjectDetailPage() {
 
         {project.story ? <ProjectStorySections story={project.story} /> : null}
         {project.engineeringCaseStudy ? (
-          <EngineeringCaseStudySections caseStudy={project.engineeringCaseStudy} />
+          <EngineeringCaseStudySections caseStudy={project.engineeringCaseStudy} contributions={project.bullets} />
         ) : null}
         {project.technicalCaseStudy ? (
           <TechnicalCaseStudySections caseStudy={project.technicalCaseStudy} />
@@ -624,7 +636,7 @@ export function ProjectDetailPage() {
                   className="pressable group flex h-full w-full flex-col rounded-3xl border border-forest-line/70 bg-forest-surface p-3 text-left shadow-soft transition-all duration-300  hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:p-4"
                 >
                   <div
-                    className={`overflow-hidden rounded-2xl bg-forest-raised transition-transform duration-300  ${
+                    className={`relative overflow-hidden rounded-2xl bg-forest-raised transition-transform duration-300  ${
                       item.layout === 'portrait' ? 'h-64 sm:h-72 md:h-[30rem]' : 'h-36 sm:h-40'
                     }`}
                   >
@@ -637,11 +649,23 @@ export function ProjectDetailPage() {
                       style={item.thumbnailScale ? { transform: `scale(${item.thumbnailScale})` } : undefined}
                       loading="lazy"
                     />
+                    {item.videoSrc ? (
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0 grid place-items-center"
+                      >
+                        <span className="grid h-14 w-14 place-items-center border border-forest-line bg-forest-surface/90 text-forest-accent md:h-16 md:w-16">
+                          <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 md:h-7 md:w-7" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </span>
+                      </span>
+                    ) : null}
                   </div>
                   <div className="mt-3 space-y-2">
                     <p className="text-sm font-semibold text-body md:text-base">{item.caption}</p>
                     <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-sky-700 md:text-sm">
-                      Click to expand
+                      {item.videoSrc ? 'Click to play video' : 'Click to expand'}
                     </p>
                   </div>
                 </button>
@@ -742,7 +766,7 @@ export function ProjectDetailPage() {
                         (value) => (value === null ? 0 : (value - 1 + projectMedia.length) % projectMedia.length)
                       )
                     }
-                    aria-label="Previous image"
+                    aria-label="Previous item"
                     className="pressable absolute left-2 top-1/2 -translate-y-1/2 rounded-full border border-forest-line/70 bg-forest-surface/90 p-2.5 text-xl font-bold text-ink shadow-lg transition-all hover:-translate-x-0.5 hover:bg-forest-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:left-3 md:p-3 md:text-2xl"
                   >
                     ‹
@@ -752,20 +776,34 @@ export function ProjectDetailPage() {
                     onClick={() =>
                       setActiveMediaIndex((value) => (value === null ? 0 : (value + 1) % projectMedia.length))
                     }
-                    aria-label="Next image"
+                    aria-label="Next item"
                     className="pressable absolute right-2 top-1/2 -translate-y-1/2 rounded-full border border-forest-line/70 bg-forest-surface/90 p-2.5 text-xl font-bold text-ink shadow-lg transition-all hover:translate-x-0.5 hover:bg-forest-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 md:right-3 md:p-3 md:text-2xl"
                   >
                     ›
                   </button>
                 </>
               ) : null}
-              <ResponsiveImage
-                src={projectMedia[activeMediaIndex].src}
-                alt={projectMedia[activeMediaIndex].alt}
-                className="h-auto max-h-[65dvh] w-auto max-w-full rounded-2xl object-contain shadow-xl md:max-h-[78dvh]"
-                sizes="100vw"
-                loading="eager"
-              />
+              {projectMedia[activeMediaIndex].videoSrc ? (
+                <video
+                  key={projectMedia[activeMediaIndex].videoSrc}
+                  src={`${import.meta.env.BASE_URL}${projectMedia[activeMediaIndex].videoSrc}`}
+                  poster={projectMedia[activeMediaIndex].src}
+                  aria-label={projectMedia[activeMediaIndex].alt}
+                  className="h-auto max-h-[65dvh] w-auto max-w-full rounded-2xl object-contain shadow-xl md:max-h-[78dvh]"
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="metadata"
+                />
+              ) : (
+                <ResponsiveImage
+                  src={projectMedia[activeMediaIndex].src}
+                  alt={projectMedia[activeMediaIndex].alt}
+                  className="h-auto max-h-[65dvh] w-auto max-w-full rounded-2xl object-contain shadow-xl md:max-h-[78dvh]"
+                  sizes="100vw"
+                  loading="eager"
+                />
+              )}
             </div>
           </div>
         </div>

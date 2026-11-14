@@ -22,6 +22,9 @@ import saeFullGroupPhoto from '../assets/optimized/SAEAeroFullGroupphotoAfterFli
 import locIrisDryfitAssemblyPhoto from '../assets/optimized/LocIrisDryfitAssembly-1600.webp'
 import locIrisFinFiberglassingPhoto from '../assets/optimized/LocIrisFinFiberglassing-1600.webp'
 import locIrisMotorMountAssemblyPhoto from '../assets/optimized/LocIrisMotorMountAssemblyPostEpoxy-1600.webp'
+import locIrisLaunchPadPhoto from '../assets/optimized/LocIrisLaunchPad-1600.webp'
+import locIrisLaunchVideoPoster from '../assets/optimized/LocIrisLaunchVideoPoster-1600.webp'
+import locIrisRecoveryPhoto from '../assets/optimized/LocIrisRecovery-1600.webp'
 import robotArmCADPhoto from '../assets/optimized/RobotArmCADModel-1600.webp'
 import robotArmBuildPhoto from '../assets/optimized/RobotArm-1600.webp'
 import robotArmControlPhoto from '../assets/optimized/RobotArmDuetBoardwithRaspberryPi-1600.webp'
@@ -125,11 +128,12 @@ export interface ProjectItem {
   coverPosition?: string
   coverFit?: 'cover' | 'contain'
   coverScale?: number
-  media?: Array<{ src: string; alt: string; caption: string; layout?: 'portrait' | 'landscape'; thumbnailFit?: 'cover' | 'contain'; thumbnailScale?: number }>
+  media?: Array<{ src: string; alt: string; caption: string; layout?: 'portrait' | 'landscape'; thumbnailFit?: 'cover' | 'contain'; thumbnailScale?: number; videoSrc?: string }>
   mediaPlaceholders?: string[]
   subtitle?: string
   links?: Array<{ label: string; href: string; variant?: 'primary' | 'secondary' }>
   status?: string
+  statusTone?: 'complete'
   engineeringCaseStudy?: {
     sponsor: string
     teamSize: string
@@ -480,29 +484,29 @@ export const projects: ProjectItem[] = [
     slug: 'inverted-payload-system',
     title: 'Lockheed Martin Inverted Payload System',
     subtitle: 'Mechanical payload installation system for a confined tunnel environment',
-    role: 'Concept System Designer & CAD/BOM Author',
+    role: 'CAD & BOM Lead',
     organization: 'Florida Institute of Technology',
     dates: '2026–2027',
     cardDates: '2026–2027 · In Development',
-    status: 'In Development · Preliminary Design Report',
+    status: 'In Development · Final Concept Selected',
     description:
-      'Designed Concept Design Team #3’s complete mechanical concept, CAD assembly, and working bill of materials for overhead installation of 20-pound payloads.',
+      'Designed Concept Design Team #3 Versions 1 and 2, then designed Concept 4, the team’s final concept selected at the Preliminary Design Review, and authored its detailed bill of materials.',
     overview:
-      'The Inverted Payload System is a Mechanical Engineering Senior Design project sponsored by Lockheed Martin and the United States Navy. Our 11-student team is developing a mechanically operated device to install and remove three cube-shaped payloads at overhead interfaces within a confined tunnel. For Concept Design Team #3, I designed the complete Version 2 system concept, created its full CAD assembly, and authored its entire working bill of materials. This is our subteam concept, not the final design for the full project team.',
+      'The Inverted Payload System is a Mechanical Engineering Senior Design project sponsored by Lockheed Martin and the United States Navy. Our 12-student team is developing a mechanically operated device to install and remove three cube-shaped payloads at overhead interfaces within a confined tunnel. For Concept Design Team #3, I designed both Version 1 and Version 2, creating their CAD assemblies and the working bill of materials. For the Preliminary Design Review, the team scored the subteam concepts in weighted decision matrices and chose to combine their strongest elements. I designed that final concept, Concept 4, and authored its detailed bill of materials. It uses Concept #1’s straight path and wedge supports, Concept #2’s rail-guided lifting cart, an aluminum-frame support approach, and fine adjustment from Concept #3. Concept 4 now moves into detailed design.',
     bullets: [
-      'Designed the full Concept Design Team #3 Version 2 system, from the aluminum extrusion base to the telescoping arm and final positioning stage.',
-      'Created the entire Version 2 CAD assembly and authored the full working bill of materials for the subteam concept.',
-      'Contributed to requirements development, verification planning, literature review, risk analysis, and the Systems Requirements Review.',
-      'Created a Creo model and drawing of the tunnel envelope and prepared concept sketches and technical presentation material.'
+      'Designed Concept 4, the team’s final concept selected at the Preliminary Design Review, combining the strongest elements of all three subteam concepts.',
+      'Authored the detailed bill of materials for Concept 4.',
+      'Designed Concept Design Team #3 Versions 1 and 2, from the aluminum extrusion base to the telescoping arm and final positioning stage, including their CAD assemblies and working bill of materials.'
     ],
     fullDetails: [
       'The system must maintain positive control of one 6-inch, 20-pound cube while technicians complete a multi-bolt ceiling interface.',
       'The Version 2 concept uses an aluminum extrusion base and a screw jack to raise an aluminum-tube telescoping arm. Torsion spring loaded rollers support the telescoping motion, which the operator controls with a face worm winch.',
       'An X-Y linear rail stage, turntable bearing, and scissor lift provide fine positioning at the payload installation point.',
-      'This is Concept Design Team #3’s proposal, not the full team’s final design; its mechanisms remain under evaluation and have not been experimentally validated.'
+      'For the Preliminary Design Review, the team scored the concepts against weighted criteria for mechanical reliability, traversal, lift, alignment, and controls. Concept 4, the final concept I designed, carries a rail-guided lifting cart along a straight path on aluminum wedge supports, with fine adjustment adopted from Concept #3.',
+      'Versions 1 and 2 were Concept Design Team #3’s proposals. Neither they nor Concept 4 has been fabricated or experimentally validated.'
     ],
     categories: ['Defense', 'Mechanical Design', 'Manufacturing'],
-    tags: ['Mechanical Design', 'Creo', 'Systems Engineering', 'Concept Development', 'Bill of Materials', 'DFM/DFA'],
+    tags: ['Mechanical Design', 'Fusion', 'Creo', 'Systems Engineering', 'Concept Development', 'Risk Analysis', 'Bill of Materials', 'DFM/DFA'],
     visual: 'from-forest-surface via-forest-raised to-forest-base',
     stepPreviewPlaceholder: true,
     modelPath: 'models/inverted-payload-system-v2.glb',
@@ -517,7 +521,7 @@ export const projects: ProjectItem[] = [
     bomPdf: {
       path: 'docs/lmco-navy-team-3-concept-bom.pdf',
       title: 'Concept Design Team #3 Bill of Materials',
-      description: 'I authored the complete working bill of materials for the Concept Design Team #3 system concept. It documents the proposed components and purchasing details for this subteam design, which is still under evaluation.'
+      description: 'I authored the complete working bill of materials for the Concept Design Team #3 system concept. It documents the proposed components and purchasing details for this subteam design. It is separate from the detailed bill of materials I authored for Concept 4, the team’s final concept.'
     },
     modelCameraPosition: [1.15, -0.8, 0.6],
     coverImage: ipsTunnelModelPhoto,
@@ -557,9 +561,9 @@ export const projects: ProjectItem[] = [
     ],
     engineeringCaseStudy: {
       sponsor: 'Lockheed Martin + United States Navy',
-      teamSize: '11 engineering students',
+      teamSize: '12 engineering students',
       budget: '$10,000',
-      phase: 'Preliminary Design Report',
+      phase: 'Preliminary Design Review',
       challenge:
         'The team must enable controlled overhead installation and removal without allowing a payload to contact the floor. The system must fit entirely inside a low-visibility tunnel with a sloped, low-friction floor, keep-out zones, limited tooling clearance, and no allowance for electrical or magnetic components or permanent tunnel modifications.',
       requirements: [
@@ -616,7 +620,7 @@ export const projects: ProjectItem[] = [
       ],
       concept: {
         summary:
-          'Concept Design Team #3 Version 2 starts with an aluminum extrusion base. A screw jack raises a telescoping arm made from aluminum tubing; torsion spring loaded rollers support its extension, while the operator controls that extension with a face worm winch. An X-Y linear rail stage, turntable bearing, and scissor lift provide final alignment for overhead installation. I designed this full subteam concept and its CAD assembly and authored its working bill of materials. It is not the final design for the entire senior design team.',
+          'Concept Design Team #3 Version 2 starts with an aluminum extrusion base. A screw jack raises a telescoping arm made from aluminum tubing; torsion spring loaded rollers support its extension, while the operator controls that extension with a face worm winch. An X-Y linear rail stage, turntable bearing, and scissor lift provide final alignment for overhead installation. I designed this subteam concept and its CAD assembly and authored its working bill of materials. Its fine-adjustment approach carried into Concept 4, the final concept I designed for the full team.',
         elements: [
           {
             title: 'Aluminum extrusion base',
@@ -641,12 +645,14 @@ export const projects: ProjectItem[] = [
         ]
       },
       tools: [
+        'Autodesk Fusion',
         'Creo Parametric',
+        'Decision matrices',
         'Mechanical concept development',
         'Requirements decomposition',
         'Verification planning',
         'Literature review',
-        'Risk analysis',
+        'Risk assessment matrices',
         'Mechanism selection',
         'Design for assembly',
         'Design for manufacturability',
@@ -655,10 +661,10 @@ export const projects: ProjectItem[] = [
         'Team collaboration'
       ],
       currentStatus:
-        'The project is in development at the Preliminary Design Report stage. Concept Design Team #3 has produced the Version 2 CAD assembly and working bill of materials, but the full team has not selected this as its final design. The concept is still being evaluated; no completed structural validation, fabricated hardware, or validated performance claim is presented here.',
+        'The project is at the Preliminary Design Review. After evaluating the subteam concepts, the team selected Concept 4, the final concept I designed by combining elements of all three, and it moves into detailed design. I have authored its detailed bill of materials. The Version 2 CAD and BOM shown here are my subteam’s earlier proposal. No IPS hardware has been purchased or fabricated, and no structural validation or performance claim is presented here.',
       nextSteps: [
-        'Complete concept evaluation and select a system architecture',
-        'Develop the selected concept in detailed Creo assemblies and drawings',
+        'Finalize the PDR report and present the selected concept to the sponsors',
+        'Develop Concept 4 in detailed CAD assemblies and drawings',
         'Perform hand calculations, structural analysis, FEA, and tolerance studies',
         'Resolve anchoring, rotation, locking, stability, access, and failure-control details',
         'Prototype critical mechanisms before full-system fabrication',
@@ -672,7 +678,7 @@ export const projects: ProjectItem[] = [
         'A final engineering report describing the design process and results'
       ],
       disclaimer:
-        'Concept Design Team #3 Versions 1 and 2 are subteam proposals, not final designs selected by the full senior design team. Design details and requirements may change as development continues.'
+        'Concept Design Team #3 Versions 1 and 2 are subteam proposals. Concept 4, the full team’s final concept, combines elements from all three subteam concepts, and its design details and requirements may change during detailed design.'
     }
   },
   {
@@ -1095,11 +1101,11 @@ export const projects: ProjectItem[] = [
     organization: 'Independent Personal Project',
     dates: 'October 2026 - Present',
     cardDates: '2026 - Present',
-    status: 'In Development · Fusion Concept',
+    status: 'In Development · Assembly & Programming',
     description:
-      'Designing a single-axis ground station with full 360° azimuth travel that sweeps a directional 5.8 GHz antenna, measures receiver signal strength, and points toward the strongest reception.',
+      'Building a single-axis ground station with full 360° azimuth travel that sweeps a directional 5.8 GHz antenna, measures receiver signal strength, and points toward the strongest reception.',
     overview:
-      'This project extends my analog FPV drone system with a motorized ground antenna. The baseline design uses an Arduino Uno, an RX5808 receiver, a directional RHCP patch antenna, and a bearing-supported belt drive. A Fusion assembly and renders show the current concept; the antenna geometry is a placeholder and tracking performance has not been measured.',
+      'This project extends my analog FPV drone system with a motorized ground antenna. The baseline design uses an Arduino Uno, an RX5808 receiver, a directional RHCP patch antenna, and a bearing-supported belt drive. All components have arrived, and I am now assembling the hardware, then programming the tracking firmware. The Fusion assembly and renders show the design; the antenna geometry in the model is a placeholder, and tracking performance has not been measured yet.',
     bullets: [
       'Developing the azimuth mechanism in Autodesk Fusion around a NEMA 17 motor, 20-tooth and 60-tooth GT2 pulleys, and a separately supported 8 mm output shaft.',
       'Defining a home-and-scan control sequence that records relative RSSI against commanded angle, refines around the best signal, and returns to that direction.',
@@ -1123,7 +1129,7 @@ export const projects: ProjectItem[] = [
       objective:
         'Develop a one-axis ground station with full 360° azimuth travel that points a directional antenna toward the strongest received analog FPV signal without relying on GPS or drone position telemetry.',
       currentStatus:
-        'The system architecture and Fusion concept assembly are in development. Components have been purchased, and Version 1 of the structure is ready for 3D printing. Belt geometry, purchased-part interfaces, wiring, firmware, and physical test results remain to be finalized.',
+        'All components have arrived, and the Version 1 hardware is being assembled. Programming the homing, scan, and pointing firmware comes next, followed by bench testing. No tracking or pointing results have been measured yet.',
       specifications: [
         { label: 'Tracking method', value: 'RSSI-based azimuth sweep and refinement; no GPS' },
         { label: 'Video link', value: 'Analog 5.8 GHz FPV with RHCP directional patch' },
@@ -1195,7 +1201,8 @@ export const projects: ProjectItem[] = [
       results: [
         'Established the baseline single-axis RSSI tracking architecture and developed a Fusion concept assembly.',
         'Selected a 3:1 GT2 belt-drive concept with a separately supported output shaft for further mechanical design.',
-        'Defined a staged validation plan; firmware, assembled hardware, and measured pointing results are still pending.'
+        'Received all components and began assembling the Version 1 hardware.',
+        'Defined a staged validation plan; firmware and measured pointing results are still pending.'
       ],
       tools: ['Autodesk Fusion', 'Mechanical Design', 'GT2 Belt Drive', 'Arduino Uno', 'Analog FPV', 'RSSI', 'RF Integration', 'Controls Planning']
     },
@@ -1275,29 +1282,49 @@ export const projects: ProjectItem[] = [
     title: 'Loc Iris Model Rocket',
     role: 'Builder',
     organization: 'Personal Project',
-    dates: 'Mar 2026 - Present',
-    cardDates: 'Mar 2026 - Present',
-    status: 'Assembly Complete · Launch Preparation',
+    dates: 'Mar 2026 - Nov 2026',
+    cardDates: 'Mar 2026 - Nov 2026',
+    status: 'NAR Level 1 Certified · Successful Recovery',
+    statusTone: 'complete',
     description:
-      'Built a Loc Iris model rocket to pursue NAR Level 1 high powered rocketry certification.',
+      'Built and launched a Loc Iris high-power model rocket to earn NAR Level 1 high-power rocketry certification, flying an H135 motor with a Jolly Logic Chute Release for low-altitude parachute deployment.',
     overview:
-      'The rocket assembly is complete, including fiberglass reinforcement on the fins. I am now painting the rocket and sourcing a motor for an anticipated mid-November 2026 launch.',
-    bullets: [
-      'Assembled the Loc Iris model rocket for NAR Level 1 certification preparation.',
-      'Fiberglassed the fins to improve reinforcement and durability.',
-      'Completed the assembly and moved into painting and motor sourcing for an anticipated mid-November 2026 launch.'
-    ],
+      'After building the rocket with fiberglass-reinforced fins, I launched it on November 14, 2026, at the Palm Bay compound launch site on an H135 motor. A Jolly Logic Chute Release kept the parachute closed until the rocket descended to 600 ft to reduce drift. The parachute opened as planned, the recovery was smooth, and the rocket was recovered, completing my NAR Level 1 high-power rocketry certification.',
+    bullets: [],
     fullDetails: [
-      'Built the rocket as a certification-focused project for NAR Level 1 high powered rocketry.',
+      'Built the rocket as a certification-focused project for NAR Level 1 high-power rocketry.',
       'Applied fiberglass reinforcement to the fins to improve strength and flight durability.',
-      'Assembly is complete. Painting and motor sourcing remain before the anticipated mid-November 2026 certification launch.'
+      'Flew the rocket on an H135 motor at the Palm Bay compound launch site on November 14, 2026.',
+      'Integrated a Jolly Logic Chute Release so the parachute stayed bundled after ejection and opened at 600 ft, limiting drift during descent.',
+      'Pre-flight simulation estimated a maximum speed of Mach 0.46 and an apogee of 2,446 ft. These are simulated values, not flight-measured data.',
+      'The parachute opened, the descent was smooth, and the rocket was recovered, completing NAR Level 1 high-power rocketry certification.'
     ],
     categories: ['Mechanical Design', 'Manufacturing'],
-    tags: ['Model Rocketry', 'Fiberglassing', 'Assembly', 'Certification'],
+    tags: ['Model Rocketry', 'High-Power Rocketry', 'NAR Level 1', 'H135 Motor', 'Jolly Logic Chute Release', 'Flight Simulation', 'Fiberglassing', 'Assembly'],
     visual: 'from-forest-surface via-forest-raised to-forest-base',
-    coverImage: locIrisFinFiberglassingPhoto,
-    coverAlt: 'Fiberglassing the fins on the Loc Iris model rocket',
+    coverImage: locIrisLaunchPadPhoto,
+    coverAlt: 'Thomas Weik standing beside the Loc Iris rocket on the launch pad',
+    coverPosition: 'object-[center_55%]',
     media: [
+      {
+        src: locIrisLaunchPadPhoto,
+        alt: 'Thomas Weik standing beside the Loc Iris rocket on the launch pad',
+        caption: 'On the pad before launch at the Palm Bay compound',
+        layout: 'portrait'
+      },
+      {
+        src: locIrisLaunchVideoPoster,
+        videoSrc: 'videos/loc-iris-launch.mp4',
+        alt: 'Video of the Loc Iris rocket launching on an H135 motor',
+        caption: 'Launch video: H135 motor',
+        layout: 'portrait'
+      },
+      {
+        src: locIrisRecoveryPhoto,
+        alt: 'Loc Iris rocket and yellow parachute recovered in a grass field',
+        caption: 'Recovered after a smooth 600 ft chute release',
+        layout: 'portrait'
+      },
       {
         src: locIrisFinFiberglassingPhoto,
         alt: 'Fiberglassing the fins on the Loc Iris model rocket',
@@ -1683,6 +1710,11 @@ export const coursework: string[] = [
 ]
 
 export const certifications: Credential[] = [
+  {
+    title: 'NAR Level 1 High-Power Rocketry Certification',
+    issuer: 'National Association of Rocketry',
+    issued: 'Nov 2026'
+  },
   {
     title: 'Lean Six Sigma White Belt',
     issuer: 'Council for Six Sigma Certification',

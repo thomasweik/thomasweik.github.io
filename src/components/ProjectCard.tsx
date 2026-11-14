@@ -52,8 +52,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <p className="text-xs font-semibold text-forest-accent md:text-base">{project.role}</p>
         <p className="text-xs text-body md:text-base">{project.organization} · {project.cardDates ?? project.dates}</p>
         {project.status && (
-          <p className="inline-flex w-fit items-center gap-2 border border-amber-700 bg-amber-200 px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.12em] text-amber-950">
-            <span className="h-2 w-2 bg-amber-800" aria-hidden="true" />
+          <p className={`inline-flex w-fit items-center gap-2 border px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.12em] ${project.statusTone === 'complete' ? 'border-emerald-700 bg-emerald-200 text-emerald-950' : 'border-amber-700 bg-amber-200 text-amber-950'}`}>
+            <span className={`h-2 w-2 ${project.statusTone === 'complete' ? 'bg-emerald-800' : 'bg-amber-800'}`} aria-hidden="true" />
             {project.status}
           </p>
         )}
