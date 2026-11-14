@@ -476,6 +476,15 @@ export const leadership: ExperienceItem[] = [
     type: 'Membership',
     dates: 'Present',
     bullets: ['Active member.']
+  },
+  {
+    company: 'Order of Omega Honor Society',
+    companyUrl: 'https://orderofomega.org',
+    role: 'Member',
+    location: 'United States',
+    type: 'Membership',
+    dates: 'Present',
+    bullets: ['Active member.']
   }
 ]
 
@@ -1679,11 +1688,12 @@ export const education: EducationItem[] = [
       'Motorsports Club',
       'Council of Presidents',
       "Dean's List",
-      'Gamma Sigma Alpha Honor Society'
+      'Gamma Sigma Alpha Honor Society',
+      'Order of Omega Honor Society'
     ],
     highlights: [
       "Dean's List Scholar",
-      'Member: AIAA, ARES, Gamma Sigma Alpha Honor Society'
+      'Member: AIAA, ARES, Gamma Sigma Alpha Honor Society, Order of Omega Honor Society'
     ]
   }
 ]
