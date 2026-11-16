@@ -42,6 +42,14 @@ import cadHandoffTreePhoto from '../assets/optimized/Example_Tree-1600.webp'
 import ipsTunnelModelPhoto from '../assets/optimized/Tunnel_Model-1600.webp'
 import ipsTunnelAnalysisPhoto from '../assets/optimized/Tunnel_Analysis-1600.webp'
 import ipsConceptAssemblyPhoto from '../assets/optimized/IPSConceptAssembly-1600.webp'
+import ipsConcept4IsoPhoto from '../assets/optimized/IPSConcept4Iso-1600.webp'
+import ipsConcept4TunnelFrontPhoto from '../assets/optimized/IPSConcept4TunnelFront-1600.webp'
+import ipsConcept4TunnelTopPhoto from '../assets/optimized/IPSConcept4TunnelTop-1600.webp'
+import ipsConcept4TunnelDetailPhoto from '../assets/optimized/IPSConcept4TunnelDetail-1600.webp'
+import ipsConcept4PayloadCradlePhoto from '../assets/optimized/IPSConcept4PayloadCradle-1600.webp'
+import ipsConcept3TunnelFrontPhoto from '../assets/optimized/IPSConcept3TunnelFront-1600.webp'
+import ipsConcept3SidePhoto from '../assets/optimized/IPSConcept3Side-1600.webp'
+import ipsConcept3TunnelIsoPhoto from '../assets/optimized/IPSConcept3TunnelIso-1600.webp'
 import ipsTunnelFloorFEAPhoto from '../assets/optimized/IPSTunnelFloorFEA-1600.webp'
 import ipsInitialConceptSketchPhoto from '../assets/optimized/IPSInitialConceptSketch-1600.webp'
 
@@ -106,13 +114,14 @@ export interface ProjectItem {
   stepPreviewPlaceholder?: boolean
   modelPath?: string
   modelCaption?: string
-  previousModel?: {
+  previousModels?: Array<{
     path: string
     caption: string
     rotationDegrees?: number
     rotationXDegrees?: number
     viewAxisRotationDegrees?: number
-  }
+    cameraPosition?: [number, number, number]
+  }>
   bomPdf?: {
     path: string
     title: string
@@ -518,21 +527,28 @@ export const projects: ProjectItem[] = [
     tags: ['Mechanical Design', 'Fusion', 'Creo', 'Systems Engineering', 'Concept Development', 'Risk Analysis', 'Bill of Materials', 'DFM/DFA'],
     visual: 'from-forest-surface via-forest-raised to-forest-base',
     stepPreviewPlaceholder: true,
-    modelPath: 'models/inverted-payload-system-v2.glb',
-    modelCaption: 'Concept Design Team #3 Version 2',
-    previousModel: {
-      path: 'models/inverted-payload-system.glb',
-      caption: 'Concept Design Team #3 Version 1',
-      rotationDegrees: 90,
-      rotationXDegrees: 180,
-      viewAxisRotationDegrees: 90
-    },
+    modelPath: 'models/inverted-payload-system-concept-4.glb?v=20261116-colors4',
+    modelCaption: 'Concept 4 · Final concept',
+    modelCameraPosition: [1.0, -0.45, 0.55],
+    previousModels: [
+      {
+        path: 'models/inverted-payload-system-v2.glb',
+        caption: 'Concept Design Team #3 Version 2',
+        cameraPosition: [1.15, -0.8, 0.6]
+      },
+      {
+        path: 'models/inverted-payload-system.glb',
+        caption: 'Concept Design Team #3 Version 1',
+        rotationDegrees: 90,
+        rotationXDegrees: 180,
+        viewAxisRotationDegrees: 90
+      }
+    ],
     bomPdf: {
       path: 'docs/lmco-navy-team-3-concept-bom.pdf',
       title: 'Concept Design Team #3 Bill of Materials',
       description: 'I authored the complete working bill of materials for the Concept Design Team #3 system concept. It documents the proposed components and purchasing details for this subteam design. It is separate from the detailed bill of materials I authored for Concept 4, the team’s final concept.'
     },
-    modelCameraPosition: [1.15, -0.8, 0.6],
     coverImage: ipsTunnelModelPhoto,
     coverAlt: 'Simplified tunnel-envelope model showing payload approach and overhead installation directions',
     coverFit: 'contain',
@@ -566,6 +582,62 @@ export const projects: ProjectItem[] = [
         alt: 'Preliminary static structural analysis visualization of the tunnel-envelope reference model',
         caption: 'Preliminary tunnel-envelope analysis reference; not final IPS design validation',
         layout: 'landscape'
+      },
+      {
+        src: ipsConcept4IsoPhoto,
+        alt: 'Fusion render of the Concept 4 final concept: rail on wedge supports carrying a scissor-jack cart with a positioning stage and payload cradle',
+        caption: 'Concept 4 final concept: rail, wedge supports, lifting cart, and payload cradle',
+        layout: 'landscape',
+        thumbnailFit: 'contain'
+      },
+      {
+        src: ipsConcept4TunnelFrontPhoto,
+        alt: 'Front Fusion render of Concept 4 inside the tunnel envelope model',
+        caption: 'Concept 4 inside the tunnel envelope, front view',
+        layout: 'landscape',
+        thumbnailFit: 'contain'
+      },
+      {
+        src: ipsConcept4TunnelTopPhoto,
+        alt: 'Top Fusion render of Concept 4 rail path inside the tunnel envelope model',
+        caption: 'Concept 4 rail path through the tunnel, top view',
+        layout: 'landscape',
+        thumbnailFit: 'contain'
+      },
+      {
+        src: ipsConcept4TunnelDetailPhoto,
+        alt: 'Close-up Fusion render of the Concept 4 scissor jack, positioning stage, and payload cube in the tunnel',
+        caption: 'Concept 4 lift, positioning stage, and payload at the installation point',
+        layout: 'landscape',
+        thumbnailFit: 'contain'
+      },
+      {
+        src: ipsConcept4PayloadCradlePhoto,
+        alt: 'Fusion render of the Concept 4 payload cradle with hinged clamp arms and an indexing plunger',
+        caption: 'Concept 4 payload cradle with hinged clamp arms',
+        layout: 'landscape',
+        thumbnailFit: 'contain'
+      },
+      {
+        src: ipsConcept3TunnelFrontPhoto,
+        alt: 'Front Fusion render of Concept Design Team #3 inside the tunnel envelope model',
+        caption: 'Concept Design Team #3 inside the tunnel envelope, front view',
+        layout: 'landscape',
+        thumbnailFit: 'contain'
+      },
+      {
+        src: ipsConcept3SidePhoto,
+        alt: 'Side Fusion render of the Concept Design Team #3 extrusion base, jack, and telescoping arm',
+        caption: 'Concept Design Team #3 base, jack, and telescoping arm, side view',
+        layout: 'landscape',
+        thumbnailFit: 'contain'
+      },
+      {
+        src: ipsConcept3TunnelIsoPhoto,
+        alt: 'Isometric Fusion render of Concept Design Team #3 inside the tunnel envelope model',
+        caption: 'Concept Design Team #3 inside the tunnel envelope, isometric view',
+        layout: 'landscape',
+        thumbnailFit: 'contain'
       }
     ],
     engineeringCaseStudy: {

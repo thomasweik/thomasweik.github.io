@@ -42,56 +42,72 @@ import image20_640 from '../assets/optimized/Gimbal_Front_Iso-640.webp'
 import image20_1600 from '../assets/optimized/Gimbal_Front_Iso-1600.webp'
 import image21_640 from '../assets/optimized/Gimbal_Front_Square-640.webp'
 import image21_1600 from '../assets/optimized/Gimbal_Front_Square-1600.webp'
-import image22_640 from '../assets/optimized/LocIrisDryfitAssembly-640.webp'
-import image22_1600 from '../assets/optimized/LocIrisDryfitAssembly-1600.webp'
-import image23_640 from '../assets/optimized/LocIrisFinFiberglassing-640.webp'
-import image23_1600 from '../assets/optimized/LocIrisFinFiberglassing-1600.webp'
-import image24_640 from '../assets/optimized/LocIrisLaunchPad-640.webp'
-import image24_1600 from '../assets/optimized/LocIrisLaunchPad-1600.webp'
-import image25_640 from '../assets/optimized/LocIrisLaunchVideoPoster-640.webp'
-import image25_1600 from '../assets/optimized/LocIrisLaunchVideoPoster-1600.webp'
-import image26_640 from '../assets/optimized/LocIrisMotorMountAssemblyPostEpoxy-640.webp'
-import image26_1600 from '../assets/optimized/LocIrisMotorMountAssemblyPostEpoxy-1600.webp'
-import image27_640 from '../assets/optimized/LocIrisRecovery-640.webp'
-import image27_1600 from '../assets/optimized/LocIrisRecovery-1600.webp'
-import image28_640 from '../assets/optimized/MenziMuckClawDrawing-640.webp'
-import image28_1600 from '../assets/optimized/MenziMuckClawDrawing-1600.webp'
-import image29_640 from '../assets/optimized/MenziMuckoverviewDrawing-640.webp'
-import image29_1600 from '../assets/optimized/MenziMuckoverviewDrawing-1600.webp'
-import image30_640 from '../assets/optimized/PortfolioWebsiteCoverpage-640.webp'
-import image30_1600 from '../assets/optimized/PortfolioWebsiteCoverpage-1600.webp'
-import image31_640 from '../assets/optimized/PortfolioWebsiteMobile-640.webp'
-import image31_1600 from '../assets/optimized/PortfolioWebsiteMobile-1600.webp'
-import image32_640 from '../assets/optimized/PortfolioWebsiteProjects-640.webp'
-import image32_1600 from '../assets/optimized/PortfolioWebsiteProjects-1600.webp'
-import image33_640 from '../assets/optimized/PortfolioWebsiteSampleBackendscreenshotwithcodex-640.webp'
-import image33_1600 from '../assets/optimized/PortfolioWebsiteSampleBackendscreenshotwithcodex-1600.webp'
-import image34_640 from '../assets/optimized/PrytanisGroupPhotowithSt.JudeCheck-640.webp'
-import image34_1600 from '../assets/optimized/PrytanisGroupPhotowithSt.JudeCheck-1600.webp'
-import image35_640 from '../assets/optimized/RobotArm-640.webp'
-import image35_1600 from '../assets/optimized/RobotArm-1600.webp'
-import image36_640 from '../assets/optimized/RobotArmCADModel-640.webp'
-import image36_1600 from '../assets/optimized/RobotArmCADModel-1600.webp'
-import image37_640 from '../assets/optimized/RobotArmDuetBoardwithRaspberryPi-640.webp'
-import image37_1600 from '../assets/optimized/RobotArmDuetBoardwithRaspberryPi-1600.webp'
-import image38_640 from '../assets/optimized/SAEAeroFullGroupphotoAfterFlight-640.webp'
-import image38_1600 from '../assets/optimized/SAEAeroFullGroupphotoAfterFlight-1600.webp'
-import image39_640 from '../assets/optimized/SAEAeroGroupPicturecompetitionday-640.webp'
-import image39_1600 from '../assets/optimized/SAEAeroGroupPicturecompetitionday-1600.webp'
-import image40_640 from '../assets/optimized/SAEAeroMovingPlaneCompetitionday-640.webp'
-import image40_1600 from '../assets/optimized/SAEAeroMovingPlaneCompetitionday-1600.webp'
-import image41_640 from '../assets/optimized/SayvilleFerryServiceFireIslandEmpress-640.webp'
-import image41_1600 from '../assets/optimized/SayvilleFerryServiceFireIslandEmpress-1600.webp'
-import image42_640 from '../assets/optimized/SpeakerboxIsometricView-640.webp'
-import image42_1600 from '../assets/optimized/SpeakerboxIsometricView-1600.webp'
-import image43_640 from '../assets/optimized/SpeakerboxTopdownviewoflasercuttop-640.webp'
-import image43_1600 from '../assets/optimized/SpeakerboxTopdownviewoflasercuttop-1600.webp'
-import image44_640 from '../assets/optimized/TomWeikReceivingAwardfromFloridaTechPresident-640.webp'
-import image44_1600 from '../assets/optimized/TomWeikReceivingAwardfromFloridaTechPresident-1600.webp'
-import image45_640 from '../assets/optimized/Tunnel_Analysis-640.webp'
-import image45_1600 from '../assets/optimized/Tunnel_Analysis-1600.webp'
-import image46_640 from '../assets/optimized/Tunnel_Model-640.webp'
-import image46_1600 from '../assets/optimized/Tunnel_Model-1600.webp'
+import image22_640 from '../assets/optimized/IPSConcept3Side-640.webp'
+import image22_1600 from '../assets/optimized/IPSConcept3Side-1600.webp'
+import image23_640 from '../assets/optimized/IPSConcept3TunnelFront-640.webp'
+import image23_1600 from '../assets/optimized/IPSConcept3TunnelFront-1600.webp'
+import image24_640 from '../assets/optimized/IPSConcept3TunnelIso-640.webp'
+import image24_1600 from '../assets/optimized/IPSConcept3TunnelIso-1600.webp'
+import image25_640 from '../assets/optimized/IPSConcept4Iso-640.webp'
+import image25_1600 from '../assets/optimized/IPSConcept4Iso-1600.webp'
+import image26_640 from '../assets/optimized/IPSConcept4PayloadCradle-640.webp'
+import image26_1600 from '../assets/optimized/IPSConcept4PayloadCradle-1600.webp'
+import image27_640 from '../assets/optimized/IPSConcept4TunnelDetail-640.webp'
+import image27_1600 from '../assets/optimized/IPSConcept4TunnelDetail-1600.webp'
+import image28_640 from '../assets/optimized/IPSConcept4TunnelFront-640.webp'
+import image28_1600 from '../assets/optimized/IPSConcept4TunnelFront-1600.webp'
+import image29_640 from '../assets/optimized/IPSConcept4TunnelTop-640.webp'
+import image29_1600 from '../assets/optimized/IPSConcept4TunnelTop-1600.webp'
+import image30_640 from '../assets/optimized/LocIrisDryfitAssembly-640.webp'
+import image30_1600 from '../assets/optimized/LocIrisDryfitAssembly-1600.webp'
+import image31_640 from '../assets/optimized/LocIrisFinFiberglassing-640.webp'
+import image31_1600 from '../assets/optimized/LocIrisFinFiberglassing-1600.webp'
+import image32_640 from '../assets/optimized/LocIrisLaunchPad-640.webp'
+import image32_1600 from '../assets/optimized/LocIrisLaunchPad-1600.webp'
+import image33_640 from '../assets/optimized/LocIrisLaunchVideoPoster-640.webp'
+import image33_1600 from '../assets/optimized/LocIrisLaunchVideoPoster-1600.webp'
+import image34_640 from '../assets/optimized/LocIrisMotorMountAssemblyPostEpoxy-640.webp'
+import image34_1600 from '../assets/optimized/LocIrisMotorMountAssemblyPostEpoxy-1600.webp'
+import image35_640 from '../assets/optimized/LocIrisRecovery-640.webp'
+import image35_1600 from '../assets/optimized/LocIrisRecovery-1600.webp'
+import image36_640 from '../assets/optimized/MenziMuckClawDrawing-640.webp'
+import image36_1600 from '../assets/optimized/MenziMuckClawDrawing-1600.webp'
+import image37_640 from '../assets/optimized/MenziMuckoverviewDrawing-640.webp'
+import image37_1600 from '../assets/optimized/MenziMuckoverviewDrawing-1600.webp'
+import image38_640 from '../assets/optimized/PortfolioWebsiteCoverpage-640.webp'
+import image38_1600 from '../assets/optimized/PortfolioWebsiteCoverpage-1600.webp'
+import image39_640 from '../assets/optimized/PortfolioWebsiteMobile-640.webp'
+import image39_1600 from '../assets/optimized/PortfolioWebsiteMobile-1600.webp'
+import image40_640 from '../assets/optimized/PortfolioWebsiteProjects-640.webp'
+import image40_1600 from '../assets/optimized/PortfolioWebsiteProjects-1600.webp'
+import image41_640 from '../assets/optimized/PortfolioWebsiteSampleBackendscreenshotwithcodex-640.webp'
+import image41_1600 from '../assets/optimized/PortfolioWebsiteSampleBackendscreenshotwithcodex-1600.webp'
+import image42_640 from '../assets/optimized/PrytanisGroupPhotowithSt.JudeCheck-640.webp'
+import image42_1600 from '../assets/optimized/PrytanisGroupPhotowithSt.JudeCheck-1600.webp'
+import image43_640 from '../assets/optimized/RobotArm-640.webp'
+import image43_1600 from '../assets/optimized/RobotArm-1600.webp'
+import image44_640 from '../assets/optimized/RobotArmCADModel-640.webp'
+import image44_1600 from '../assets/optimized/RobotArmCADModel-1600.webp'
+import image45_640 from '../assets/optimized/RobotArmDuetBoardwithRaspberryPi-640.webp'
+import image45_1600 from '../assets/optimized/RobotArmDuetBoardwithRaspberryPi-1600.webp'
+import image46_640 from '../assets/optimized/SAEAeroFullGroupphotoAfterFlight-640.webp'
+import image46_1600 from '../assets/optimized/SAEAeroFullGroupphotoAfterFlight-1600.webp'
+import image47_640 from '../assets/optimized/SAEAeroGroupPicturecompetitionday-640.webp'
+import image47_1600 from '../assets/optimized/SAEAeroGroupPicturecompetitionday-1600.webp'
+import image48_640 from '../assets/optimized/SAEAeroMovingPlaneCompetitionday-640.webp'
+import image48_1600 from '../assets/optimized/SAEAeroMovingPlaneCompetitionday-1600.webp'
+import image49_640 from '../assets/optimized/SayvilleFerryServiceFireIslandEmpress-640.webp'
+import image49_1600 from '../assets/optimized/SayvilleFerryServiceFireIslandEmpress-1600.webp'
+import image50_640 from '../assets/optimized/SpeakerboxIsometricView-640.webp'
+import image50_1600 from '../assets/optimized/SpeakerboxIsometricView-1600.webp'
+import image51_640 from '../assets/optimized/SpeakerboxTopdownviewoflasercuttop-640.webp'
+import image51_1600 from '../assets/optimized/SpeakerboxTopdownviewoflasercuttop-1600.webp'
+import image52_640 from '../assets/optimized/TomWeikReceivingAwardfromFloridaTechPresident-640.webp'
+import image52_1600 from '../assets/optimized/TomWeikReceivingAwardfromFloridaTechPresident-1600.webp'
+import image53_640 from '../assets/optimized/Tunnel_Analysis-640.webp'
+import image53_1600 from '../assets/optimized/Tunnel_Analysis-1600.webp'
+import image54_640 from '../assets/optimized/Tunnel_Model-640.webp'
+import image54_1600 from '../assets/optimized/Tunnel_Model-1600.webp'
 
 // Generated by scripts/optimize-images.py.
 export const responsiveImages: Record<string, { small: string; smallWidth: number; width: number; height: number }> = {
@@ -117,29 +133,37 @@ export const responsiveImages: Record<string, { small: string; smallWidth: numbe
   [image19_1600]: { small: image19_640, smallWidth: 640, width: 1212, height: 962 },
   [image20_1600]: { small: image20_640, smallWidth: 640, width: 1230, height: 1010 },
   [image21_1600]: { small: image21_640, smallWidth: 640, width: 1212, height: 864 },
-  [image22_1600]: { small: image22_640, smallWidth: 640, width: 1242, height: 2208 },
-  [image23_1600]: { small: image23_640, smallWidth: 640, width: 1600, height: 2133 },
-  [image24_1600]: { small: image24_640, smallWidth: 640, width: 1600, height: 2133 },
-  [image25_1600]: { small: image25_640, smallWidth: 640, width: 1080, height: 1920 },
-  [image26_1600]: { small: image26_640, smallWidth: 640, width: 1600, height: 2133 },
-  [image27_1600]: { small: image27_640, smallWidth: 640, width: 1600, height: 2133 },
-  [image28_1600]: { small: image28_640, smallWidth: 640, width: 1136, height: 792 },
-  [image29_1600]: { small: image29_640, smallWidth: 640, width: 1136, height: 790 },
-  [image30_1600]: { small: image30_640, smallWidth: 640, width: 1600, height: 935 },
-  [image31_1600]: { small: image31_640, smallWidth: 640, width: 1334, height: 1258 },
-  [image32_1600]: { small: image32_640, smallWidth: 640, width: 1600, height: 735 },
-  [image33_1600]: { small: image33_640, smallWidth: 640, width: 1600, height: 869 },
-  [image34_1600]: { small: image34_640, smallWidth: 640, width: 1600, height: 1200 },
+  [image22_1600]: { small: image22_640, smallWidth: 640, width: 1600, height: 690 },
+  [image23_1600]: { small: image23_640, smallWidth: 640, width: 1600, height: 690 },
+  [image24_1600]: { small: image24_640, smallWidth: 640, width: 1600, height: 690 },
+  [image25_1600]: { small: image25_640, smallWidth: 640, width: 1600, height: 671 },
+  [image26_1600]: { small: image26_640, smallWidth: 640, width: 1600, height: 671 },
+  [image27_1600]: { small: image27_640, smallWidth: 640, width: 1600, height: 671 },
+  [image28_1600]: { small: image28_640, smallWidth: 640, width: 1600, height: 671 },
+  [image29_1600]: { small: image29_640, smallWidth: 640, width: 1600, height: 671 },
+  [image30_1600]: { small: image30_640, smallWidth: 640, width: 1242, height: 2208 },
+  [image31_1600]: { small: image31_640, smallWidth: 640, width: 1600, height: 2133 },
+  [image32_1600]: { small: image32_640, smallWidth: 640, width: 1600, height: 2133 },
+  [image33_1600]: { small: image33_640, smallWidth: 640, width: 1080, height: 1920 },
+  [image34_1600]: { small: image34_640, smallWidth: 640, width: 1600, height: 2133 },
   [image35_1600]: { small: image35_640, smallWidth: 640, width: 1600, height: 2133 },
-  [image36_1600]: { small: image36_640, smallWidth: 640, width: 1600, height: 910 },
-  [image37_1600]: { small: image37_640, smallWidth: 640, width: 1600, height: 1315 },
-  [image38_1600]: { small: image38_640, smallWidth: 640, width: 1179, height: 642 },
-  [image39_1600]: { small: image39_640, smallWidth: 640, width: 1179, height: 645 },
-  [image40_1600]: { small: image40_640, smallWidth: 640, width: 1179, height: 1519 },
-  [image41_1600]: { small: image41_640, smallWidth: 640, width: 640, height: 336 },
-  [image42_1600]: { small: image42_640, smallWidth: 640, width: 1600, height: 2133 },
+  [image36_1600]: { small: image36_640, smallWidth: 640, width: 1136, height: 792 },
+  [image37_1600]: { small: image37_640, smallWidth: 640, width: 1136, height: 790 },
+  [image38_1600]: { small: image38_640, smallWidth: 640, width: 1600, height: 935 },
+  [image39_1600]: { small: image39_640, smallWidth: 640, width: 1334, height: 1258 },
+  [image40_1600]: { small: image40_640, smallWidth: 640, width: 1600, height: 735 },
+  [image41_1600]: { small: image41_640, smallWidth: 640, width: 1600, height: 869 },
+  [image42_1600]: { small: image42_640, smallWidth: 640, width: 1600, height: 1200 },
   [image43_1600]: { small: image43_640, smallWidth: 640, width: 1600, height: 2133 },
-  [image44_1600]: { small: image44_640, smallWidth: 640, width: 1600, height: 1064 },
-  [image45_1600]: { small: image45_640, smallWidth: 640, width: 838, height: 484 },
-  [image46_1600]: { small: image46_640, smallWidth: 640, width: 772, height: 336 }
+  [image44_1600]: { small: image44_640, smallWidth: 640, width: 1600, height: 910 },
+  [image45_1600]: { small: image45_640, smallWidth: 640, width: 1600, height: 1315 },
+  [image46_1600]: { small: image46_640, smallWidth: 640, width: 1179, height: 642 },
+  [image47_1600]: { small: image47_640, smallWidth: 640, width: 1179, height: 645 },
+  [image48_1600]: { small: image48_640, smallWidth: 640, width: 1179, height: 1519 },
+  [image49_1600]: { small: image49_640, smallWidth: 640, width: 640, height: 336 },
+  [image50_1600]: { small: image50_640, smallWidth: 640, width: 1600, height: 2133 },
+  [image51_1600]: { small: image51_640, smallWidth: 640, width: 1600, height: 2133 },
+  [image52_1600]: { small: image52_640, smallWidth: 640, width: 1600, height: 1064 },
+  [image53_1600]: { small: image53_640, smallWidth: 640, width: 838, height: 484 },
+  [image54_1600]: { small: image54_640, smallWidth: 640, width: 772, height: 336 }
 }

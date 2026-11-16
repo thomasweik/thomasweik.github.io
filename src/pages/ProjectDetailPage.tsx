@@ -690,22 +690,23 @@ export function ProjectDetailPage() {
           ) : null}
         </Card> : null}
 
-        {project.previousModel ? (
-          <Card className="space-y-4 md:space-y-5">
+        {project.previousModels?.map((model) => (
+          <Card key={model.path} className="space-y-4 md:space-y-5">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-forest-accent">Earlier concept model</p>
-              <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">{project.previousModel.caption}</h2>
+              <h2 className="mt-2 text-2xl font-bold text-ink md:text-3xl">{model.caption}</h2>
             </div>
             <StepModelViewer
-              modelPath={project.previousModel.path}
-              projectTitle={`${project.title} ${project.previousModel.caption}`}
+              modelPath={model.path}
+              projectTitle={`${project.title} ${model.caption}`}
               mode="manual"
-              rotationOffsetDegrees={project.previousModel.rotationDegrees}
-              rotationXDegrees={project.previousModel.rotationXDegrees}
-              viewAxisRotationDegrees={project.previousModel.viewAxisRotationDegrees}
+              rotationOffsetDegrees={model.rotationDegrees}
+              rotationXDegrees={model.rotationXDegrees}
+              viewAxisRotationDegrees={model.viewAxisRotationDegrees}
+              cameraPosition={model.cameraPosition}
             />
           </Card>
-        ) : null}
+        ))}
 
         {project.bomPdf ? (
           <Card className="space-y-4 md:space-y-5">
