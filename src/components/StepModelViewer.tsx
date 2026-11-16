@@ -257,9 +257,17 @@ export function StepModelViewer({
             {state === 'error' ? '3D preview unavailable' : 'Preparing 3D model…'}
           </p>
         ) : null}
-        <span className={`pointer-events-none absolute bottom-1.5 left-1 right-1 text-center font-bold uppercase text-forest-accent ${compact ? 'text-[7px] tracking-[0.08em]' : 'bottom-3 left-3 right-3 text-[10px] tracking-[0.13em] sm:bottom-5'}`}>
-          {compact ? 'Scroll to rotate' : manual ? 'Drag to rotate · Pinch or scroll to zoom' : 'Scroll to rotate · Open project to explore'}
-        </span>
+        {manual ? (
+          <span className="pointer-events-none absolute bottom-3 left-3 right-3 text-center text-[10px] font-bold uppercase tracking-[0.13em] text-forest-accent sm:bottom-5">
+            Drag to rotate · Pinch or scroll to zoom
+          </span>
+        ) : (
+          <span className={`pointer-events-none absolute text-right font-bold uppercase leading-tight text-forest-accent ${compact ? 'right-1.5 top-1.5 text-[7px] tracking-[0.08em]' : 'right-3 top-3 text-[10px] tracking-[0.13em] sm:right-5 sm:top-5'}`}>
+            Open project
+            <br />
+            To explore
+          </span>
+        )}
       </div>
     </div>
   )
